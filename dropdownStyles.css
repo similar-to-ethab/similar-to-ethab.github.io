@@ -1,0 +1,53 @@
+*{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+
+/*.dropdown{
+  height:100px;
+  background-color:rgb(255, 0, 0);
+  opacity: 50%;
+  position:relative;}*/
+
+
+
+#h1_link{
+  margin-left: 5px;
+}
+.dropdownHeadings{
+  top:0px;
+  border: solid 3px #019fb6;
+  border-bottom: solid 4px #019fb6;
+  height:100px;
+  text-align: center;
+  
+
+}
+/*firstH to fifthH style is defining the horizontal position*/
+#firstH{
+  left: 0%;
+  position:absolute;
+
+}
+#secondH{
+  left:20%;
+  position:absolute;
+
+}
+#thirdH{
+  left:40%;
+  position:absolute;
+
+}
+#fourthH{
+  left:60%;
+  position:absolute;
+
+}
+#fifthH{
+
+  left:80%;
+  position:absolute;
+
+}
