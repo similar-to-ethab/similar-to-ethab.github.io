@@ -1,4 +1,4 @@
-document.getElementById("layer1").style.color = "blue";
+
 var n1 = 0;
 var n2 = 95;
 
@@ -8,9 +8,9 @@ var hex = c.toString(16);
 return hex.length == 1 ? "0" + hex : hex;
 }
 function rgbToHex(r, g, b) {
-return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
-var intervalColor;
+var intervalId;
 function change_color(){
 
         if (n1 == 255)
@@ -43,6 +43,6 @@ function change_color(){
         console.log(n2);
         console.log(n3);
         console.log(rgbToHex(n1,n2,n3));*/
-        document.getElementById("layer1").style.backgroundColor = rgbToHex(n1,n2,n3); //rgb(n1,n2,n3);
+        document.getElementById("title").style.backgroundColor = rgbToHex(n1,n2,n3); //rgb(n1,n2,n3);
 
 }

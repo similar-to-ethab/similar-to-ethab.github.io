@@ -5,31 +5,15 @@
 }
 
 /*this is for the color-changing title/header*/
-.layersquare{
+#title{
     background-color:rgb(0,0,0);
-    background-position: top;
     height: 100px;
-    width: 100%;
-    position: -webkit-sticky;
-    position: fixed;
-    background-position: left top;
-    top: 0;
-    padding: 50px;
+    padding: 100px
+
     font-size: 20px;
     opacity: 100%;
-    z-index:-2;
+    
 }
 
-#heading {
-    z-index: 2;
-    position:static;
 
-}
-#heading:hover{color:white;}
-
-#layer2
-{
-  position:relative;
-  margin:auto;
-
-}
+#title:hover{color:white;}
