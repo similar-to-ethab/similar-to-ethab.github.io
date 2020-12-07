@@ -5,49 +5,60 @@
     <link rel="stylesheet" type="text/css" href="dropdownStyles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
-
-ul li:hover ul{display:block;}
-ul li ul{
-  display:none;
-
-}
-    div h3 {
-      text-decoration: none;
+      *{
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
       }
+      div a {
+        text-decoration: none;
+        color: black;
+        font-size: 30px;
+}
+      ul li:hover ul{display:block;}
+      ul li ul{
+        position:absolute;
+        width:inherit;
+        display: none;
+      }
+       ul li{
+         display: inline;
+         width:14%;
+         text-align: center;
+       }
+      div h3 {
+        text-decoration: none;
+        display:inline-block;
+      }
+      ul{background-color: red;
+      width:inherit;}
+      ul li:hover{background-color:black;}
       .dropdownHeadings
       {
         background-color:rgb(255, 0, 0);
         z-index: 2;
-        width: 20%;
         top:0px;
         border: solid 3px #019fb6;
         border-bottom: solid 4px #019fb6;
-        height:100px;
-
-      }
-      ul li{
-        display:inline;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 70px;
       }
       .dropdownHeadings:hover{
         background-color:pink;
         opacity: 100%;
       }
-
-
-      .dropdownHeadings:hover ul{
-        display:block;
+      div ul li h3{width:100%;}
+      /*this is the flex code*/
+      #main {
+        display: flex;
+        width:100%;
       }
-
-      ul {
-        display: inline;
-
-        padding: 0;
-        z-index:5;
+      #main li{
+        -ms-flex: 1;  /* IE 10 */
+        flex: 1;
       }
-      ul li ul{
-        position: absolute;
-      }
-
+      li{width:inherit; background-color: red;}
     </style>
 
     <title>loc</title>
@@ -56,8 +67,8 @@ ul li ul{
 
 
 
-        
-          <ul><!--format so my eyes dont hurt:
+        <div>
+          <ul id="main"><!--format so my eyes dont hurt:
           ul
             li
               h3/,ul
@@ -67,50 +78,66 @@ ul li ul{
     #then next heading
               -->
               <li>
-                <div>
-                <h3 class="dropdownHeadings" id="firstH"><a href="#">heading 1</a></h3>
+
+                <h3 class="dropdownHeadings" id="firstH"><a href="index.html">Home</a></h3>
                 <ul id="option1options">
                   <li id="option1"><h3><a href="./dropdownHeader.html">yes</a></h3></li>
-                  <li id="option1"><h3>yes</h3></li>
-                  <li id="option1"><h3>no</h3></li>
+                  <li id="option1"><h3><a href="#">yes</a></h3></li>
+                  <li id="option1"><h3><a href="#">no</a></h3></li>
                 </ul>
-              </div>
+
 
               </li>
             <li>
-              <h3 class="dropdownHeadings" id="secondH">hyesr</h3>
+              <h3 class="dropdownHeadings" id="secondH"><a href="">Input Forms</h3>
               <ul>
-                <li id="option2"><h3>op 1</h3></li>
-                <li id="option2"><h3>op 2</h3></li>
-                <li id="option2"><h3>op 3</h3></li>
+                <li id="option2"><h3><a href="#">op 1</a></h3></li>
+                <li id="option2"><h3><a href="#">op 2</a></h3></li>
+                <li id="option2"><h3><a href="#">op 3</a></h3></li>
               </ul>
             </li>
             <li>
-              <h3 class="dropdownHeadings" id="thirdH">hr</h3>
+              <h3 class="dropdownHeadings" id="thirdH"><a href="#">See Tables</a></h3>
               <ul>
-                <li id="option3"><h3>op 1</h3></li>
-                <li id="option3"><h3>op 2</h3></li>
-                <li id="option3"><h3>op 3</h3></li>
+                <li id="option3"><h3><a href="#">op 1</a></h3></li>
+                <li id="option3"><h3><a href="#">op 2</a></h3></li>
+                <li id="option3"><h3><a href="#">op 3</a></h3></li>
               </ul>
             </li>
             <li>
-              <h3 class="dropdownHeadings" id="fourthH">hr</h3>
+              <h3 class="dropdownHeadings" id="fourthH"><a href="#">hr</a></h3>
               <ul>
-                <li id="option4"><h3>op 1</h3</li>
-                <li id="option4"><h3>op 2</h3></li>
-                <li id="option4"><h3>op 3</h3></li>
+                <li id="option4"><h3><a href="#">op 1</a></h3></li>
+                <li id="option4"><h3><a href="#">op 2</a></h3></li>
+                <li id="option4"><h3><a href="#">op 3</a></h3></li>
               </ul>
             </li>
             <li>
-              <h3 class="dropdownHeadings" id="fifthH" href="index.html">hr</h3>
+              <h3 class="dropdownHeadings" id="fifthH"><a href="index.html">hr</a></h3>
               <ul>
-                <li id="option5"><h3>op 1</h3></li>
-                <li id="option5"><h3>op 2</h3></li>
-                <li id="option5"><h3>op 3</h3></li>
+                <li id="option5"><h3><a href="#">op 1</a></h3></li>
+                <li id="option5"><h3><a href="#">op 2</a></h3></li>
+                <li id="option5"><h3><a href="#">op 3</a></h3></li>
+              </ul>
+            </li>
+            <li>
+              <h3 class="dropdownHeadings" id="fourthH"><a href="#">hr</a></h3>
+              <ul>
+                <li id="option6"><h3><a href="#">op 1</a></h3></li>
+                <li id="option6"><h3><a href="#">op 2</a></h3></li>
+                <li id="option6"><h3><a href="#">op 3</a></h3></li>
+              </ul>
+            </li>
+            <li>
+              <h3 class="dropdownHeadings" id="fifthH"><a href="#">hr</a></h3>
+              <ul>
+                <li id="option7"><h3>op 1</h3></li>
+                <li id="option7"><h3>op 2</h3></li>
+                <li id="option7"><h3>op 3</h3></li>
               </ul>
             </li>
 
-
+          </div>
   </head>
   <body>
 
