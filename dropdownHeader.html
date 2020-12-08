@@ -13,8 +13,16 @@
       div a {
         text-decoration: none;
         color: black;
-        font-size: 30px;
 }
+    @media (max-width: 1181px;){
+      div ul>li>h3>a {
+        font-size:10px;
+      }
+    }
+      div>#main>li>ul>li a {
+        font-size:20px;
+
+      }
       ul li:hover ul{display:block;}
       ul li ul{
         position:absolute;
@@ -23,26 +31,24 @@
       }
        ul li{
          display: inline;
-         width:14%;
+         width:14.2857142857142857142857142857142857142857142857%;
          text-align: center;
        }
       div h3 {
         text-decoration: none;
         display:inline-block;
       }
-      ul{background-color: red;
-      width:inherit;}
       ul li:hover{background-color:black;}
       .dropdownHeadings
       {
         background-color:rgb(255, 0, 0);
         z-index: 2;
-        top:0px;
         border: solid 3px #019fb6;
         border-bottom: solid 4px #019fb6;
         text-align: center;
         vertical-align: middle;
-        line-height: 70px;
+        height:100px;
+        line-height: 90px;
       }
       .dropdownHeadings:hover{
         background-color:pink;
@@ -50,15 +56,15 @@
       }
       div ul li h3{width:100%;}
       /*this is the flex code*/
-      #main {
+      #headmain {
         display: flex;
         width:100%;
       }
-      #main li{
+      #headmain li{
         -ms-flex: 1;  /* IE 10 */
         flex: 1;
       }
-      li{width:inherit; background-color: red;}
+      li{background-color: white;}
     </style>
 
     <title>loc</title>
@@ -66,9 +72,8 @@
 
 
 
-
         <div>
-          <ul id="main"><!--format so my eyes dont hurt:
+          <ul id="headmain"><!--format so my eyes dont hurt:
           ul
             li
               h3/,ul
@@ -131,9 +136,9 @@
             <li>
               <h3 class="dropdownHeadings" id="fifthH"><a href="#">hr</a></h3>
               <ul>
-                <li id="option7"><h3>op 1</h3></li>
-                <li id="option7"><h3>op 2</h3></li>
-                <li id="option7"><h3>op 3</h3></li>
+                <li id="option7"><h3><a href="#">op 1</a></h3></li>
+                <li id="option7"><h3><a href="#">op 2</a></h3></li>
+                <li id="option7"><h3><a href="#">op 3</a></h3></li>
               </ul>
             </li>
 
