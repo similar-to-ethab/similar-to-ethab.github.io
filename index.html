@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
     <style>
-#heading{opacity: 90%;}
+
+
     </style>
     <title>Website</title>
+
+    <div  style="font-size:2.4vh">
+      <style media="screen">
+        #title:hover{color:white;}
+      </style>
+        <h1 id="title" style="width:100vw;padding:20px;height:80px;text-align:center; background-color:grey;"
+        onmouseover="intervalId = setInterval(change_color ,40);"
+        onmouseleave="clearInterval(intervalId); console.log('Yes');">Heading</h1>
+    </div>
     <div>
-        <h1 id="title" style="width:auto;" onmouseover="intervalId = setInterval(change_color ,40);" onmouseleave="
-        clearInterval(intervalId); console.log('Yes');">Heading</h1>
         <a class="headingstuff2" href="./dropdownHeader.html">Reach Heading</a>
         <a class="headingstuff2" href="./inner/form.php/">access input file</a>
-    </div>
+  </div>
 <div class="header">
 </div>
 </head>

@@ -8,9 +8,16 @@
     <h1>Form</h1>
   </head>
   <body>
-    <form class="form" action="input.php" method="post">
-<label></label>
-<input type="text" name="" value="">
+    <form id='register' class="form" action="../input.php" accept-charset='UTF-8' method="post">
+<h3><a href="#">Create Account</a></h3>
+<label>Username:</label>
+<input type="username" name="username" value=""><br>
+<label for="password">Password:</label>
+<input id="password" type="password" name="password" value="">
+<br>
+<label>Submit:</label>
+<a href="#">Forgot Password or Username</a>
+<input type="submit">
     </form>
 
   </body>

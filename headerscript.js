@@ -1,8 +1,8 @@
 
 var n1 = 0;
-var n2 = 95;
+var n2 = 86;
 
-var n3 = 159;
+var n3 = 171;
 function componentToHex(c) {
 var hex = c.toString(16);
 return hex.length == 1 ? "0" + hex : hex;
