@@ -18,6 +18,8 @@
         color: black;
         font-size: 2.4vw;
 }
+div a {color:black;}
+div ul li ul h3:hover a {color:white;}
     @media (max-width: 1181px;){
       div ul>li>h3>a {
         font-size:10px;
@@ -33,20 +35,28 @@
         width:inherit;
         display: none;
       }
-       ul li{
-         display: inline;
+       ul li {
+         display: inline-block;
+         background-color: red;
+         height:auto;
          width:14.2857142857142857142857142857142857142857142857%;
          text-align: center;
+       }
+       ul li ul li {
+         display:inline-block;
+         background-color: green;
+         height:auto;
        }
       div h3 {
         text-decoration: none;
         display:inline-block;
       }
 
-      ul li:hover{background-color:black;}
+      ul li ul li:hover{background-color:black;color:white;}
+
       .dropdownHeadings
       {
-        background-color:rgb(255, 0, 0);
+        background-color:red;
         z-index: 2;
         border: solid 3px #019fb6;
         border-bottom: solid 4px #019fb6;
@@ -60,9 +70,9 @@
         opacity: 100%;
       }
       div ul li h3{width:100%;}
-        div>ul>li>ul>li>h3{
 
-        }
+
+        div ul li ul li{width:100%;}
       /*this is the flex code*/
       #headmain {
         display: flex;
@@ -72,13 +82,18 @@
         -ms-flex: 1;  /* IE 10 */
         flex: 1;
       }
-      li{background-color: white;}
     </style>
 
     <title>loc</title>
-<div id="heading" style="padding:1.7vw;width:100%; text-align:center;font-size:2.4vh;">
-  <h1>welcome to me</h1>
-</div>
+    <div  style="font-size:2.4vh">
+      <style media="screen">
+        #title:hover{color:white;}
+      </style>
+        <script src="headerscript.js" type="text/javascript"></script>
+        <h1 id="title" style="width:100vw;padding:20px;height:80px;text-align:center; background-color:grey;"
+        onmouseover="intervalId = setInterval(change_color ,40);"
+        onmouseleave="clearInterval(intervalId); console.log('Yes');">welcome to me</h1>
+    </div>
 
 
 
@@ -107,9 +122,9 @@
             <li>
               <h3 class="dropdownHeadings" id="secondH"><a href="">Input Forms</h3>
               <ul>
-                <li id="option2"><h3><a href="#">op 1</a></h3></li>
-                <li id="option2"><h3><a href="#">op 2</a></h3></li>
-                <li id="option2"><h3><a href="#">op 3</a></h3></li>
+                <li id="option2"><h3><a href="/inner/form.php">form.php</a></h3></li>
+                <li id="option2"><h3><a href="/inner/input.php">input.php</a></h3></li>
+                <li id="option2"><h3><a href="/inner/login/logintest.php">logintest.php</a></h3></li>
               </ul>
             </li>
             <li>

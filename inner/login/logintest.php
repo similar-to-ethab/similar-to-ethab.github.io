@@ -10,7 +10,7 @@
     </head>
   </head>
   <body>
-    <form action="" id="myform" method="post" autocomplete="email">
+    <form action="logintest.php" id="myform" method="post" autocomplete="email">
 <p>
 	<label for='FirstName'>First Name:</label>
 	<input type="text" id="FirstName" name="FirstName" >
@@ -27,9 +27,10 @@
 	<label for='Phone'>Phone:</label>
 	<input type="tel" id="Phone" name="Phone"pattern="[0-9]{3} [0-9]{4}" length="8">
 </p>
-<p>zz
+<p>
 	<label for='Country'>Country:</label>
 	<select id="Country"  name="Country">
+        <option value="1">United States</option>
         <option value="000" selected="selected">[choose yours]</option>
         <option value="93">Afghanistan</option>
         <option value="355">Albania</option>
@@ -256,7 +257,6 @@
         <option value="380">Ukraine</option>
         <option value="971">United Arab Emirates</option>
         <option value="44">United Kingdom</option>
-        <option value="1">United States</option>
         <option value="1">United States Minor Outlying Islands</option>
         <option value="598">Uruguay</option>
         <option value="998">Uzbekistan</option>
@@ -305,7 +305,6 @@
  frmvalidator.addValidation("Email","email");
 
  frmvalidator.addValidation("Phone","maxlen=50");
- frmvalidator.addValidation("Phone","numeric");
 </script>
 <script type="text/javascript">
 const myInput = document.querySelector('input[name="Phone"]');
@@ -334,9 +333,10 @@ document.getElementById("Phone").value.replace("/([0-9]{3}) ([0-9]{3})/","\1 ");
     $servername = "localhost";
     $username = "root";
     $password = "";
+    $database = "anotherWeb";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($servername, $username, $password, $database);
 
     // Check connection
     if ($conn->connect_error) {
@@ -367,6 +367,36 @@ document.getElementById("Phone").value.replace("/([0-9]{3}) ([0-9]{3})/","\1 ");
     $_SESSION[$this->GetLoginSessionVar()] = $username;
     return true;
     }
-?>
-  </body>
+
+$sql = "SELECT * FROM country";
+if($result = mysqli_query($conn, $sql)){
+    if(mysqli_num_rows($result) > 0){
+        echo "<table>";
+            echo "<tr>";
+                echo "<th>id</th>";
+                echo "<th>FirstName</th>";
+                echo "<th>LastName</th>";
+                echo "<th>Email</th>";
+            echo "</tr>";
+        while($row = mysqli_fetch_array($result)){
+            echo "<tr>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['nicename'] . "</td>";
+                echo "<td>" . $row['name'] . "</td>";
+                echo "<td>" . $row['iso'] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        // Free result set
+        mysqli_free_result($result);
+    } else{
+        echo "No records matching your query were found.";
+    }
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+}
+
+// Close connection
+mysqli_close($conn);
+ ?> </body>
 </html>
