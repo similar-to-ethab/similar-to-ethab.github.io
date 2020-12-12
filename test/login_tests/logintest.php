@@ -12,7 +12,7 @@
     </head>
   </head>
   <body>
-    <form action="" id="myform" method="post">
+    <form action="acceptlogin_test.php" id="myform" method="post">
 <p>
 	<label for='fname'>First Name:</label>
 	<input type="text" id="fname" name="fname" required>
@@ -297,80 +297,14 @@
 	</select>
 </p>
 <p>
-	<input type="submit" name="submit" value="Submit" method="post" action"">
+	<input type="submit" name="submit" value="Submit" method="post">
 </p>
 </form>
+
 <?php
-  /**
-   *
-   */
-  class ClassName extends AnotherClass
-  {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "anotherWeb";
+//moved php code to acceptlogin_test.php
 
-    // Create connection
-    static $conn = new mysqli($servername, $username, $password, $database);
-    //Check Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    else {
-      echo "Connected";
-    }
-
-  }
-
-
-
-  // Check connection
-
-
-
-
-
-
-
-function NewUsername()
-{
-  $newusername = $_POST['username'];
-  $sql = "SELECT username from login_test WHERE username=$newusername";
-  if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-    echo $sql;
-  } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-  }
-}
-
-if(isset($_POST['submit']))
-  {
-    NewUsername();
-  }
-  else{echo "run";}
-
-
-function Login()#this is for logging in - seeing if they put anything in
-{
-
-  $username = trim($_POST["username"]);
-  $password = trim($_POST["password"]);
-
-
-  if(!$this->CheckLoginInDB($username,$password))
-{
-    return false;
-}
-session_start();
-$_SESSION[$this->GetLoginSessionVar()] = $username;
-return true;
-
-
-}
  ?>
-
 <script>
 const myInput = document.querySelector('input[name="phone"]');
 
