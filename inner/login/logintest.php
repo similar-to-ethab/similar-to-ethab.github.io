@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" href="loginscript.js"></script>
+    <script src="/gen_validatorv4.js" type="text/javascript"></script>
     <meta charset="utf-8">
-    <title></title>
+    <title>Log In</title>
 
     <a href=".././form.php"></a>
-    <script src="/gen_validatorv4.js" type="text/javascript"></script>
+
     </head>
   </head>
   <body>
@@ -290,113 +292,46 @@
 	<input type="submit" name="submit" value="Submit">
 </p>
 </form>
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "anotherWeb";
 
-<script  type="text/javascript">
- var frmvalidator = new Validator("myform");
- frmvalidator.addValidation("FirstName","req","Please enter your First Name");
- frmvalidator.addValidation("FirstName","maxlen=20",
-		"Max length for FirstName is 20");
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $database);
 
- frmvalidator.addValidation("LastName","req","Please enter last name");
- frmvalidator.addValidation("LastName","maxlen=20");
+  // Check connection
+  if ($conn->connect_error) {
+    echo "Notify ethan that he fucked up at his email –– ethanperson82@gmail.com";
+    die("Connection failed: " . $conn->connect_error);
+  }
+  echo "Connected successfully";
 
- frmvalidator.addValidation("Email","req","Email is if you forget your password");
- frmvalidator.addValidation("Email","maxlen=50");
- frmvalidator.addValidation("Email","email");
-
- frmvalidator.addValidation("Phone","maxlen=50");
-</script>
-<script type="text/javascript">
-const myInput = document.querySelector('input[name="Phone"]');
-
-myInput.addEventListener("input", (e) => {
-  // here we do something
-  if (document.getElementById("Phone").value.length == 3){
-    (document.getElementById("Phone").value = document.getElementById("Phone").value + " ");
-      }
-});
-    /*const source = document.getElementById('source');
-    const result = document.getElementById('result');
-    const inputHandler = function(e) {
-      source.innerHTML = e.target.value;
-}
-
-else if (document.getElementById("Phone").value.length == 7)
-
-
-document.getElementById("Phone").value.replace("/([0-9]{3}) ([0-9]{3})/","\1 ");*/
-//if i feel like adding area code then uncomment then add
-
-
-</script>
-  <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "anotherWeb";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully";
-
-    function Login()#this is for logging in - seeing if they put anything in
+  function Login()#this is for logging in - seeing if they put anything in
+  {
+    if(empty($_POST["username"]))
     {
-      if(empty($_POST["username"]))
-      {
-        $this->HandleError("one or more of the fields are empty");
-        return false;
-      }
-      if(empty($_POST["password"]))
-      {
-        $this->HandleError("one or more of the fields are empty");
-        return false;
-      }
-      $username = trim($_POST["username"]);
-      $password = trim($_POST["password"]);
-
-      if(!$this->CheckLoginInDB($username,$password))
+      $this->HandleError("one or more of the fields are empty");
+      return false;
+    }
+    if(empty($_POST["password"]))
     {
-        return false;
+      $this->HandleError("one or more of the fields are empty");
+      return false;
     }
-    session_start();
-    $_SESSION[$this->GetLoginSessionVar()] = $username;
-    return true;
-    }
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
 
-$sql = "SELECT * FROM country";
-if($result = mysqli_query($conn, $sql)){
-    if(mysqli_num_rows($result) > 0){
-        echo "<table>";
-            echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>FirstName</th>";
-                echo "<th>LastName</th>";
-                echo "<th>Email</th>";
-            echo "</tr>";
-        while($row = mysqli_fetch_array($result)){
-            echo "<tr>";
-                echo "<td>" . $row['id'] . "</td>";
-                echo "<td>" . $row['nicename'] . "</td>";
-                echo "<td>" . $row['name'] . "</td>";
-                echo "<td>" . $row['iso'] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-        // Free result set
-        mysqli_free_result($result);
-    } else{
-        echo "No records matching your query were found.";
-    }
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
+    if(!$this->CheckLoginInDB($username,$password))
+  {
+      return false;
+  }
+  session_start();
+  $_SESSION[$this->GetLoginSessionVar()] = $username;
+  return true;
+  }
+?>
 
-// Close connection
-mysqli_close($conn);
- ?> </body>
+</body>
 </html>
