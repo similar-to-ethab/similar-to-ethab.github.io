@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <title>Form</title>
     <h1><a href="../../index.html">Go back</a></h1>
-    <h1><a href="../input.php">input.php</a></h1>
+    <h1><a href="../inner/login/createaccount.php">input.php</a></h1>
     <h1>Form</h1>
   </head>
   <body>
-    <form id='register' class="form" action="../input.php" accept-charset='UTF-8' method="post">
-<h3><a href="#">Create Account</a></h3>
+    <form id='register' class="form" action="/login/logintest.php" accept-charset='UTF-8' method="post">
+<h3><a href="../inner/login/createaccount.php">Create Account</a></h3>
 <label>Username:</label>
 <input type="username" name="username" value=""><br>
 <label for="password">Password:</label>
