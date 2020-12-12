@@ -2,36 +2,44 @@
 <html lang="en" dir="ltr">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" href="loginscript.js"></script>
+    <script type="text/javascript" href="createaccount.js"></script>
     <script src="/gen_validatorv4.js" type="text/javascript"></script>
     <meta charset="utf-8">
     <title>Log In</title>
 
-    <a href=".././form.php"></a>
+    <h1><a href="../.././inner/form.php">TEST FILE DO NOT CONFUSE 'again'</a></h1>
 
     </head>
   </head>
   <body>
-    <form action="logintest.php" id="myform" method="post" autocomplete="email">
+    <form action="" id="myform" method="post">
 <p>
-	<label for='FirstName'>First Name:</label>
-	<input type="text" id="FirstName" name="FirstName" >
+	<label for='fname'>First Name:</label>
+	<input type="text" id="fname" name="fname" required>
 </p>
 <p>
-	<label for='LastName'>Last Name:</label>
-	<input type="text" id="LastName" name="LastName">
+	<label for='lname'>Last Name:</label>
+	<input type="text" id="lname" name="lname" required>
 </p>
 <p>
-	<label for='Email'>Email:</label>
-	<input type="text" id="Email" name="Email" >
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
 </p>
 <p>
-	<label for='Phone'>Phone:</label>
-	<input type="tel" id="Phone" name="Phone"pattern="[0-9]{3} [0-9]{4}" length="8">
+  <label for="password">Password:</label>
+  <input type="password" minlength="5" name="password" required>
 </p>
 <p>
-	<label for='Country'>Country:</label>
-	<select id="Country"  name="Country">
+	<label for='email'>Email:</label>
+	<input type="text" id="email" name="email" required>
+</p>
+<p>
+	<label for='phone'>phone:</label>
+	<input type="tel" id="phone" name="phone" pattern="\(\d{3}\)\s\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{10}" placeholder="(###) ###-####"length="8">
+</p>
+<p>
+	<label for='country'>Country:</label>
+	<select id="country"  name="country" value="country">
         <option value="1">United States</option>
         <option value="000" selected="selected">[choose yours]</option>
         <option value="93">Afghanistan</option>
@@ -289,49 +297,159 @@
 	</select>
 </p>
 <p>
-	<input type="submit" name="submit" value="Submit">
+	<input type="submit" name="submit" value="Submit" method="post" action"">
 </p>
 </form>
 <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "anotherWeb";
+  /**
+   *
+   */
+  class ClassName extends AnotherClass
+  {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "anotherWeb";
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $database);
+    // Create connection
+    static $conn = new mysqli($servername, $username, $password, $database);
+    //Check Connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    else {
+      echo "Connected";
+    }
+
+  }
+
+
 
   // Check connection
-  if ($conn->connect_error) {
-    echo "Notify ethan that he fucked up at his email –– ethanperson82@gmail.com";
-    die("Connection failed: " . $conn->connect_error);
-  }
-  echo "Connected successfully";
 
-  function Login()#this is for logging in - seeing if they put anything in
+
+
+
+
+
+
+function NewUsername()
+{
+  $newusername = $_POST['username'];
+  $sql = "SELECT username from login_test WHERE username=$newusername";
+  if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+    echo $sql;
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+}
+
+if(isset($_POST['submit']))
   {
-    if(empty($_POST["username"]))
-    {
-      $this->HandleError("one or more of the fields are empty");
-      return false;
-    }
-    if(empty($_POST["password"]))
-    {
-      $this->HandleError("one or more of the fields are empty");
-      return false;
-    }
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
-
-    if(!$this->CheckLoginInDB($username,$password))
-  {
-      return false;
+    NewUsername();
   }
-  session_start();
-  $_SESSION[$this->GetLoginSessionVar()] = $username;
-  return true;
-  }
-?>
+  else{echo "run";}
 
+
+function Login()#this is for logging in - seeing if they put anything in
+{
+
+  $username = trim($_POST["username"]);
+  $password = trim($_POST["password"]);
+
+
+  if(!$this->CheckLoginInDB($username,$password))
+{
+    return false;
+}
+session_start();
+$_SESSION[$this->GetLoginSessionVar()] = $username;
+return true;
+
+
+}
+ ?>
+
+<script>
+const myInput = document.querySelector('input[name="phone"]');
+
+myInput.addEventListener("click", (e) => {document.getElementById("phone").value = "(" }, {once:true});
+myInput.addEventListener("input", (e) => {
+  // here we do something
+
+  switch(document.getElementById("phone").value.length){
+    case 0:
+      document.getElementById("phone").value = "(" + document.getElementById("phone").value;
+      break;
+    case 4:
+      document.getElementById("phone").value = document.getElementById("phone").value + ") ";
+      break;
+    case 9:
+      document.getElementById("phone").value = document.getElementById("phone").value + "-";
+      break;
+    case 14:
+      let max_length = document.getElementById("phone").value;
+      console.log(max_length);
+      break;
+    case 15:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-1);
+      break;
+    case 16:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-2);
+      break;
+    case 17:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-3);
+      break;
+    case 18:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-4);
+      break;
+    case 19:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-5);
+      break;
+    case 20:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-6);
+      break;
+    case 21:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-7);
+      break;
+    case 22:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-8);
+      break;
+    case 23:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-9);
+      break;
+    case 24:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-10);
+      break;
+    case 25:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-11);
+      break;
+    case 26:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-12);
+      break;
+    case 27:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-13);
+      break;
+    case 28:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-14);
+      break;
+    case 29:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-15);
+      break;
+    case 30:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-16);
+      break;
+    case 31:
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-17);
+      break;
+  default:
+    if(document.getElementById("phone").value.length > 31){
+      document.getElementById("phone").value = document.getElementById("phone").value.slice(0,-18);
+    }
+
+  }
+});
+</script>
 </body>
 </html>
