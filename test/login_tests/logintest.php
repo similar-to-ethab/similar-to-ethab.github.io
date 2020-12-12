@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include('checkduplicates.php') ?>
 <html lang="en" dir="ltr">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
@@ -12,26 +13,26 @@
     </head>
   </head>
   <body>
-    <form action="acceptlogin_test.php" id="myform" method="post">
+    <form action="logintest.php" id="myform" method="post">
 <p>
 	<label for='fname'>First Name:</label>
 	<input type="text" id="fname" name="fname" required>
 </p>
 <p>
 	<label for='lname'>Last Name:</label>
-	<input type="text" id="lname" name="lname" required>
+	<input type="text" id="lname" name="lname"><!--took out required for easier developing/testing-->
 </p>
 <p>
   <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required>
+  <input type="text" id="username" name="username"><!--took out required for easier developing/testing-->
 </p>
 <p>
   <label for="password">Password:</label>
-  <input type="password" minlength="5" name="password" required>
+  <input type="password" minlength="5" name="password"><!--took out required for easier developing/testing-->
 </p>
 <p>
 	<label for='email'>Email:</label>
-	<input type="text" id="email" name="email" required>
+	<input type="text" id="email" name="email"><!--took out required for easier developing/testing-->
 </p>
 <p>
 	<label for='phone'>phone:</label>
@@ -297,7 +298,7 @@
 	</select>
 </p>
 <p>
-	<input type="submit" name="submit" value="Submit" method="post">
+	<button type="submit" name="submit" style="">Yes</button>
 </p>
 </form>
 
