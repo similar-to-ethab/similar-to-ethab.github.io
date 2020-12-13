@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php include('checkduplicates.php') ?>
+<?php require ($_SERVER['DOCUMENT_ROOT']."/database.php"); ?>
+<?php include ('checkduplicates.php') ?>
+
 <html lang="en" dir="ltr">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
@@ -298,7 +300,7 @@
 	</select>
 </p>
 <p>
-	<button type="submit" name="submit" style="">Yes</button>
+	<button type="submit" name="register" style="">Yes</button>
 </p>
 </form>
 

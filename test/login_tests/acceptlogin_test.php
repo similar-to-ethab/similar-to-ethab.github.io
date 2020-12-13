@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php require "database.php"; ?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -8,16 +9,6 @@
 <h1>Head</h1>
 
     <?php
-      /**
-       *
-       */
-       $servername = "localhost";
-       $username = "root";
-       $password = "";
-       $database = "anotherWeb";
-
-       // Create connection
-       $conn = new mysqli($servername, $username, $password, $database);
        //Check Connection
        if ($conn->connect_error) {
          die("Connection failed: " . $conn->connect_error);

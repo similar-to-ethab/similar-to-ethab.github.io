@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<?php include('process.php') ?>
+
 <html>
 <head>
+  <?php include('process.php'); ?>
   <title>Register</title>
   <link rel="stylesheet" href="styles.css">
 </head>
