@@ -4,6 +4,8 @@
 
 <html lang="en" dir="ltr">
   <head>
+    <meta charset="utf-8">
+    <base href="./index.html" target="_self">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" href="createaccount.js"></script>
     <script src="/gen_validatorv4.js" type="text/javascript"></script>

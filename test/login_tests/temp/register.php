@@ -2,6 +2,8 @@
 
 <html>
 <head>
+  <meta charset="utf-8">
+  <base href="./index.html" target="_self">
   <?php include('process.php'); ?>
   <title>Register</title>
   <link rel="stylesheet" href="styles.css">

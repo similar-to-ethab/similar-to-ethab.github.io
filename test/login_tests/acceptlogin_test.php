@@ -2,6 +2,8 @@
 <?php require "database.php"; ?>
 <html lang="en" dir="ltr">
   <head>
+
+    <base href="./index.html" target="_self">
     <meta charset="utf-8">
     <title></title>
   </head>
