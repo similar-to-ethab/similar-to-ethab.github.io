@@ -5,6 +5,9 @@
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ethan Smith">
+    <meta name="keywords" content="HTML, CSS,javascript,projects">
+    <meta name="description" content="A mix of prejects completed instead of doing schoolwork">
     <link rel="stylesheet" type="text/css" href="style.css">
     <style>
 
@@ -22,13 +25,85 @@
         onmouseleave="clearInterval(intervalId); console.log('Yes');">welcome to me</h1>
     </div>
     <div>
-        <a class="headingstuff2" href="./dropdownHeader.html">Reach Heading</a>
-        <a class="headingstuff2" href="./inner/form.php/">access input file</a>
-  </div>
+        </div>
   <div class="header">
   </div>
   </head>
   <body>
-    
+<style media="screen">
+  .column_left {
+    float:left;
+    width:20%;
+    flex:20%;
+    background-color: red;
+    padding: 10px;
+  }
+  .column_right {
+    float:right;
+    width:80%;
+    flex:80%;
+    background-color: purple;
+    padding: 10px;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  ul li{
+
+  }
+  .subtitle {
+    padding-top: 10px;
+    font-size: 22px;
+  }
+  .subsubtitle {
+    list-style-position: inside;
+    padding-left: 20px;
+}
+  .subsubtitle li {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+</style>
+
+    <div class="">
+      <div class="column_left">
+        <h1>hello</h1><h6><a class="headingstuff2" href="./dropdownHeader.html">Reach Heading</a>
+        <a class="headingstuff2" href="./inner/form.php/">access input file</a>
+  </h6>
+        <h3 class="subtitle">Input Forms</h3>
+        <ul class="subsubtitle" id="input_forms">
+          <li><a href="#1234">form.php</a></li>
+          <li>input.php</li>
+          <li>createaccount.php</li>
+        </ul>
+        <h3 class="subtitle">See Tables</h3>
+        <ul class="subsubtitle" id="tables">
+          <li>Table 1</li>
+          <li>Table 2</li>
+          <li>Table 3</li>
+        </ul>
+        <h3 class="subtitle">Test Link</h3>
+        <ul class="subsubtitle" id="test">
+          <li>logintest.php</li>
+          <li>Folder</li>
+        </ul>
+      </div>
+      <div class="column_right">
+        <h1>What you can expect</h1>
+        <div class="images">
+          <img src="./favicon.ico"> <alt="Highway" width="10px"height="7px">
+        </div>
+      </div>
+    </div>
   </body>
+  <footer>
+<div class="credits">
+
+</div>
+  </footer>
 </html>
