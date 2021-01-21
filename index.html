@@ -5,6 +5,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="headerscript.js" type="text/javascript"></script>
+      <!-- ./js/imageChange.js moved to bottom for id-loading errors-->
+    <script src="./js/moveColumn.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="./css/sideColumn.css">
 
@@ -66,90 +68,16 @@
           <img class="img" id="htmlImg" src="./home_images/htmlStock.jpg" alt="html stock photo">
           <img class="img" id="sqlImg" src="./home_images/sqlStock.jpg" alt="sql stock photo">
 
-
-          <script type="text/javascript">
-
-              //var imgElement = document.getElementById("img");
-
-              var images = ["chatbotImg", "dropdownImg","htmlImg","sqlImg"];
-
-              //on load
-              document.getElementById(images[0]).style.display = "inline-block";
-
-              var delayMs = 10000;
-              var index = 0;
-              var break_test = 0;
-
-
-
-
-              setInterval(function(){
-                index++;
-
-                //console.log("hello");
-                //console.log(images[index]);
-                //console.log(index);
-
-                document.getElementById(images[index -1]).style.display = "none";
-                if (index >= images.length){
-                  index = 0;
-                }
-                document.getElementById(images[index]).style.display = "block";
-                //index++;
-                //console.log(images.length);
-                document.getElementById("images").style.height;
-                //console.log(document.getElementById("images").style.height);
-
-              },delayMs);
-
-          </script>
         </div>
+        <script src="./js/imageChange.js" type="text/javascript"></script>
       </div>
     </div>
   </body>
-
-
-
-
   <footer id="footer">
 
-<div>
-  <h6>Credits</h6>
-</div>
+    <div>
+      <h6>Credits</h6>
+    </div>
 
-
-<script type="text/javascript">
-
-function topOffset() {
-  if ($('#column_left')[0].getBoundingClientRect().top <= 0 && !$('#column_left').hasClass('fixed')) {
-
-    $('#column_left').removeClass('absolute');
-    $('#column_left').addClass('fixed');
-    console.log("more",$('#column_left').offset().top <= 160);
-  }
-  else if ($('#column_left').offset().top <= 160 && !$('#MyElement').hasClass('absolute')){
-
-      $('#column_left').removeClass('fixed');
-      $('#column_left').addClass('absolute');
-      console.log("less");
-  }
-  else {
-    console.log("I broke it.");
-  }
-
-      //console.log($('#column_left').offset().top, "offset");
-      //console.log($('#column_left')[0].getBoundingClientRect().top, "relative to viewport");
-
-}
-
-  document.addEventListener("scroll", function(){
-    topOffset();
-  });
-
-</script>
   </footer>
-
-
-
-
 </html>
