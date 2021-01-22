@@ -12,6 +12,9 @@
   flex:20%;
   background-color: red;
   padding: 10px;
+
+
+  display: block;
 }
 .column_right {
   float:right;
