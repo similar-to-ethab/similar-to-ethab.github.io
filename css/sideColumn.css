@@ -19,7 +19,7 @@
   flex:80%;
   background-color: purple;
   padding: 10px;
-  display: inline-block;
+  display: block;
 }
 
 /* Clear floats after the columns */
