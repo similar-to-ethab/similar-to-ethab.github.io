@@ -35,8 +35,12 @@
   </head>
   <body>
 
-
-    <div>
+<style media="screen">
+  #column_parent{
+    height: auto;
+  }
+</style>
+    <div id="column_parent">
       <div id="column_left" class='column_left' class="column">
         <h1>hello</h1>
         <h3><a class="headingstuff2" href="./dropdownHeader.html">Reach Heading</a>
@@ -61,7 +65,6 @@
       </div>
 
       <!-- until i find good files --><style media="screen"> .img{height: 80vh;}</style>
-      <div class="parent_column_right" style="height:auto;">
 
 
         <div class="column_right" class="column">
@@ -75,40 +78,73 @@
           </div>
           <script src="./js/imageChange.js" type="text/javascript"></script>
         </div>
-      </div>
+
     </div>
   </body>
 
   <style media="screen"> /*footer style*/
     #footer {
       width:100vw;
-      position: absolute;
-      bottom:0;
       background-color: grey;
       color: white;
-    }
-    #footer_head {
-      display:inline-block;
-      width:24.5%;
-      text-align: center;
-    }
-    #footer_body {
+      position: relative;
+      bottom: 0;
       display: inline-block;
-      text-align: center;
-      width:24.5%;
+      z-index: 1;
     }
+
+
+    #footer_head {
+      display:block;
+      width:100%;
+      text-align: center;
+      padding-top:5px;
+      padding-bottom:5px;
+      height: auto;
+    }
+    .footer_head_data {
+      display:inline-block;
+      width: 25%;
+
+
+    }
+    .footer_body {
+      display: inline-block;
+      list-style-type: none;
+
+      text-align: center;
+      width:25%;
+      text-decoration: none;
+    }
+
   </style>
   <footer id="footer">
 
     <div>
       <style media="screen">
 
-      </style><!-- will convert into ul/li -->
-      <h5 id="footer_head">Credits</h5>
-      <h5 id="footer_head">Contact</h5>
-      <h5 id="footer_head">Socials</h5>
-      <h5 id="footer_head">Reference Links</h5>
-      <h6 id="footer_body">Ethan Smith</h6>
+      </style><!-- will convert into ul/li --> <!-- maybe use span to separate? -->
+
+
+
+      <div id="footer_head">
+
+        <h5 class="footer_head_data">Credits</h5><h5 class="footer_head_data">Contact</h5><h5 class="footer_head_data">Socials</h5><h5 class="footer_head_data">Reference Links</h5>
+      </div>
+
+
+        <ul class="footer_body" id="credits_data"><!-- problem is likely that it isnt inline-->
+          <li><h6>Ethan Smith</h6></li>
+          <li><h6>Ethan Smith</h6></li>
+        </ul>
+        <ul class="footer_body" id="contact_data">
+          <li><h6>Email: <a href="mailto:ethanperson82.work@gmail.com?su=Contact%20Me">ethanperson82.work@gmail.com</a></h6></li>
+          <li><h6>: <a href="mailto:ethanperson82.work@gmail.com?su=Contact%20Me">ethanperson82.work@gmail.com</a></h6></li>
+        </ul>
+        <ul class="footer_body" id="contact_data">
+          <li><h6>Email: <a href="mailto:ethanperson82.work@gmail.com?su=Contact%20Me">ethanperson82.work@gmail.com</a></h6></li>
+        </ul>
+
     </div>
 
 
