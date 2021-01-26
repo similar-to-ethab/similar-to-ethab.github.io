@@ -1,0 +1,20 @@
+@font-face{
+	font-family: 'western_striped';
+  src: url('western_striped.eot');
+  src: url('western_striped.eot?#iefix') format('embedded-opentype'),
+       url('western_striped.woff2') format('woff2'),
+       url('western_striped.woff') format('woff'),
+       url('western_striped.ttf') format('truetype'),
+       url('western_striped.svg#viagrande_stripebold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'western';
+  src: url('western.eot');
+	src: url('western.eot?#iefix') format('embedded-opentype'),
+	     url('western.woff') format('woff'),
+	     url('western.ttf') format('truetype'),
+	     url('western.svg#webfont') format('svg');
+}
