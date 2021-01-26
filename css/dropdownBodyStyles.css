@@ -1,0 +1,11 @@
+#game_title {
+  display:inline-block;
+  height:10vh;
+  width:auto;
+  padding-top:10px;
+  font-family: 'western'; /* i want a western-esque font */
+  font-size: 50px;
+}
+#subsubtitle {
+  margin-left:10px;
+}
