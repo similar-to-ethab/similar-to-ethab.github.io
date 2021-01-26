@@ -5,46 +5,39 @@
   margin:0;
   box-sizing:border-box;
 }
-div a {
+#dropdowndiv a {
   text-decoration: none;
   color: black;
   font-size: 2.4vw;
 }
-div a {color:black;}
-div ul li ul h3:hover a {color:white;}
-@media (max-width: 1181px){
-  div ul>li>h3>a {
-    font-size:10px;
-  }
-}
-div>#main>li>ul>li a {
-  font-size:20px;
 
-}
+#dropdowndiv ul li ul h3:hover a {color:white;}
+
+
 ul li:hover ul{display:block;}
 ul li ul{
   position:absolute;
   width:inherit;
   display: none;
 }
- ul li {
+#dropdowndiv ul li {
    display: inline-block;
    background-color: red;
    height:auto;
    width:14.2857142857142857142857142857142857142857142857%;
    text-align: center;
  }
- ul li ul li {
+ #dropdowndiv ul li ul li  {
    display:inline-block;
    background-color: green;
    height:auto;
  }
-div h3 {
+#dropdowndiv h3 {
   text-decoration: none;
   display:inline-block;
 }
 
-ul li ul li:hover{background-color:black;color:white;}
+#dropdowndiv ul li ul li:hover{background-color:black;color:white;}
 
 .dropdownHeadings
 {
@@ -61,7 +54,7 @@ ul li ul li:hover{background-color:black;color:white;}
   background-color:pink;
   opacity: 100%;
 }
-div ul li h3, div ul li ul li{width:100%;}
+#dropdowndiv ul li h3, #dropdowndiv ul li ul li{width:100%;}
 
 /*this is the flex code*/
 #headmain {
