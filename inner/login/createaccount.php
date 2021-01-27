@@ -5,6 +5,7 @@
     <script type="text/javascript" href="createaccount.js"></script>
     <script src="/gen_validatorv4.js" type="text/javascript"></script>
     <meta charset="utf-8">
+    
     <title>Log In</title>
 
     <a href=".././form.php">form.php</a>
