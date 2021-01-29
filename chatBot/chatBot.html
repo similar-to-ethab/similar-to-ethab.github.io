@@ -10,11 +10,11 @@
     <style media="screen">
       table {
         border-collapse: separate;
-        margin-left: 3px;
-        border: 1px solid black;
-        width:calc(100vw - 3px);
+        margin-left: 4px;
+        border: 2px solid black;
+        width:calc(100vw - 4px * 2);
         empty-cells: hide;
-
+        background-color: lightgrey;
       }
       th {
         width:50%;
@@ -31,11 +31,12 @@
 
         border-collapse: separate;
       }
-      #bot {
 
+      #userResponse {
+        background-color: red;
       }
-      #user {
-
+      #botResponse {
+        background-color: darkgrey;
       }
 
       #userInput {
@@ -173,6 +174,7 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
 from browser import console, document
 console.log("hello");
 document <= "hi you"
+
 
 
 
