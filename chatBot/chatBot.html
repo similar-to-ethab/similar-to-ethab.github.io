@@ -15,14 +15,16 @@
         width:calc(100vw - 4px * 2);
         empty-cells: hide;
         background-color: lightgrey;
+        font-family: Arial, sans-serif;
+        margin-top:5px;
       }
       th {
         width:50%;
         text-align: center;
         border-bottom: 1px solid black;
       }
-      table, td, th, tr,thead, tbody {
-
+      td, th, tr,thead, tbody {
+        box-sizing: border-box;
         padding: 2px;
       }
       tbody tr td {
@@ -172,6 +174,7 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
     </script>
     <script type="text/python">
 from browser import console, document
+ 
 console.log("hello");
 document <= "hi you"
 
