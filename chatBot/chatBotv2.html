@@ -98,97 +98,71 @@ moved to tfoot
 
 
     <h6><a href=".././">go home</a></h6>
+    <h6><a href="./chatBotv1.html">chatbotv1</a></h6>
     <script type="text/javascript">
 
 
-var regex_intents = {};
-
-regex_intents.helloRe = '.*[^\w](hello|hey|hi)[^\w].*';
-regex_intents.goodbyeRe = '.*(bye)';
-regex_intents.list = [regex_intents.helloRe, regex_intents.goodbyeRe];
-
-forEach((regex_intents.list, i) => {
-  console.log(i);
-});
-
-
-console.log(regex_intents);
-function generateResponse(userInput){
-
-  return "hrllo";
-}
-
-
-function keyPressFunction() {
-  var el = document.getElementById("userInput");
-  console.log(el.value);
-  if (el.value == "" || el.value.trim() == ""){
-    console.log("hello");
-    el.value = "";
-  }
-  else {
-    addElement(el.value);
-  }
-}
+    function addElement (input) {
+      var emptyCell = document.createElement("td");
+      var userh3 = document.createElement("td");
+      userh3.id = "userResponse";
+      var userInput = document.createTextNode(input);
+      userh3.appendChild(userInput);
+      var both3 = document.createElement("td");
+      both3.id = "botResponse";
+      try {
+        var botInput = (document.createTextNode(generateResponse(input))); // getting bot response
+        both3.appendChild(botInput);
+      } catch {
+        var botInput = (document.createTextNode('my respi')); // getting bot response
+        both3.appendChild(botInput);
+      }
 
 
-function addElement (input) {
-  var emptyCell = document.createElement("td");
-  var userh3 = document.createElement("td");
-  userh3.id = "userResponse";
-  var userInput = document.createTextNode(input);
-  userh3.appendChild(userInput);
-  var both3 = document.createElement("td");
-  both3.id = "botResponse";
+      var botRow = document.createElement("tr");
+      var userRow = document.createElement("tr");
 
-  var botInput = (document.createTextNode(getBotAnswer(input)));
-  both3.appendChild(botInput);
+      botRow.class = "tableRow";
 
-  var botRow = document.createElement("tr");
-  var userRow = document.createElement("tr");
+      botRow.appendChild(both3);
+      botRow.appendChild(emptyCell);
+      userRow.appendChild(emptyCell);
+      userRow.appendChild(userh3);
 
-  botRow.class = "tableRow";
+      var conversationDiv = document.getElementById("conversation");
 
-  botRow.appendChild(both3);
-  botRow.appendChild(emptyCell);
-  userRow.appendChild(emptyCell);
-  userRow.appendChild(userh3);
+      conversationDiv.appendChild(userRow);
+      conversationDiv.appendChild(botRow);
 
-  var conversationDiv = document.getElementById("conversation");
+      document.getElementById("userInput").value = "";
+    }
 
-  conversationDiv.appendChild(userRow);
-  conversationDiv.appendChild(botRow);
+    function keyPressFunction() {
+      var el = document.getElementById("userInput");
+      if (el.value == "" || el.value.trim() == ""){
+        el.value = "";
+      }
+      else {
+        addElement(el.value);
+      }
+    }
 
-  document.getElementById("userInput").value = "";
-}
-
-
-function getBotAnswer(input)
-{
-  var response;
-
-  if (input.includes("hello") || input.includes("hi"))
-  {
-    return "hello";
-  }
-  response = generateResponse(input);
-  return response;
-}
+    document.querySelector('#userInput').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        keyPressFunction();
+      }
+    });
 
 
 
-document.querySelector('#userInput').addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    keyPressFunction();
-  }
-});
 
 
     </script>
+
     <script type="text/python">
 from browser import console, document
 
-console.log("hello");
+#console.log("hello");
 document <= "hi you"
 
 
