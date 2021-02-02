@@ -101,7 +101,22 @@ moved to tfoot
     <script type="text/javascript">
 
 
+var regex_intents = {};
 
+regex_intents.helloRe = '.*[^\w](hello|hey|hi)[^\w].*';
+regex_intents.goodbyeRe = '.*(bye)';
+regex_intents.list = [regex_intents.helloRe, regex_intents.goodbyeRe];
+
+forEach((regex_intents.list, i) => {
+  console.log(i);
+});
+
+
+console.log(regex_intents);
+function generateResponse(userInput){
+
+  return "hrllo";
+}
 
 
 function keyPressFunction() {
@@ -112,22 +127,17 @@ function keyPressFunction() {
     el.value = "";
   }
   else {
-
     addElement(el.value);
   }
 }
 
+
 function addElement (input) {
   var emptyCell = document.createElement("td");
-
-
   var userh3 = document.createElement("td");
   userh3.id = "userResponse";
   var userInput = document.createTextNode(input);
-
   userh3.appendChild(userInput);
-
-
   var both3 = document.createElement("td");
   both3.id = "botResponse";
 
@@ -136,7 +146,7 @@ function addElement (input) {
 
   var botRow = document.createElement("tr");
   var userRow = document.createElement("tr");
-  //tableRow.id = "conversationRow"; //i dontneed it rn cause im not using it
+
   botRow.class = "tableRow";
 
   botRow.appendChild(both3);
@@ -161,9 +171,11 @@ function getBotAnswer(input)
   {
     return "hello";
   }
-  response =  "this is where the bot would talk";
+  response = generateResponse(input);
   return response;
 }
+
+
 
 document.querySelector('#userInput').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
@@ -175,7 +187,7 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
     </script>
     <script type="text/python">
 from browser import console, document
- 
+
 console.log("hello");
 document <= "hi you"
 
