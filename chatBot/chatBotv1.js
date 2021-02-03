@@ -25,15 +25,140 @@ function getIntent(userInput) {
   return "none";
 }
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function generateResponse(userInput){
   item = getIntent(userInput);
   switch (item) {
     case 'hello':
+      switch (getRandomInt(0,20)) {
+        case 0:
+          return 'hi!';
+          break;
+        case 1:
+          return 'Hi!';
+          break;
+        case 2:
+          return 'hi';
+          break;
+        case 3:
+          return 'hey';
+          break;
+        case 4:
+          return 'Hey';
+          break;
+        case 5:
+          return 'hey!';
+          break;
+        case 6:
+          return 'Hello!';
+          break;
+        case 7:
+          return 'hi!';
+          break;
+        case 8:
+          return 'sup';
+          break;
+        case 9:
+          return 'howdy';
+          break;
+        case 10:
+          return 'hey you';
+          break;
+        case 11:
+          return "Hey! What's up!";
+          break;
+        case 12:
+          return 'Hola';
+          break;
+        case 13:
+          return 'Greetings!';
+          break;
+        case 14:
+          d = new Date();
+          if (d.getHours() <= 11){ // 11:00 AM
+            return 'good morning';
+          }
+          else if (d.getHours() > 20) {
+            return "a nice evening, isn't it?";
+          }
+          else if (d.getHours() > 11) {
+            return 'good afternoon';
+          }
+          else {
+            return 'See you later!';
+          }
+          break;
+        case 15:
+          return 'Hi!';
+          break;
+        case 16:
+          return 'hi';
+          break;
+        case 17:
+          return 'hey';
+          break;
+        case 18:
+          return 'Hey';
+          break;
+        case 19:
+          return 'hey!';
+          break;
+        case 20:
+          return 'Hello!';
+          break;
+        default:
+          break;
+      }
       return 'hello';
       break;
 
     case 'bye':
-      return 'goodbye';
+      switch (getRandomInt(0,7)) {
+        case 0:
+          return 'bye!';
+          break;
+        case 1:
+          return 'see you later';
+          break;
+        case 2:
+          return 'get lost kid';
+          break;
+        case 3:
+          return 'fine. be like that.';
+          break;
+        case 4:
+          return 'adios';
+          break;
+        case 5:
+          return 'Goodbye!';
+          break;
+        case 6:
+          return 'It has been fun!';
+          break;
+        case 7:
+          d = new Date();
+          if (d.getHours() <= 11){ // 11:00 AM
+            return 'have a pleasant morning!';
+          }
+          else if (d.getHours() > 20) {
+            return 'Have a nice evening!';
+          }
+          else if (d.getHours() > 11) {
+            return 'Have a nice afternoon!';
+          }
+          else {
+            return 'See you later!';
+          }
+        default:
+          return 'bye';
+          break;
+
+      }
       break;
 
     case 'what':
