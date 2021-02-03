@@ -48,8 +48,10 @@
 }
 
 .img {
+
   display: none;
   width:100%;
+
 }
 .images {
   height:auto;
