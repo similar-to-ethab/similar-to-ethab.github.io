@@ -5,13 +5,16 @@ var regex_intents = {};
 
 regex_intents.helloRe = [
   new RegExp(/^(.* )?(hello|hey|hi)([ ,\.].*)?$/,'g'), "hello"
-]
+];
 regex_intents.goodbyeRe = [
   new RegExp(/^(.* )?(bye|adios|goodbye|holla|see you later)( .*)?$/,'g'),'bye'
-]
+];
+regex_intents.feeling = [
+  new RegExp(/^(.* )?(how are you)( .*)?$/,'g'), 'feeling'
+];
 regex_intents.what = [
-  new RegExp(/^(.* )?(what|who|why|when|how)$/,'g'),'what'
-]
+  new RegExp(/^(.* )?(what|who|why|when|how)( .*)?$/,'g'),'what'
+];
 
 function getIntent(userInput) {
   for (var re in regex_intents) {
@@ -19,7 +22,7 @@ function getIntent(userInput) {
       return regex_intents[re][1];
     }
   }
-  return 69, "none";
+  return "none";
 }
 
 function generateResponse(userInput){
@@ -37,13 +40,16 @@ function generateResponse(userInput){
       return 'Interesting Question';
       break;
 
+    case 'feeling':
+      return "I'm good, How are you?";
     default:
       return 'Due to my limited scope, I am unable to understand you. My apologies';
       break;
   }
 }
 
-function addElement (input) {
+function addElement (userInput) {
+  var input = userInput;//.toLowerCase().trim();
   var emptyCell = document.createElement("td");
   var userh3 = document.createElement("td");
   userh3.id = "userResponse";
@@ -79,7 +85,9 @@ function keyPressFunction() {
     el.value = "";
   }
   else {
-    addElement(el.value);
+    console.log(el.value.toLowerCase().trim());
+    addElement(el.value.toLowerCase().trim());
+
   }
 }
 
