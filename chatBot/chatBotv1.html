@@ -11,14 +11,13 @@
     <style media="screen">
       table {
         border-collapse: separate;
-        margin-left: 4px;
         border: 2px solid black;
-        width:calc(100vw - 4px * 2);
+        width:calc(100% - 4px * 2);
         empty-cells: hide;
         background-color: lightgrey;
         font-family: Arial, sans-serif;
-        margin-top:5px;
-      }
+        margin:auto;
+        }
       th {
         width:50%;
         text-align: center;
@@ -52,6 +51,13 @@
       }
       input[type="text"]:focus {
         outline:none;
+      }
+
+      .table {
+        border-style: solid;
+        background-color: orange;
+        padding:10px;
+        margin:5px;
       }
     </style>
   </head>
