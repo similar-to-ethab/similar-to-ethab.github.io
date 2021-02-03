@@ -48,12 +48,12 @@ function generateResponse(userInput){
   }
 }
 
-function addElement (userInput) {
-  var input = userInput;//.toLowerCase().trim();
+function addElement (user) {
+  var input = user.toLowerCase();
   var emptyCell = document.createElement("td");
   var userh3 = document.createElement("td");
   userh3.id = "userResponse";
-  var userInput = document.createTextNode(input);
+  var userInput = document.createTextNode(user);
   userh3.appendChild(userInput);
   var both3 = document.createElement("td");
   both3.id = "botResponse";
@@ -80,13 +80,13 @@ function addElement (userInput) {
 }
 
 function keyPressFunction() {
-  var el = document.getElementById("userInput");
-  if (el.value == "" || el.value.trim() == ""){
-    el.value = "";
+  var el = document.getElementById("userInput").value;
+  if (el == "" || el.trim() == ""){
+    document.getElementById("userInput").value = "";
   }
   else {
-    console.log(el.value.toLowerCase().trim());
-    addElement(el.value.toLowerCase().trim());
+    console.log(el.toUpperCase().trim());
+    addElement(el.trim());
 
   }
 }
