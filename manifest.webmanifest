@@ -2,10 +2,9 @@
   "short_name":"Chat Bot",
   "name":"Artificial Chatty Bot",
   "description":"A website taht can fulfill your needs of a friend",
-  "start_url":"https://similar-to-ethab.github.io/",
+  "start_url":".",
   "background_color":"#000000",
   "display":"browser",
-  "scope":"https://similar-to-ethab.github.io",
   "theme_color":"#000000",
   "icons": [
     {
