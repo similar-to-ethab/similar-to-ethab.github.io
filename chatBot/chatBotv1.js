@@ -230,7 +230,7 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
       }
       else {
         console.log(elementsBot.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
-        elementsBot.item(i).style.width = 'fit-content';
+        //elementsBot.item(i).style.width = 'fit-content';
       }
     }
 
