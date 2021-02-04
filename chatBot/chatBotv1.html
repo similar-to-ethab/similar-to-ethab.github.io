@@ -10,9 +10,9 @@
     <meta name="keywords" content="chatbot, friend, v1, version 1, ai, virtual friend, html, js, similar to ethab, similar to ethan, similartoethab, css">
     <title>Chatbot - Version 1</title>
     <link rel="stylesheet" href="/css/footer.css" media="screen">
-    <link rel="manifest" href=".././manifest.webmanifest">
+
     <style media="screen">
-      table {
+      .innerconv {
         border-collapse: separate;
         border: 2px solid black;
         width:calc(100% - 4px * 2);
@@ -20,28 +20,43 @@
         background-color: lightgrey;
         font-family: Arial, sans-serif;
         margin:auto;
+        word-break: break-word;
         }
-      th {
-        width:50%;
-        text-align: center;
-        border-bottom: 1px solid black;
-      }
-      td, th, tr,thead, tbody {
-        box-sizing: border-box;
-        padding: 2px;
-      }
-      tbody tr td {
-        border: 1px solid black;
-        border-radius: 10px;
 
-        border-collapse: separate;
+      #headconv {
+        display: flex;
+        flex-direction: row;
       }
+      #headconv h3{
+        flex:50%;
+        text-align: center;
+      }
+
 
       #userResponse {
         background-color: red;
+        border-style: dashed;
+        border-radius: 10px;
+        /*width:50%;*/
+        word-wrap: break-word;
+
+        /*float:right;
+        display: flex;*/
+        justify-content: flex-end;
+        width:fit-content;
+        margin-top: 10px;
+        margin-left: /*45%*/auto;
+        text-align: right;
+        text-align: -webkit-right;
       }
       #botResponse {
         background-color: darkgrey;
+        border-style: dashed;
+        border-radius: 10px;
+        /*width:50%;*/
+        word-wrap: break-word;
+        display: inline-flex;
+        flex:left;
       }
 
       #userInput {
@@ -75,24 +90,20 @@
 <div class="table">
 
 
-  <table>
-    <thead>
-      <tr>
-        <th id="bot">Bot</th>
-        <th id="user">User</th>
-      </tr>
-    </thead>
-    <tbody id="conversation" >
-    </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td><label for="userInput">
+  <div class="innerconv" id="innerconv">
+    <div id="headconv">
+      <h3 id="bot">Bot</h3>
+      <h3 id="user">User</h3>
+    </div>
+
+    <div id="conversation">
+    </div>
+    <div>
+      <label for="userInput">
           <input id="userInput" type="text" name="userInput"  autofocus autocomplete="off" placeholder="Speak!">
-        </label></td>
-      </tr>
-    </tfoot>
-  </table>
+        </label>
+    </div>
+  </div>
 </div>
          <!-- possible
         textarea, form, input w/o form

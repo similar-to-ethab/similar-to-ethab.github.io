@@ -35,6 +35,7 @@ function generateResponse(userInput){
   item = getIntent(userInput);
   switch (item) {
     case 'hello':
+      return 'asdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologies';
       switch (getRandomInt(0,20)) {
         case 0:
           return 'hi!';
@@ -175,31 +176,33 @@ function generateResponse(userInput){
 
 function addElement (user) {
   var input = user.toLowerCase();
-  var emptyCell = document.createElement("td");
-  var userh3 = document.createElement("td");
+  //var emptyCell = document.createElement("td");
+  var userh3 = document.createElement("h3");//"td");
   userh3.id = "userResponse";
+  userh3.className= "userResponse";
   var userInput = document.createTextNode(user);
   userh3.appendChild(userInput);
-  var both3 = document.createElement("td");
+  var both3 = document.createElement("h3");//"td");
   both3.id = "botResponse";
+  both3.className = "botResponse";
 
   var botInput = (document.createTextNode(generateResponse(input))); // getting bot response
   both3.appendChild(botInput);
 
-  var botRow = document.createElement("tr");
-  var userRow = document.createElement("tr");
+  //var botRow = document.createElement(//"tr");
+  //var userRow = document.createElement("tr");
 
-  botRow.class = "tableRow";
+  //botRow.class = "tableRow";
 
-  botRow.appendChild(both3);
-  botRow.appendChild(emptyCell);
-  userRow.appendChild(emptyCell);
-  userRow.appendChild(userh3);
+  //botRow.appendChild(both3);
+  //botRow.appendChild(emptyCell);
+  //userRow.appendChild(emptyCell);
+  //userRow.appendChild(userh3);
 
   var conversationDiv = document.getElementById("conversation");
 
-  conversationDiv.appendChild(userRow);
-  conversationDiv.appendChild(botRow);
+  conversationDiv.appendChild(userh3);//userRow);
+  conversationDiv.appendChild(both3);//botRow);
 
   document.getElementById("userInput").value = "";
 }
@@ -219,5 +222,30 @@ function keyPressFunction() {
 document.querySelector('#userInput').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     keyPressFunction();
+    var elementsBot = document.getElementsByClassName('botResponse');
+    for (var i=0; i<elementsBot.length; i++) {
+      if (elementsBot.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
+        elementsBot.item(i).style.width = '60%';
+        console.log('hello');
+      }
+      else {
+        console.log(elementsBot.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
+        elementsBot.item(i).style.width = 'fit-content';
+      }
+    }
+
+    var elementsUser = document.getElementsByClassName('userResponse');
+    for (var i=0; i<elementsUser.length; i++) {
+      if (elementsUser.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
+        elementsUser.item(i).style.width = '60%';
+        console.log('hello');
+      }
+      //else if (elementsUser.item(i).clientWidth / document.getElementById("innerconv").clientWidth < 0.2) {
+
+      //}
+      else {
+        console.log(elementsUser.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
+      }
+    }
   }
 });
