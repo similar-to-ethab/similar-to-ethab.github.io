@@ -1,0 +1,19 @@
+article {
+  font-family: sans-serif;
+}
+article h2 {
+  margin-left: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+article h3 {
+  margin-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+article h4 {
+  margin-left: 30px;
+}
+article h5 {
+  padding-top: 10px;
+}
