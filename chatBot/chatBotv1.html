@@ -1,157 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@similartoethab">
+    <meta name="twitter:creator" content="@similartoethab">
+    <meta name="twitter:title" content="Chatbot v1">
+    <meta name="twitter:description" content="The first version of the friendly neighborhood chatbot">
+    <meta name="twitter:image" content="https://similar-to-ethab.github.io/favicon.ico">
+
+
     <meta charset="utf-8">
+    <meta name="language" content="en">
+    <link rel="stylesheet" href=".././css/chatBot.css">
+    <link rel="stylesheet" href=".././css/article.css">
     <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
-  <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+    <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./chatBotv1.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The first version of your very own friend. While it may be in alpha stages, the core code is completed. See for yourself!">
     <meta name="keywords" content="chatbot, friend, v1, version 1, ai, virtual friend, html, js, similar to ethab, similar to ethan, similartoethab, css">
     <title>Chatbot - Version 1</title>
     <link rel="stylesheet" href="/css/footer.css" media="screen">
-
-    <style media="screen">
-      .innerconv {
-        border-collapse: separate;
-        border: 2px solid black;
-        width:calc(100% - 4px * 2);
-        empty-cells: hide;
-        background-color: lightgrey;
-        font-family: Arial, sans-serif;
-        margin:auto;
-        word-break: break-word;
-        }
-
-      #headconv {
-        display: flex;
-        flex-direction: row;
-      }
-      #headconv h3{
-        flex:50%;
-        text-align: center;
-      }
-
-
-      #userResponse {
-        background-color: red;
-        border-style: dashed;
-        border-radius: 15px;
-        /*width:50%;*/
-        word-wrap: break-word;
-
-        /*float:right;
-        display: flex;*/
-        justify-content: flex-end;
-        width:fit-content;
-        margin-top: 10px;
-        margin-left: /*45%*/auto;
-        text-align: right;
-        text-align: -webkit-right;
-        padding-left: 7px;
-        padding-right:7px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        margin-right: 0.1em;
-      }
-      #botResponse {
-        background-color: darkgrey;
-        border-style: dashed;
-        border-radius: 10px;
-        /*width:50%;*/
-        word-wrap: break-word;
-
-
-        text-align: left;
-        text-align: -webkit-left;
-        padding-left: 7px;
-        padding-right:7px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        margin-left: 0.1em;
-        margin-bottom: 2px;
-      }
-
-      #userInput {
-        width:100%;
-        border:1px solid black;
-        border-radius: 10px;
-        font-size: 15px;
-        padding:3px;
-        padding-left: 5px;
-      }
-      input[type="text"]:focus {
-        outline:none;
-      }
-
-      .table {
-        border-style: solid;
-        border-width: 4px;
-        background-color: orange;
-        padding:10px;
-        margin:5px;
-      }
-    </style>
   </head>
   <body onload="brython()">
     <h1>Welcome</h1>
     <h2>Need a friend? Talk to me!</h2><h3>* Note - not very good</h3>
-
-
-
-
-<div class="table">
-
-
+<div class="table" id="table">
   <div class="innerconv" id="innerconv">
     <div id="headconv">
       <h3 id="bot">Bot</h3>
       <h3 id="user">User</h3>
     </div>
-
     <div id="conversation">
-    </div>
-    <div>
-      <label for="userInput">
-          <input id="userInput" type="text" name="userInput"  autofocus autocomplete="off" placeholder="Speak!">
-        </label>
     </div>
   </div>
 </div>
-         <!-- possible
-        textarea, form, input w/o form
-    -->
+<div id="userDiv">
+    <label for="userInput">
+      <textarea autofocus name="userInput" id="userInput"rows="1" cols="20"></textarea>
+    </label>
+</div>
 
-        <!--<label for="userInput">User Input
-          <input id="userInput" type="text" name="userInput"  autofocus>
-        </label>
-moved to tfoot
-      -->
-
-<style media="screen">
-  article {
-    font-family: sans-serif;
-  }
-  article h2 {
-    margin-left: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  article h3 {
-    margin-left: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
-  article h4 {
-    margin-left: 30px;
-  }
-  article h5 {
-    padding-top: 10px;
-  }
-</style>
 <article class="article">
-
-
   <div class="text">
 
     <h2>Welcome!</h2>
@@ -168,26 +61,19 @@ moved to tfoot
     <h3>What are the applications?</h3>
     <p><h4>I'll get to this later</h4></p>
 
-    <h5 id="version">Version: 1.2.0</h5>
+    <h5 id="version">Version: 1.6.0</h5>
   </div>
 </article>
     <h6 style="display:inline;"><a href=".././">go home</a></h6>
     <h6 style="display:inline;"><a href="./chatBotv2.html">chatbotv2</a></h6>
-    <script type="text/javascript" src="./chatBotv1.js"></script>
 
     <script type="text/python">
 from browser import console, document
 
 #console.log("hello");
-document <= "hi you"
-
-
-
-
+#document <= "hi you"
     </script>
   </body>
-
-
     <footer id="footer">
 
       <div>

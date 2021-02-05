@@ -176,57 +176,53 @@ function generateResponse(userInput){
 
 function addElement (user) {
   var input = user.toLowerCase();
-  //var emptyCell = document.createElement("td");
-  var userh3 = document.createElement("h3");//"td");
+  var userh3 = document.createElement("h3");
   userh3.id = "userResponse";
   userh3.className= "userResponse";
   var userInput = document.createTextNode(user);
   userh3.appendChild(userInput);
-  var both3 = document.createElement("h3");//"td");
+  var both3 = document.createElement("h3");
   both3.id = "botResponse";
   both3.className = "botResponse";
 
   var botInput = (document.createTextNode(generateResponse(input))); // getting bot response
   both3.appendChild(botInput);
-
-  //var botRow = document.createElement(//"tr");
-  //var userRow = document.createElement("tr");
-
-  //botRow.class = "tableRow";
-
-  //botRow.appendChild(both3);
-  //botRow.appendChild(emptyCell);
-  //userRow.appendChild(emptyCell);
-  //userRow.appendChild(userh3);
-
   var conversationDiv = document.getElementById("conversation");
 
-  conversationDiv.appendChild(userh3);//userRow);
-  conversationDiv.appendChild(both3);//botRow);
-
-  document.getElementById("userInput").value = "";
+  conversationDiv.appendChild(userh3);
+  conversationDiv.appendChild(both3);
 }
 
 function keyPressFunction() {
-  var el = document.getElementById("userInput").value;
-  if (el == "" || el.trim() == ""){
-    document.getElementById("userInput").value = "";
+  console.log('hrllo');
+  var el = document.getElementById("userInput");
+  if (el.value == "" || el.value.trim() == ""){
+    //el.value = "";
+    el.style.height = "25px";
   }
   else {
-    console.log(el.toUpperCase().trim());
-    addElement(el.trim());
-
+    addElement(el.value.trim());
+    return false;
+    el.style.height = "25px";
   }
+}
+function scrollSmoothToBottom (id) {
+   var div = document.getElementById(id);
+   $('#' + id).animate({
+      scrollTop: div.scrollHeight - div.clientHeight
+   }, 500);
 }
 
 document.querySelector('#userInput').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     keyPressFunction();
+
+    document.getElementById("userInput").value = "";
+    event.preventDefault();
     var elementsBot = document.getElementsByClassName('botResponse');
     for (var i=0; i<elementsBot.length; i++) {
       if (elementsBot.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
         elementsBot.item(i).style.width = '60%';
-        console.log('hello');
       }
       else {
         console.log(elementsBot.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
@@ -240,12 +236,35 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
         elementsUser.item(i).style.width = '60%';
         console.log('hello');
       }
-      //else if (elementsUser.item(i).clientWidth / document.getElementById("innerconv").clientWidth < 0.2) {
-
-      //}
       else {
         console.log(elementsUser.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
       }
     }
+    scrollSmoothToBottom('table');
   }
+});
+
+
+
+// if there are any issues with the input, they are likely here -
+(function($) {
+  $.fn.hasScrollBar = function() {
+    console.log(this.get(0).scrollHeight);
+    console.log($(this).innerHeight());
+    return this.get(0).scrollHeight > $( this ).innerHeight();
+  }
+})(jQuery);
+function heightChange() {
+  console.log($('#userInput').hasScrollBar());
+  if ($('#userInput').hasScrollBar()) {
+    $('#userInput').css('height', $('#userInput').get(0).scrollHeight - 2);
+  }
+}
+
+const input = document.querySelector('#userInput');
+$(document).ready(function() {
+  $('#userInput').on('input', function() {
+    console.log('h?');
+    heightChange();
+  });
 });
