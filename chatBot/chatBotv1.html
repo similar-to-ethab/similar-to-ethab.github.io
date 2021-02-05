@@ -1,133 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@similartoethab">
+    <meta name="twitter:creator" content="@similartoethab">
+    <meta name="twitter:title" content="Chatbot v1">
+    <meta name="twitter:description" content="The first version of the friendly neighborhood chatbot">
+    <meta name="twitter:image" content="https://similar-to-ethab.github.io/favicon.ico">
+
+
     <meta charset="utf-8">
+    <meta name="language" content="en">
+    <link rel="stylesheet" href=".././css/chatBot.css">
+    <link rel="stylesheet" href=".././css/article.css">
     <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
-  <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+    <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The first version of your very own friend. While it may be in alpha stages, the core code is completed. See for yourself!">
     <meta name="keywords" content="chatbot, friend, v1, version 1, ai, virtual friend, html, js, similar to ethab, similar to ethan, similartoethab, css">
     <title>Chatbot - Version 1</title>
     <link rel="stylesheet" href="/css/footer.css" media="screen">
-    <link rel="manifest" href=".././manifest.webmanifest">
-    <style media="screen">
-      table {
-        border-collapse: separate;
-        border: 2px solid black;
-        width:calc(100% - 4px * 2);
-        empty-cells: hide;
-        background-color: lightgrey;
-        font-family: Arial, sans-serif;
-        margin:auto;
-        }
-      th {
-        width:50%;
-        text-align: center;
-        border-bottom: 1px solid black;
-      }
-      td, th, tr,thead, tbody {
-        box-sizing: border-box;
-        padding: 2px;
-      }
-      tbody tr td {
-        border: 1px solid black;
-        border-radius: 10px;
-
-        border-collapse: separate;
-      }
-
-      #userResponse {
-        background-color: red;
-      }
-      #botResponse {
-        background-color: darkgrey;
-      }
-
-      #userInput {
-        width:100%;
-        border:1px solid black;
-        border-radius: 10px;
-        font-size: 15px;
-        padding:3px;
-        padding-left: 5px;
-      }
-      input[type="text"]:focus {
-        outline:none;
-      }
-
-      .table {
-        border-style: solid;
-        border-width: 4px;
-        background-color: orange;
-        padding:10px;
-        margin:5px;
-      }
-    </style>
   </head>
   <body onload="brython()">
     <h1>Welcome</h1>
     <h2>Need a friend? Talk to me!</h2><h3>* Note - not very good</h3>
 
-
-
-
-<div class="table">
-
-
-  <table>
-    <thead>
-      <tr>
-        <th id="bot">Bot</th>
-        <th id="user">User</th>
-      </tr>
-    </thead>
-    <tbody id="conversation" >
-    </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td><label for="userInput">
-          <input id="userInput" type="text" name="userInput"  autofocus autocomplete="off" placeholder="Speak!">
-        </label></td>
-      </tr>
-    </tfoot>
-  </table>
+<div class="table" id="table">
+  <div class="innerconv" id="innerconv">
+    <div id="headconv">
+      <h3 id="bot">Bot</h3>
+      <h3 id="user">User</h3>
+    </div>
+    <div id="conversation">
+    </div>
+  </div>
 </div>
-         <!-- possible
-        textarea, form, input w/o form
-    -->
+<div id="userDiv">
+    <label for="userInput">
+      <textarea autofocus name="userInput" id="userInput"rows="1" cols="20"></textarea>
+    </label>
+</div>
+        <script type="text/javascript" src="./chatBotv1.js"></script>
 
-        <!--<label for="userInput">User Input
-          <input id="userInput" type="text" name="userInput"  autofocus>
-        </label>
-moved to tfoot
-      -->
-
-<style media="screen">
-  article {
-    font-family: sans-serif;
-  }
-  article h2 {
-    margin-left: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  article h3 {
-    margin-left: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
-  article h4 {
-    margin-left: 30px;
-  }
-  article h5 {
-    padding-top: 10px;
-  }
-</style>
 <article class="article">
-
-
   <div class="text">
 
     <h2>Welcome!</h2>
@@ -143,27 +62,77 @@ moved to tfoot
     <p><h4>I'll get to this later</h4></p>
     <h3>What are the applications?</h3>
     <p><h4>I'll get to this later</h4></p>
+<style media="screen">
+  table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+    empty-cells: show;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  table {
+    margin-left: 3px;
+  }
+  #num {
+    font-style: italic;
+    text-align: center;
+  }
+</style>
+    <table>
+      <thead>
+        <tr>
+          <th>User Inputs</th>
+          <th>amount</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hello</td>
+          <td id="num">23</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Goodbye</td>
+          <td id="num">10</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Question</td>
+          <td id="num">1</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>feeling</td>
+          <td id="num">1</td>
+          <td>How are you?</td>
+        </tr>
+        <tr>
+          <td>Special</td>
+          <td id="num">25</td>
+          <td>20 random idioms that have no meaning</td>
+        </tr>
+        <tr>
+          <td>Other</td>
+          <td id="num">1</td>
+          <td>default</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <h5 id="version">Version: 1.2.0</h5>
+    <h5 id="version">Version: 1.7.1</h5>
   </div>
 </article>
     <h6 style="display:inline;"><a href=".././">go home</a></h6>
     <h6 style="display:inline;"><a href="./chatBotv2.html">chatbotv2</a></h6>
-    <script type="text/javascript" src="./chatBotv1.js"></script>
 
     <script type="text/python">
 from browser import console, document
 
 #console.log("hello");
-document <= "hi you"
-
-
-
-
+#document <= "hi you"
     </script>
   </body>
-
-
     <footer id="footer">
 
       <div>

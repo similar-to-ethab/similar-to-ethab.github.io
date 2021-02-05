@@ -15,6 +15,9 @@ regex_intents.feeling = [
 regex_intents.what = [
   new RegExp(/^(.* )?(what|who|why|when|how)( .*)?$/,'g'),'what'
 ];
+regex_intents.longLength = [
+  new RegExp(/.{250,}/,'g'),'long'
+];
 
 function getIntent(userInput) {
   for (var re in regex_intents) {
@@ -167,6 +170,88 @@ function generateResponse(userInput){
 
     case 'feeling':
       return "I'm good, How are you?";
+    case 'long':
+      switch (getRandomInt(0,25)) {
+        case 1:
+          return 'Wow!';
+          break;
+        case 2:
+          return 'The average length of a word is 4.7 letters';
+          break;
+        case 3:
+          return 'I have spent over 4 weeks on this project as of 2/4/21';
+          break;
+        case 4:
+          return 'I am running out of ideas.';
+          break;
+        case 5:
+          return 'Woohoo';
+          break;
+        case 6:
+          return "Wouldn't Harm a Fly";
+          break;
+        case 7:
+          return 'Every Cloud Has a Silver Lining';
+          break;
+        case 8:
+          return 'In a Pickle';
+          break;
+        case 9:
+          return 'Hands Down';
+          break;
+        case 10:
+          return 'Everything But The Kitchen Sink';
+          break;
+        case 11:
+          return 'Wake Up Call';
+          break;
+        case 12:
+          return 'Know the Ropes';
+          break;
+        case 13:
+          return 'Up In Arms';
+          break;
+        case 14:
+          return 'An Arm and a Leg';
+          break;
+        case 15:
+          return 'Short End of the Stick';
+          break;
+        case 16:
+          return 'Par For the Course';
+          break;
+        case 17:
+          return 'A Fool and His Money are Soon Parted';
+          break;
+        case 18:
+          return 'Son of a Gun';
+          break;
+        case 19:
+          return 'Shot In the Dark';
+          break;
+        case 20:
+          return 'Go Out On a Limb';
+          break;
+        case 21:
+          return 'Dropping Like Flies';
+          break;
+        case 22:
+          return 'Eat My Hat';
+          break;
+        case 23:
+          return 'Greased Lightning';
+          break;
+        case 24:
+          return 'Barking Up The Wrong Tree';
+          break;
+        case 25:
+          return 'A Piece of Cake';
+          break;
+        default:
+          return 'interesting';
+          break;
+      }
+      break;
     default:
       return 'Due to my limited scope, I am unable to understand you. My apologies';
       break;
@@ -175,49 +260,95 @@ function generateResponse(userInput){
 
 function addElement (user) {
   var input = user.toLowerCase();
-  var emptyCell = document.createElement("td");
-  var userh3 = document.createElement("td");
+  var userh3 = document.createElement("h3");
   userh3.id = "userResponse";
+  userh3.className= "userResponse";
   var userInput = document.createTextNode(user);
   userh3.appendChild(userInput);
-  var both3 = document.createElement("td");
+  var both3 = document.createElement("h3");
   both3.id = "botResponse";
+  both3.className = "botResponse";
 
   var botInput = (document.createTextNode(generateResponse(input))); // getting bot response
   both3.appendChild(botInput);
-
-  var botRow = document.createElement("tr");
-  var userRow = document.createElement("tr");
-
-  botRow.class = "tableRow";
-
-  botRow.appendChild(both3);
-  botRow.appendChild(emptyCell);
-  userRow.appendChild(emptyCell);
-  userRow.appendChild(userh3);
-
   var conversationDiv = document.getElementById("conversation");
 
-  conversationDiv.appendChild(userRow);
-  conversationDiv.appendChild(botRow);
-
-  document.getElementById("userInput").value = "";
+  conversationDiv.appendChild(userh3);
+  conversationDiv.appendChild(both3);
 }
 
 function keyPressFunction() {
-  var el = document.getElementById("userInput").value;
-  if (el == "" || el.trim() == ""){
-    document.getElementById("userInput").value = "";
+  console.log('hrllo');
+  var el = document.getElementById("userInput");
+  if (el.value == "" || el.value.trim() == ""){
+    //el.value = "";
+    el.style.height = "25px";
   }
   else {
-    console.log(el.toUpperCase().trim());
-    addElement(el.trim());
-
+    addElement(el.value.trim());
+    return false;
+    el.style.height = "25px";
   }
+}
+function scrollSmoothToBottom (id) {
+   var div = document.getElementById(id);
+   $('#' + id).animate({
+      scrollTop: div.scrollHeight - div.clientHeight
+   }, 500);
 }
 
 document.querySelector('#userInput').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     keyPressFunction();
+
+    document.getElementById("userInput").value = "";
+    event.preventDefault();
+    var elementsBot = document.getElementsByClassName('botResponse');
+    for (var i=0; i<elementsBot.length; i++) {
+      if (elementsBot.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
+        elementsBot.item(i).style.width = '60%';
+      }
+      else {
+        console.log(elementsBot.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
+        //elementsBot.item(i).style.width = 'fit-content';
+      }
+    }
+
+    var elementsUser = document.getElementsByClassName('userResponse');
+    for (var i=0; i<elementsUser.length; i++) {
+      if (elementsUser.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
+        elementsUser.item(i).style.width = '60%';
+        console.log('hello');
+      }
+      else {
+        console.log(elementsUser.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
+      }
+    }
+    scrollSmoothToBottom('table');
   }
+});
+
+
+
+// if there are any issues with the input, they are likely here -
+(function($) {
+  $.fn.hasScrollBar = function() {
+    console.log(this.get(0).scrollHeight);
+    console.log($(this).innerHeight());
+    return this.get(0).scrollHeight > $( this ).innerHeight();
+  }
+})(jQuery);
+function heightChange() {
+  console.log($('#userInput').hasScrollBar());
+  if ($('#userInput').hasScrollBar()) {
+    $('#userInput').css('height', $('#userInput').get(0).scrollHeight - 2);
+  }
+}
+
+const input = document.querySelector('#userInput');
+$(document).ready(function() {
+  $('#userInput').on('input', function() {
+    console.log('h?');
+    heightChange();
+  });
 });
