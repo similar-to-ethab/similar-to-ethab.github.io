@@ -16,8 +16,10 @@
 }
 #userResponse {
   background-color: red;
-  border-style: dashed;
+  border-style: solid;
   border-radius: 15px;
+  border-width: 2px;
+
   word-wrap: break-word;
   justify-content: flex-end;
   width:fit-content;
@@ -33,7 +35,9 @@
 }
 #botResponse {
   background-color: darkgrey;
-  border-style: dashed;
+  border-style: solid;
+  border-width: 2px;
+
   border-radius: 10px;
   word-wrap: break-word;
   text-align: left;

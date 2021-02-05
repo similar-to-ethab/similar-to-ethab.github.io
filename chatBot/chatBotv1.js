@@ -15,6 +15,9 @@ regex_intents.feeling = [
 regex_intents.what = [
   new RegExp(/^(.* )?(what|who|why|when|how)( .*)?$/,'g'),'what'
 ];
+regex_intents.longLength = [
+  new RegExp(/.{250,}/,'g'),'long'
+];
 
 function getIntent(userInput) {
   for (var re in regex_intents) {
@@ -35,7 +38,6 @@ function generateResponse(userInput){
   item = getIntent(userInput);
   switch (item) {
     case 'hello':
-      return 'asdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologiesasdfghgjdhjdasghjshhjhgpologies';
       switch (getRandomInt(0,20)) {
         case 0:
           return 'hi!';
@@ -168,6 +170,88 @@ function generateResponse(userInput){
 
     case 'feeling':
       return "I'm good, How are you?";
+    case 'long':
+      switch (getRandomInt(0,25)) {
+        case 1:
+          return 'Wow!';
+          break;
+        case 2:
+          return 'The average length of a word is 4.7 letters';
+          break;
+        case 3:
+          return 'I have spent over 4 weeks on this project as of 2/4/21';
+          break;
+        case 4:
+          return 'I am running out of ideas.';
+          break;
+        case 5:
+          return 'Woohoo';
+          break;
+        case 6:
+          return "Wouldn't Harm a Fly";
+          break;
+        case 7:
+          return 'Every Cloud Has a Silver Lining';
+          break;
+        case 8:
+          return 'In a Pickle';
+          break;
+        case 9:
+          return 'Hands Down';
+          break;
+        case 10:
+          return 'Everything But The Kitchen Sink';
+          break;
+        case 11:
+          return 'Wake Up Call';
+          break;
+        case 12:
+          return 'Know the Ropes';
+          break;
+        case 13:
+          return 'Up In Arms';
+          break;
+        case 14:
+          return 'An Arm and a Leg';
+          break;
+        case 15:
+          return 'Short End of the Stick';
+          break;
+        case 16:
+          return 'Par For the Course';
+          break;
+        case 17:
+          return 'A Fool and His Money are Soon Parted';
+          break;
+        case 18:
+          return 'Son of a Gun';
+          break;
+        case 19:
+          return 'Shot In the Dark';
+          break;
+        case 20:
+          return 'Go Out On a Limb';
+          break;
+        case 21:
+          return 'Dropping Like Flies';
+          break;
+        case 22:
+          return 'Eat My Hat';
+          break;
+        case 23:
+          return 'Greased Lightning';
+          break;
+        case 24:
+          return 'Barking Up The Wrong Tree';
+          break;
+        case 25:
+          return 'A Piece of Cake';
+          break;
+        default:
+          return 'interesting';
+          break;
+      }
+      break;
     default:
       return 'Due to my limited scope, I am unable to understand you. My apologies';
       break;
