@@ -5,11 +5,17 @@ var regex_intents = {};
 regex_intents.userName = [
   new RegExp( /my name is (\w*)/), 'userName'
 ];
+regex_intents.userAgeNum = [
+  new RegExp(/(\d{1,2}) years old|age[^\d]*(\d+)/), 'age'
+];
+//regex_intents.userAgeBornIn = [
+  //new RegExp(/,'age')
+//];
 regex_intents.helloRe = [
   new RegExp(/^(.* )?(hello|hey|hi)([ \,\.].*)?$/,'g'), "hello"
 ];
 regex_intents.goodbyeRe = [
-  new RegExp(/^(.* )?(bye|adios|goodbye|holla|see you later)([\.\, ].*)?$/),'bye'
+  new RegExp(/^(.* )*(bye|adios|goodbye|holla|see you later)([\.\, ].*)?$/),'bye'
 ];
 regex_intents.feeling = [
   new RegExp(/^(.* )?(how are you)([ \,\.].*)?$/,'g'), 'feeling'
@@ -19,6 +25,9 @@ regex_intents.what = [
 ];
 regex_intents.longLength = [
   new RegExp(/.{250,}/,'g'),'long'
+];
+regex_intents.positive = [
+  new RegExp(/great|awesome|cool|nice/)
 ];
 
 
@@ -122,7 +131,7 @@ function generateResponse(userInput){
           default:
             break;
           }
-        }
+      }
       else {
         switch (getRandomInt(0,20)) {
           case 0:
@@ -204,9 +213,18 @@ function generateResponse(userInput){
             break;
         }
       }
-      return 'hello';
-      break;
 
+    case 'age':
+      groups = userInput.match(regex_intents.userAgeNum[0]);
+      if (groups[1]) {
+        localStorage.setItem('age',groups[1]);
+        return groups[1];
+      }
+      else {
+        localStorage.setItem('age',groups[2]);
+        return groups[2];
+      }
+      break;
     case 'bye':
       switch (getRandomInt(0,7)) {
         case 0:
@@ -258,7 +276,7 @@ function generateResponse(userInput){
     case 'feeling':
       return "I'm good, How are you?";
     case 'long':
-      switch (getRandomInt(0,25)) {
+      switch(3){ //(getRandomInt(0,25)) {
         case 1:
           return 'Wow!';
           break;
@@ -266,7 +284,12 @@ function generateResponse(userInput){
           return 'The average length of a word is 4.7 letters';
           break;
         case 3:
-          return 'I have spent over 4 weeks on this project as of 2/4/21';
+          const a = new Date("2020-12-20"),
+          b = new Date(),
+          difference = dateDiffInWeeks(a,b);
+          yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          return 'I have been working on this project for ' + difference + ' weeks as of ' + yesterday.toLocaleDateString() + '!';
           break;
         case 4:
           return 'I am running out of ideas.';
@@ -340,12 +363,16 @@ function generateResponse(userInput){
       }
 
     case 'userName':
-      var name = userInput.match(regex_intents.userName[0]);
-      console.log(name);
-      name = name[1];
+      var name = userInput.match(regex_intents.userName[0])[1];
       localStorage.setItem('name',name);
-      console.log(name);
-      return name;
+      //if (name.includes('\\') || name.includes('/'))
+      if (localStorage.getItem('name') != '') {
+        return 'It is nice to meet you, ' + name;
+      }
+      localStorage.removeItem('name');
+
+      return 'Not this time bud';
+
 
 
       break;
@@ -405,20 +432,12 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
       if (elementsBot.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
         elementsBot.item(i).style.width = '60%';
       }
-      else {
-        console.log(elementsBot.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
-        //elementsBot.item(i).style.width = 'fit-content';
-      }
     }
 
     var elementsUser = document.getElementsByClassName('userResponse');
     for (var i=0; i<elementsUser.length; i++) {
       if (elementsUser.item(i).clientWidth / document.getElementById("innerconv").clientWidth > 0.6){
         elementsUser.item(i).style.width = '60%';
-        console.log('hello');
-      }
-      else {
-        console.log(elementsUser.item(i).clientWidth); /// document.getElementById("innerconv").style.width);
       }
     }
     scrollSmoothToBottom('table');
@@ -430,13 +449,10 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
 // if there are any issues with the input, they are likely here -
 (function($) {
   $.fn.hasScrollBar = function() {
-    console.log(this.get(0).scrollHeight);
-    console.log($(this).innerHeight());
     return this.get(0).scrollHeight > $( this ).innerHeight();
   }
 })(jQuery);
 function heightChange() {
-  console.log($('#userInput').hasScrollBar());
   if ($('#userInput').hasScrollBar()) {
     $('#userInput').css('height', $('#userInput').get(0).scrollHeight - 2);
   }
@@ -445,7 +461,16 @@ function heightChange() {
 const input = document.querySelector('#userInput');
 $(document).ready(function() {
   $('#userInput').on('input', function() {
-    console.log('h?');
     heightChange();
   });
 });
+
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+// a and b are javascript Date objects
+function dateDiffInWeeks(a, b) {
+  // Discard the time and time-zone information.
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.abs(Math.floor((utc2 - utc1) / (_MS_PER_DAY * 7)));
+}
