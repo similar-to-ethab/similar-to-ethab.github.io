@@ -2,26 +2,30 @@
 
 
 var regex_intents = {};
-
+regex_intents.userName = [
+  new RegExp( /my name is (\w*)/), 'userName'
+];
 regex_intents.helloRe = [
-  new RegExp(/^(.* )?(hello|hey|hi)([ ,\.].*)?$/,'g'), "hello"
+  new RegExp(/^(.* )?(hello|hey|hi)([ \,\.].*)?$/,'g'), "hello"
 ];
 regex_intents.goodbyeRe = [
-  new RegExp(/^(.* )?(bye|adios|goodbye|holla|see you later)( .*)?$/,'g'),'bye'
+  new RegExp(/^(.* )?(bye|adios|goodbye|holla|see you later)([\.\, ].*)?$/),'bye'
 ];
 regex_intents.feeling = [
-  new RegExp(/^(.* )?(how are you)( .*)?$/,'g'), 'feeling'
+  new RegExp(/^(.* )?(how are you)([ \,\.].*)?$/,'g'), 'feeling'
 ];
 regex_intents.what = [
-  new RegExp(/^(.* )?(what|who|why|when|how)( .*)?$/,'g'),'what'
+  new RegExp(/^(.* )?(what|who|why|when|how)([ \,\.].*)?$/,'g'),'what'
 ];
 regex_intents.longLength = [
   new RegExp(/.{250,}/,'g'),'long'
 ];
 
+
 function getIntent(userInput) {
   for (var re in regex_intents) {
     if (userInput.match(regex_intents[re][0])){
+      console.log(regex_intents[re][1]);
       return regex_intents[re][1];
     }
   }
@@ -38,84 +42,167 @@ function generateResponse(userInput){
   item = getIntent(userInput);
   switch (item) {
     case 'hello':
-      switch (getRandomInt(0,20)) {
-        case 0:
-          return 'hi!';
-          break;
-        case 1:
-          return 'Hi!';
-          break;
-        case 2:
-          return 'hi';
-          break;
-        case 3:
-          return 'hey';
-          break;
-        case 4:
-          return 'Hey';
-          break;
-        case 5:
-          return 'hey!';
-          break;
-        case 6:
-          return 'Hello!';
-          break;
-        case 7:
-          return 'hi!';
-          break;
-        case 8:
-          return 'sup';
-          break;
-        case 9:
-          return 'howdy';
-          break;
-        case 10:
-          return 'hey you';
-          break;
-        case 11:
-          return "Hey! What's up!";
-          break;
-        case 12:
-          return 'Hola';
-          break;
-        case 13:
-          return 'Greetings!';
-          break;
-        case 14:
-          d = new Date();
-          if (d.getHours() <= 11){ // 11:00 AM
-            return 'good morning';
+      if (localStorage.getItem('name')){
+        switch (getRandomInt(0,20)) {
+          case 0:
+            return 'hi ' + localStorage.getItem('name') + '!';
+            break;
+          case 1:
+            return 'Hi ' + localStorage.getItem('name') + '!';
+            break;
+          case 2:
+            return 'hi ' + localStorage.getItem('name');
+            break;
+          case 3:
+            return 'hey ' + localStorage.getItem('name');
+            break;
+          case 4:
+            return 'Hey ' + localStorage.getItem('name');
+            break;
+          case 5:
+            return 'hey ' + localStorage.getItem('name') + '!';
+            break;
+          case 6:
+            return 'Hello ' + localStorage.getItem('name') + '!';
+            break;
+          case 7:
+            return 'hi ' + localStorage.getItem('name') + '!';
+            break;
+          case 8:
+            return 'sup ' + localStorage.getItem('name');
+            break;
+          case 9:
+            return 'howdy ' + localStorage.getItem('name');
+            break;
+          case 10:
+            return 'hey you';
+            break;
+          case 11:
+            return "Hey! What's up " + localStorage.getItem('name') + "!";
+            break;
+          case 12:
+            return 'Hola ' + localStorage.getItem('name');
+            break;
+          case 13:
+            return 'Greetings ' + localStorage.getItem('name') + '!';
+            break;
+          case 14:
+            d = new Date();
+            if (d.getHours() <= 11){ // 11:00 AM
+              return 'good morning ' + localStorage.getItem('name');
+            }
+            else if (d.getHours() > 20) {
+              return "a nice evening, isn't it?";
+            }
+            else if (d.getHours() > 11) {
+              return 'good afternoon ' + localStorage.getItem('name');
+            }
+            else {
+              return 'See you later ' + localStorage.getItem('name') + '!';
+            }
+            break;
+          case 15:
+            return 'Hi ' + localStorage.getItem('name') + '!';
+            break;
+          case 16:
+            return 'hi ' + localStorage.getItem('name');
+            break;
+          case 17:
+            return 'hey ' + localStorage.getItem('name');
+            break;
+          case 18:
+            return 'Hey ' + localStorage.getItem('name');
+            break;
+          case 19:
+            return 'hey ' + localStorage.getItem('name') + '!';
+            break;
+          case 20:
+            return 'Hello ' + localStorage.getItem('name') + '!';
+            break;
+          default:
+            break;
           }
-          else if (d.getHours() > 20) {
-            return "a nice evening, isn't it?";
-          }
-          else if (d.getHours() > 11) {
-            return 'good afternoon';
-          }
-          else {
-            return 'See you later!';
-          }
-          break;
-        case 15:
-          return 'Hi!';
-          break;
-        case 16:
-          return 'hi';
-          break;
-        case 17:
-          return 'hey';
-          break;
-        case 18:
-          return 'Hey';
-          break;
-        case 19:
-          return 'hey!';
-          break;
-        case 20:
-          return 'Hello!';
-          break;
-        default:
-          break;
+        }
+      else {
+        switch (getRandomInt(0,20)) {
+          case 0:
+            return 'hi!';
+            break;
+          case 1:
+            return 'Hi!';
+            break;
+          case 2:
+            return 'hi';
+            break;
+          case 3:
+            return 'hey';
+            break;
+          case 4:
+            return 'Hey';
+            break;
+          case 5:
+            return 'hey!';
+            break;
+          case 6:
+            return 'Hello!';
+            break;
+          case 7:
+            return 'hi!';
+            break;
+          case 8:
+            return 'sup';
+            break;
+          case 9:
+            return 'howdy';
+            break;
+          case 10:
+            return 'hey you';
+            break;
+          case 11:
+            return "Hey! What's up!";
+            break;
+          case 12:
+            return 'Hola';
+            break;
+          case 13:
+            return 'Greetings!';
+            break;
+          case 14:
+            d = new Date();
+            if (d.getHours() <= 11){ // 11:00 AM
+              return 'good morning';
+            }
+            else if (d.getHours() > 20) {
+              return "a nice evening, isn't it?";
+            }
+            else if (d.getHours() > 11) {
+              return 'good afternoon';
+            }
+            else {
+              return 'See you later!';
+            }
+            break;
+          case 15:
+            return 'Hi!';
+            break;
+          case 16:
+            return 'hi';
+            break;
+          case 17:
+            return 'hey';
+            break;
+          case 18:
+            return 'Hey';
+            break;
+          case 19:
+            return 'hey!';
+            break;
+          case 20:
+            return 'Hello!';
+            break;
+          default:
+            break;
+        }
       }
       return 'hello';
       break;
@@ -251,6 +338,16 @@ function generateResponse(userInput){
           return 'interesting';
           break;
       }
+
+    case 'userName':
+      var name = userInput.match(regex_intents.userName[0]);
+      console.log(name);
+      name = name[1];
+      localStorage.setItem('name',name);
+      console.log(name);
+      return name;
+
+
       break;
     default:
       return 'Due to my limited scope, I am unable to understand you. My apologies';
