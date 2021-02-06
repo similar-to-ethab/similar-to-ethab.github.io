@@ -1,6 +1,5 @@
 //closed domain chatbot, very limited scope
 
-
 var regex_intents = {};
 regex_intents.userName = [
   new RegExp( /my name is (\w*)/), 'userName'
@@ -443,8 +442,6 @@ document.querySelector('#userInput').addEventListener('keypress', function (e) {
     scrollSmoothToBottom('table');
   }
 });
-
-
 
 // if there are any issues with the input, they are likely here -
 (function($) {
