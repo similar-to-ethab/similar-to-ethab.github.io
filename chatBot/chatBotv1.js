@@ -5,7 +5,7 @@ regex_intents.userName = [
   new RegExp( /my name is (\w*)/), 'userName'
 ];
 regex_intents.userAgeNum = [
-  new RegExp(/(\d{1,2}) years old|age[^\d]*(\d+)/), 'age'
+  new RegExp(/(\d{1,2}) years old|age[^\d]*(\d+)|i am (\d+)/), 'age'
 ];
 //regex_intents.userAgeBornIn = [
   //new RegExp(/,'age')
@@ -26,7 +26,10 @@ regex_intents.longLength = [
   new RegExp(/.{250,}/,'g'),'long'
 ];
 regex_intents.positive = [
-  new RegExp(/great|awesome|cool|nice/)
+  new RegExp(/great|awesome|cool|nice/),'positive'
+];
+regex_intents.months = [
+  new RegExp(/january|february|march|april|may|june|july|august|september|october|november|december/), 'months'
 ];
 
 
@@ -49,6 +52,12 @@ function getRandomInt(min, max) {
 function generateResponse(userInput){
   item = getIntent(userInput);
   switch (item) {
+    case 'months':
+      console.log(userInput.match(regex_intents.months[0]));
+      localStorage.setItem('month', userInput.match(regex_intents.months[0])[0]);
+
+      return 'Nice!';
+      break;
     case 'hello':
       if (localStorage.getItem('name')){
         switch (getRandomInt(0,20)) {
@@ -215,12 +224,42 @@ function generateResponse(userInput){
 
     case 'age':
       groups = userInput.match(regex_intents.userAgeNum[0]);
-      if (groups[1]) {
-        localStorage.setItem('age',groups[1]);
+      if (groups[2]) {
+        localStorage.setItem('age', groups[2]);
+        localStorage.getItem('age');
+        console.log(groups[2].toString().substr(-1));
+        switch (1) {
+          case 1:
+            return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'st birthday?';
+            break;
+          case 2:
+            return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'nd birthday?';
+            break;
+          case 3:
+            return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'rd birthday?';
+          default:
+          return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'th birthday?';
+        }
         return groups[1];
       }
       else {
-        localStorage.setItem('age',groups[2]);
+        localStorage.setItem('age', groups[3]);
+        console.log(localStorage.getItem('age'));
+        console.log(groups[3]);
+        console.log(groups);
+        console.log(12);
+        switch (groups[3].toString().substr(-1)) {
+          case 1:
+            return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'st birthday?';
+            break;
+          case 2:
+            return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'nd birthday?';
+            break;
+          case 3:
+            return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'rd birthday?';
+          default:
+          return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'th birthday?';
+        }
         return groups[2];
       }
       break;
