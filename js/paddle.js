@@ -40,7 +40,7 @@ for (var c=0; c<brickColumnCount; c++) {
 
 function restart() {
 
-  const canvas = document.getElementById('canvas');
+  canvas = document.getElementById('canvas');
   ctx = canvas.getContext("2d");
   x = canvas.width / 2;
   y = canvas.height - 30;
