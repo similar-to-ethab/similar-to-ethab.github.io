@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="unblocked,free, games, free games, unblocked games, free online games, free unblocked, strategy, i am bored, coolmathgames, shapes, fun">
+    <title>The rotating game</title>
+    <style media="screen">
+      #canvas {
+        background-color: lightgrey;
+
+      }
+      #canvasDiv {
+        /*width:80vw;/* 80vw */
+        /*height:80vh; /* vh */
+        display: block;
+        width:50%;
+        margin:auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The rotating game</h1>
+    <div id='canvasDiv'>
+      <canvas id="canvas" width="800" height="800"></canvas>
+    </div>
+    <script type="text/javascript">
+
+
+
+const canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var x = 10;
+var y = 10;
+
+var playerTurn = 1;
+
+//var amountOfBlocks = 64;
+var blocksInBlocksLength = 4;
+var blocksInBlocks = [];
+var blockLength = canvas.width/2 -50;
+for (var bc = 0; bc < 2; bc++) {
+  blocksInBlocks[bc] = [];
+  for (var br = 0; br < 2; br++) {
+    blocksInBlocks[bc][br] = [];
+    for (var c = 0; c < blocksInBlocksLength; c++) {
+      blocksInBlocks[bc][br][c] = [];
+      for (var r = 0; r < blocksInBlocksLength; r++) {
+        if(r%2 + c%2 == 1){
+          blocksInBlocks[bc][br][c][r] = { x:0, y:0, status:0, color:1, changed:false};
+        }
+        else { // r%2+x%2 == 0,2
+          blocksInBlocks[bc][br][c][r] = { x:0, y:0, status:0, color:0, changed:false};
+        }
+      }
+    }
+  }
+}
+
+// gets mouse position relative to the canvas
+function getMousePos(e) {
+    var rect = canvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+}
+
+// checks if the mouse clicked on a shape
+function inMousePos(x, y, mx, my, w = blockLength/4, h = blockLength/4) {
+  return (x <= mx) && (x + w >= mx) &&
+          (y <= my) && (y + h >= my);
+}
+
+function changePiece(e) { // and get block
+  var mouse = getMousePos(e);
+  var mx = mouse.x;
+  var my = mouse.y;
+
+  blocksInBlocks.forEach(function(bc) { // same old shit as before :)
+    bc.forEach(function(br) {
+      br.forEach(function(c) {
+        c.forEach(function(r) {
+          if (inMousePos(r.x, r.y, mx, my)) { // checks which object was clicked on
+            //console.log('aaaay'); // test
+            if (!r.changed) { // checks if a player has already clicked on it
+              // changes player turn and color of piece
+              if (playerTurn === 1) {
+                r.status = 1;
+                playerTurn = 2;
+              }
+              else if (playerTurn === 2) {
+                r.status = 2;
+                playerTurn = 1;
+              }
+              else {
+                alert('oops'); // if i fuck up or for later
+              }
+              r.changed=true;
+              drawPiece(r,25);
+            }
+          }
+        });
+      });
+    });
+  });
+}
+
+function drawPiece(piece, ballRadius, color = undefined) {
+  x = piece.x + blockLength/8;
+  y = piece.y + blockLength/8;
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+  if (piece.status == 0){
+    ctx.fillStyle = 'black';
+  }
+  else if (piece.status == 1) {
+    ctx.fillStyle = 'grey';
+  }
+  else if (piece.status == 2) {
+    ctx.fillStyle = 'white';
+  }
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawBoard(overflow, separation) {
+  for (var bc = 0; bc < 2; bc++) {
+    for (var br = 0; br < 2; br++) {
+      y = 10 + (blockLength + separation) * bc;
+      for (var c = 0; c < blocksInBlocksLength; c++) {
+        x = 10 + (blockLength + separation) * br;
+        for (var r = 0; r < blocksInBlocksLength; r++) {
+          blocksInBlocks[bc][br][c][r].x = x;
+          blocksInBlocks[bc][br][c][r].y = y;
+          //shapes.push(blocksInBlocks[bc][br][c][r]);
+          ctx.beginPath();
+          ctx.rect(x, y, blockLength/4, blockLength/4);
+          if (blocksInBlocks[bc][br][c][r].color == 0) {
+            ctx.fillStyle = '#0000FF';
+          }
+          else if (blocksInBlocks[bc][br][c][r].color == 1){
+            //console.log(blocksInBlocks[bc][br][c][r] 0,blocksInBlocks[bc][br][c][r]);
+            ctx.fillStyle = '#C4FF00';
+          }
+          ctx.fill();
+          ctx.closePath();
+          x+=(blockLength)/4 + overflow;
+        }
+        y+=(blockLength)/4 + overflow;
+      }
+      x= 10 + blockLength*br;
+    }
+  }
+}
+
+function draw() {
+  drawBoard(0,16);
+  blocksInBlocks.forEach(function(bc) {
+    bc.forEach(function(br) {
+      br.forEach(function(c) {
+        c.forEach(function(r) {
+            drawPiece(r,25);
+        });
+      });
+    });
+  });
+}
+draw();
+
+canvas.addEventListener('click', function(e) {
+  changePiece(e);
+}, true);
+
+    </script>
+  </body>
+</html>
