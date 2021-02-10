@@ -31,10 +31,10 @@
     <label for="topRight1"><button type="button" name="topRight1" id='topRight1' onclick="doRotate(1, 1, 2);">Top Right Once</button></label>
 
     <label for="bottomLeft2"><button type="button" name="bottomLeft2" id='bottomLeft2' onclick='doRotate(2, 2, 1);'>Bottom Left Twice</button></label>
-    <label for="bottomLeft1"><button type="button" name="bottomLeft1" id='bottomLeft1'>Bottom Left Once</button></label>
+    <label for="bottomLeft1"><button type="button" name="bottomLeft1" id='bottomLeft1' onclick='doRotate(1, 2, 1)'>Bottom Left Once</button></label>
 
-    <label for="bottomRight2"><button type="button" name="bottomRight2" id='bottomRight2'>Top Left Twice</button></label>
-    <label for="bottomRight1"><button type="button" name="bottomRight1" id='bottomRight1'>Top Left Once</button></label>
+    <label for="bottomRight2"><button type="button" name="bottomRight2" id='bottomRight2' onclick='doRotate(2, 2, 2)'>Bottom Right Twice</button></label>
+    <label for="bottomRight1"><button type="button" name="bottomRight1" id='bottomRight1' onclick='doRotate(1, 2, 2);'>Bottom Right Once</button></label>
     <script type="text/javascript">
 
 
@@ -207,18 +207,22 @@ function doRotate(rotations = 1, qr = 1, qc = 1) {
 
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
-  tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+
 
     // Now clear the portion to rotate.
 
     if(qr == 1){
       if (qc == 1){
+        console.log(qr, qc);
+        tempCtx.drawImage(canvas, 416, 0, canvas.width, canvas.height);
         ctx.fillRect(0, 0, 400, 400);
         ctx.save();
         ctx.translate(400 / 2, 400 / 2);
         ctx.drawImage(tempCanvas, 0, 0, 400, 400, -200, -200, 400, 400);
       }
       else {
+        console.log(qr, qc);
+        tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
         ctx.fillRect(416, 0, 400, 400);
         ctx.save();
         ctx.translate(400 / 2 + 416, 400 / 2);
@@ -227,12 +231,16 @@ function doRotate(rotations = 1, qr = 1, qc = 1) {
     }
     else {
       if (qc == 1) {
+        console.log(qr, qc);
+        tempCtx.drawImage(canvas, 0, 416, canvas.width, canvas.height);
         ctx.fillRect(0, 416, 400, 400);
         ctx.save();
         ctx.translate(400 / 2, 400 / 2 + 416);
         ctx.drawImage(tempCanvas, 0, 416, 400, 400, -200, -200, 400, 400);
       }
       else {
+        console.log(qr, qc);
+        tempCtx.drawImage(canvas, 416, 416, canvas.width, canvas.height);
         ctx.fillRect(416, 416, 400, 400);
         ctx.save();
         ctx.translate(400 / 2 + 416, 400 / 2 + 416);
