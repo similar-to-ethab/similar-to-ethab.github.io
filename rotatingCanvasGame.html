@@ -12,9 +12,6 @@
 
       }
       #canvasDiv {
-        /*width:80vw;/* 80vw */
-        /*height:80vh; /* vh */
-
 
       }
     </style>
@@ -236,7 +233,7 @@ function doRotate(rotations = 1, qr = 1, qc = 1) {
         ctx.fillRect(0, 416, 400, 400);
         ctx.save();
         ctx.translate(400 / 2, 400 / 2 + 416);
-        ctx.drawImage(tempCanvas, 0, 416, 400, 400, -200, -200, 400, 400);
+        ctx.drawImage(tempCanvas, 416, 416, 400, 400, -200, -200, 400, 400);
       }
       else {
         console.log(qr, qc);
