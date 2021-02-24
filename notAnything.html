@@ -5,8 +5,14 @@
     <title>Rotating Game</title>
     <script src="./js/coreClassChanges.js" charset="utf-8"></script>
     <style media="screen">
+
+    :root{
+      --player-text-size:20px;
+    }
+
     * {
       box-sizing: border-box;
+      padding:0;
       /*-moz-user-select: -moz-none;
      -khtml-user-select: none;
      -webkit-user-select: none;
@@ -54,6 +60,33 @@
       .player2clicked {
         background-color: blue;
       }
+
+      .player{
+        position: absolute;
+        margin:0;
+        right: 10%;
+        width:15vw;
+        height: 10vw;
+        font-size: var(--player-text-size);
+        padding:calc(5vw - (var(--player-text-size)/2));
+        text-align: center;
+
+        border: 1px solid black;
+      }
+
+      #player1{
+
+      }
+      #player2{
+
+      }
+
+      #player1:hover{
+
+      }
+      #player2:hover{
+
+      }
     </style>
   </head>
   <body>
@@ -61,6 +94,15 @@
 <label><button type="button" name="topRight2" id='topRight2' onclick="rotate(2,1)">Top Right Twice</button></label>
 <label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
 <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
+
+
+<div class="playerTurnDiv">
+  <h2 class='player' id="player1">Player 1</h2>
+</div>
+
+
+
+
 <button type="button" name="button" onclick='boardGrid()'>button</button>
     <div id="board">
       <div class="quadrant" id="quadrant1">
@@ -155,6 +197,9 @@
     <script type="text/javascript">
 
 /*  use jquert and change class styles and classes  */
+
+var winningList = [];
+
 var playerTurn = 1;
 
 var board = document.getElementById('board');
@@ -172,15 +217,7 @@ for (let q = 0; q < 4; q++) {
   }
 }
 
-function rotate(rotations, q=0){
-  if (rotations == 1){
-    doRotateTwice(q);
-  }
-  else {
-    console.log('Not yet');
-  }
-  boardGrid();
-}
+
 
 function doRotateTwice(q = 0) {
   blocks[q].forEach(function(c, indexC){
@@ -193,24 +230,9 @@ function doRotateTwice(q = 0) {
         // changing the C x R
       let classNamePathI = q.toString() + (3 - indexC).toString() + (3 - indexR).toString(); // initial after rotation
       let classNamePathF = q.toString() + indexC.toString() + indexR.toString(); // final
-      //console.log(r.status,r.oldStatus);
-      //console.log(r.el, classNamePathF);
+
       changeStatus(classNamePathI, r); // iffy on this :(
-
-      //console.log(r.el);
-
       colorChange(r);
-      console.log(playerTurn);
-
-      console.log(playerTurn);
-      //r.el = document.getElementById(classNamePathI);
-
-      // will change id AFTER everything else is changed
-
-      // change class of piece
-      //r.el.classList
-
-      //r.el = document.getElementById(classNamePathF);
 
 
       // so first, i will change the values in blocks
@@ -218,22 +240,10 @@ function doRotateTwice(q = 0) {
       // from there, things will go by ear
 
     });
-
   });
-  playerTurn=playerTurn%2 + 1;
-
-
-
-
-
-  /*for (let i = 0; i < blockStatus.length; i+=2) {
-    blockStatus.slice(i+1, 0, blockStatus[i]);
-  }*/
-  console.log(blocks[q]);
-  //console.log(blockStatus);
 }
 
-function boardGrid(){
+function boardGrid(){  // converts board to 2d array
   blockStatus=[];
   for (let q = 0; q < blocks.length; q++) {
     for (let c = 0; c < blocks[q].length; c++) {
@@ -242,38 +252,22 @@ function boardGrid(){
         cStatus.push(blocks[q][c][r].status);
       }
       blockStatus.push(cStatus);
-      console.log(cStatus);
     }
   }
-  console.log(blockStatus);
-
-  let j = 0;
 
   for (let i=0; i < 4; i++) {
     blockStatus[i+4].forEach(function(item, index) {
       blockStatus[i].push(item);
     });
   }
-  //blockStatus = blockStatus.slice(4,7);
-  console.log(blockStatus);
+
   blockStatus = blockStatus.slice(0,4).concat(blockStatus.slice(8));
-  //console.log(blockStatus);
   for (let i=4; i < 8; i++) {
-    //console.log(blockStatus);
     blockStatus[i+4].forEach(function(item, index){
-      //console.log('hi');
       blockStatus[i].push(item);
     });
   }
-
   blockStatus = blockStatus.slice(0,8);
-  //for (let i = 4; i < 8; i++) {
-    //blockStatus[]
-  //}
-
-
-
-  console.log(blockStatus);
 }
 
 
@@ -307,31 +301,83 @@ function playerSetStatus(el) {
 }
 
 
+function chkLine(a,b,c,d,e) {
+    // Check first cell non-zero and all cells match
+    return ((a != 0) && (a == b) && (a == c) && (a == d) && (a == e));
+}
+
+function chkWinner(bd) {
+  winningList = [];
+  // Check down
+  for (r = 0; r < 4; r++)
+    for (c = 0; c < 8; c++)
+      if (chkLine(bd[r][c], bd[r+1][c], bd[r+2][c], bd[r+3][c], bd[r+4][c]))
+        winningList.push(bd[r][c]);
+
+  // Check right
+  for (r = 0; r < 8; r++)
+    for (c = 0; c < 5; c++)
+      if (chkLine(bd[r][c], bd[r][c+1], bd[r][c+2], bd[r][c+3], bd[r][c+4]))
+        winningList.push(bd[r][c]);
+
+  // Check down-right
+  for (r = 0; r < 4; r++)
+    for (c = 0; c < 4; c++)
+      if (chkLine(bd[r][c], bd[r+1][c+1], bd[r+2][c+2], bd[r+3][c+3], bd[r+4][c+4]))
+        winningList.push(bd[r][c]);
+
+  // Check down-left
+  for (r = 5; r < 8; r++)
+    for (c = 0; c < 5; c++)
+      if (chkLine(bd[r][c], bd[r-1][c+1], bd[r-2][c+2], bd[r-3][c+3], bd[r-4][c+4]))
+        winningList.push(bd[r][c]);
+}
+
+function rotate(rotations, q=0){
+  if (rotations == 2)
+    doRotateTwice(q);
+  else
+    console.log('Not yet');
+
+  boardGrid();
+  playerTurn=playerTurn%2 + 1;
+  chkWinner(blockStatus);
+  console.log(winningList);
+}
+
 document.getElementById('quadrant1').addEventListener('click', function(e) {
   let el = e.target;
   playerSetStatus(el);
   boardGrid();
+  chkWinner(blockStatus);
+  console.log(winningList);
 });
 document.getElementById('quadrant2').addEventListener('click', function(e) {
   let el = e.target;
   playerSetStatus(el);
   boardGrid();
+  chkWinner(blockStatus);
+  console.log(winningList);
 });
 document.getElementById('quadrant3').addEventListener('click', function(e) {
   let el = e.target;
   playerSetStatus(el);
   boardGrid();
+  chkWinner(blockStatus);
+  console.log(winningList);
 });
 document.getElementById('quadrant4').addEventListener('click', function(e) {
   let el = e.target;
   playerSetStatus(el);
   boardGrid();
+  chkWinner(blockStatus);
+  console.log(winningList);
 });
 
 
 
 // BUG: unexpected EOF
-console.error('hi');
+// DEBUG: added } to boardGrid()
     </script>
   </body>
 </html>
