@@ -57,8 +57,11 @@
     </style>
   </head>
   <body>
-<label><button type="button" name="topLeft2" onclick="doRotateTwice(0);">Top Left</button></label>
-
+<label><button type="button" name="topLeft2" id='topLeft2' onclick="rotate(2,0)">Top Left Twice</button></label>
+<label><button type="button" name="topRight2" id='topRight2' onclick="rotate(2,1)">Top Right Twice</button></label>
+<label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
+<label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
+<button type="button" name="button" onclick='boardGrid()'>button</button>
     <div id="board">
       <div class="quadrant" id="quadrant1">
         <h1 class='1x1 000' id='000'>hi</h1><!--  colxrow  -->
@@ -76,7 +79,7 @@
         <h1 class='3x3 022' id='022'></h1>
         <h1 class='3x4 023' id='023'></h1>
 
-        <h1 class='4x1 003' id='003'></h1>
+        <h1 class='4x1 030' id='030'></h1>
         <h1 class='4x2 031' id='031'></h1>
         <h1 class='4x3 032' id='032'></h1>
         <h1 class='4x4 033' id='033'>hi</h1>
@@ -156,8 +159,7 @@ var playerTurn = 1;
 
 var board = document.getElementById('board');
 var blocks = [];
-
-const classList = ['1x1','1x2','1x3','1x4','2x1','2x2','2x3','2x4','3x1','3x2','3x3','3x4','4x1','4x2','4x3','4x4'];
+var blockStatus = [];
 
 for (let q = 0; q < 4; q++) {
   blocks[q]=[];
@@ -165,23 +167,43 @@ for (let q = 0; q < 4; q++) {
     blocks[q][c]=[];
     for (let r = 0; r < 4; r++) {
       blocks[q][c][r] = {group:(c+1).toString() + "x" + (r+1).toString(), status:0, oldStatus:0};
-      blocks[q][c][r].el = document.getElementsByClassName(blocks[q][c][r].group)[q];
+      blocks[q][c][r].el = document.getElementById(q.toString() + c.toString() + r.toString());
     }
   }
 }
 
+function rotate(rotations, q=0){
+  if (rotations == 1){
+    doRotateTwice(q);
+  }
+  else {
+    console.log('Not yet');
+  }
+  boardGrid();
+}
 
 function doRotateTwice(q = 0) {
+  blocks[q].forEach(function(c, indexC){
+    c.forEach(function(r, indexR){
+      r.oldStatus = r.status;
+    });
+  });
   blocks[q].forEach(function(c, indexC){ /*  use jquery and change class styles and classes  */
     c.forEach(function(r, indexR){
         // changing the C x R
       let classNamePathI = q.toString() + (3 - indexC).toString() + (3 - indexR).toString(); // initial after rotation
       let classNamePathF = q.toString() + indexC.toString() + indexR.toString(); // final
       //console.log(r.status,r.oldStatus);
-      console.log(r.el, classNamePathF);
+      //console.log(r.el, classNamePathF);
       changeStatus(classNamePathI, r); // iffy on this :(
 
+      //console.log(r.el);
+
       colorChange(r);
+      console.log(playerTurn);
+
+      console.log(playerTurn);
+      //r.el = document.getElementById(classNamePathI);
 
       // will change id AFTER everything else is changed
 
@@ -198,25 +220,73 @@ function doRotateTwice(q = 0) {
     });
 
   });
-  blocks[q].forEach(function(c, indexC){
-    c.forEach(function(r, indexR){
-      r.oldStatus = r.status;
-    });
-  });
+  playerTurn=playerTurn%2 + 1;
+
+
+
+
+
+  /*for (let i = 0; i < blockStatus.length; i+=2) {
+    blockStatus.slice(i+1, 0, blockStatus[i]);
+  }*/
   console.log(blocks[q]);
+  //console.log(blockStatus);
 }
 
+function boardGrid(){
+  blockStatus=[];
+  for (let q = 0; q < blocks.length; q++) {
+    for (let c = 0; c < blocks[q].length; c++) {
+      let cStatus = [];
+      for (let r = 0; r < blocks[q][c].length; r++) {
+        cStatus.push(blocks[q][c][r].status);
+      }
+      blockStatus.push(cStatus);
+      console.log(cStatus);
+    }
+  }
+  console.log(blockStatus);
+
+  let j = 0;
+
+  for (let i=0; i < 4; i++) {
+    blockStatus[i+4].forEach(function(item, index) {
+      blockStatus[i].push(item);
+    });
+  }
+  //blockStatus = blockStatus.slice(4,7);
+  console.log(blockStatus);
+  blockStatus = blockStatus.slice(0,4).concat(blockStatus.slice(8));
+  //console.log(blockStatus);
+  for (let i=4; i < 8; i++) {
+    //console.log(blockStatus);
+    blockStatus[i+4].forEach(function(item, index){
+      //console.log('hi');
+      blockStatus[i].push(item);
+    });
+  }
+
+  blockStatus = blockStatus.slice(0,8);
+  //for (let i = 4; i < 8; i++) {
+    //blockStatus[]
+  //}
+
+
+
+  console.log(blockStatus);
+}
+
+
+
 function changeStatus(FinalPath,r){ // call near beginning of rotate function
-  //console.log(r.status);
   r.status = blocks[FinalPath[0]][FinalPath[1]][FinalPath[2]].oldStatus;
-  console.log(r.status);
 }
 
 function colorChange(r){
-  if (r.oldStatus == 0){
+  if (r.status == 0){
     r.el.classList.remove('player1clicked','player2clicked');
   }
-  else if (r.oldStatus == 1) {
+  else if (r.status == 1){
     r.el.classList.add('player1clicked');
     r.el.classList.remove('player2clicked');
   }
@@ -227,7 +297,7 @@ function colorChange(r){
 }
 
 
-function playerChange(el) {
+function playerSetStatus(el) {
   if (el.tagName != 'DIV' && !el.classList.contains('player1clicked') && !el.classList.contains('player2clicked')) {
     el.classList.add('player' + playerTurn + 'clicked');
     blocks[el.id[0]][el.id[1]][el.id[2]].status = playerTurn;
@@ -239,24 +309,29 @@ function playerChange(el) {
 
 document.getElementById('quadrant1').addEventListener('click', function(e) {
   let el = e.target;
-  playerChange(el);
+  playerSetStatus(el);
+  boardGrid();
 });
 document.getElementById('quadrant2').addEventListener('click', function(e) {
   let el = e.target;
-  playerChange(el);
+  playerSetStatus(el);
+  boardGrid();
 });
 document.getElementById('quadrant3').addEventListener('click', function(e) {
   let el = e.target;
-  playerChange(el);
+  playerSetStatus(el);
+  boardGrid();
 });
 document.getElementById('quadrant4').addEventListener('click', function(e) {
   let el = e.target;
-  playerChange(el);
+  playerSetStatus(el);
+  boardGrid();
 });
 
 
 
-
+// BUG: unexpected EOF
+console.error('hi');
     </script>
   </body>
 </html>
