@@ -7,7 +7,7 @@
     <style media="screen">
 
     :root{
-      --player-text-size:20px;
+      --time-delay:2s;
     }
 
     * {
@@ -52,6 +52,8 @@
         width:70%;
         height:70%;
         border-radius: 50%;
+        transition: background-color var(--time-delay);
+        cursor:pointer;
       }
 
       .player1clicked {
@@ -61,32 +63,52 @@
         background-color: blue;
       }
 
-      .player{
+      .playerTurnDiv{
         position: absolute;
         margin:0;
         right: 10%;
         width:15vw;
         height: 10vw;
+        border: 1px solid black;
+        transition: background-color .5s, color 1s;
+      }
+      .playerTurn{
+
         font-size: var(--player-text-size);
-        padding:calc(5vw - (var(--player-text-size)/2));
+        /*padding-top:calc(5vw - (var(--player-text-size)/2));*/
         text-align: center;
 
-        border: 1px solid black;
-      }
 
-      #player1{
-
-      }
-      #player2{
 
       }
 
-      #player1:hover{
+      .playerTurn1{
+        color:white;
+        background-color: black;
+        margin-top: 25%;
+      }
+      .playerTurn2{
+        color:lightgrey;
+        background-color: blue;
+        margin-top: 25%;
+      }
+
+      .gameOver1{
+        background-color: green;
+        color: lightgreen;
+        padding:auto;
+        margin: 0;
+      }
+      .gameOver2{
+        background-color: green;
+        color: lightgreen;
+        padding:auto;
+        margin: 0;
+      }
+      #gameOver1, #gameOver2{
 
       }
-      #player2:hover{
 
-      }
     </style>
   </head>
   <body>
@@ -96,8 +118,8 @@
 <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
 
 
-<div class="playerTurnDiv">
-  <h2 class='player' id="player1">Player 1</h2>
+<div class="playerTurnDiv playerTurn1">
+  <h2 class='playerTurn' id='playerTurn1'>Player Turn: 1</h2>
 </div>
 
 
@@ -196,16 +218,17 @@
 
     <script type="text/javascript">
 
-/*  use jquert and change class styles and classes  */
-
 var winningList = [];
+var winner;
 
 var playerTurn = 1;
+var playerBoxContent = 'Player Turn: ';
 
-var board = document.getElementById('board');
+const playerTurnDiv = document.getElementsByClassName('playerTurnDiv')[0];
+const elPlayer = document.getElementsByClassName('playerTurn')[0];
+
 var blocks = [];
 var blockStatus = [];
-
 for (let q = 0; q < 4; q++) {
   blocks[q]=[];
   for (let c = 0; c < 4; c++) {
@@ -218,6 +241,24 @@ for (let q = 0; q < 4; q++) {
 }
 
 
+function playerChange(canChange){
+  console.warn(!ifGameOver(),canChange,!ifGameOver() && canChange );
+  if (!(!ifGameOver() && !canChange)) {
+    console.log(canChange);
+    playerTurnDiv.classList.remove('playerTurn' + playerTurn);
+
+
+    playerTurn=playerTurn%2+1;
+
+    playerTurnDiv.classList.add('playerTurn' + playerTurn);
+    elPlayer.id = 'playerTurn' + playerTurn;
+
+    elPlayer.innerHTML = playerBoxContent + playerTurn;
+  }
+  else {
+    console.warn('did not change playerTurn');
+  }
+}
 
 function doRotateTwice(q = 0) {
   blocks[q].forEach(function(c, indexC){
@@ -270,8 +311,6 @@ function boardGrid(){  // converts board to 2d array
   blockStatus = blockStatus.slice(0,8);
 }
 
-
-
 function changeStatus(FinalPath,r){ // call near beginning of rotate function
   r.status = blocks[FinalPath[0]][FinalPath[1]][FinalPath[2]].oldStatus;
 }
@@ -292,12 +331,15 @@ function colorChange(r){
 
 
 function playerSetStatus(el) {
-  if (el.tagName != 'DIV' && !el.classList.contains('player1clicked') && !el.classList.contains('player2clicked')) {
+//  console.error(el.classList.contains('player1clicked'),el.classList.contains('player2clicked'), el.tagName,!el.classList.contains('player1clicked') && !el.classList.contains('player2clicked') && el.tagName != 'DIV');
+  if (!el.classList.contains('player1clicked') && !el.classList.contains('player2clicked') && el.tagName != 'DIV') {
     el.classList.add('player' + playerTurn + 'clicked');
     blocks[el.id[0]][el.id[1]][el.id[2]].status = playerTurn;
     blocks[el.id[0]][el.id[1]][el.id[2]].oldStatus = playerTurn;
-    playerTurn = playerTurn%2 + 1;
+    // playerChange(); moved to end of big function
+    return true;
   }
+  return false;
 }
 
 
@@ -327,57 +369,109 @@ function chkWinner(bd) {
         winningList.push(bd[r][c]);
 
   // Check down-left
-  for (r = 5; r < 8; r++)
+  for (r = 4; r < 8; r++)
     for (c = 0; c < 5; c++)
       if (chkLine(bd[r][c], bd[r-1][c+1], bd[r-2][c+2], bd[r-3][c+3], bd[r-4][c+4]))
         winningList.push(bd[r][c]);
 }
 
-function rotate(rotations, q=0){
-  if (rotations == 2)
-    doRotateTwice(q);
-  else
-    console.log('Not yet');
-
-  boardGrid();
-  playerTurn=playerTurn%2 + 1;
-  chkWinner(blockStatus);
-  console.log(winningList);
+function ifGameOver(){ // returns false if game is not over
+  // if there are more than one 5 in a row, then whoever has more will win
+  winner = [0,0,0];
+  if (!(winningList === [])) {
+    winningList.forEach(function(winStatus) {
+      if (winStatus === 1) {
+        winner[0]+=1;
+      }
+      else {
+        winner[1]+=1;
+      }
+    });
+    if (winner[0] > winner[1]) {
+      winner[2] = 1;
+      return true;
+    }
+    else if (winner[1] > winner[0]) {
+      winner[2] = 2;
+      return true;
+    }
+    else {
+      winner[2] = 0;
+      return false;
+    }
+  }
+  return false;
 }
 
+function rotate(rotations, q=0){
+  if (!ifGameOver()) {
+    if (rotations == 2)
+      doRotateTwice(q);
+    else
+      console.log('Not yet');
+
+    boardGrid();
+    playerChange(true);
+    chkWinner(blockStatus);
+    console.log(winningList);
+  }
+  else {
+    console.log('GG');
+  }
+}
+
+
+
 document.getElementById('quadrant1').addEventListener('click', function(e) {
-  let el = e.target;
-  playerSetStatus(el);
-  boardGrid();
-  chkWinner(blockStatus);
-  console.log(winningList);
+  onPieceClick(e);
 });
 document.getElementById('quadrant2').addEventListener('click', function(e) {
-  let el = e.target;
-  playerSetStatus(el);
-  boardGrid();
-  chkWinner(blockStatus);
-  console.log(winningList);
+  onPieceClick(e);
 });
 document.getElementById('quadrant3').addEventListener('click', function(e) {
-  let el = e.target;
-  playerSetStatus(el);
-  boardGrid();
-  chkWinner(blockStatus);
-  console.log(winningList);
+  onPieceClick(e);
 });
 document.getElementById('quadrant4').addEventListener('click', function(e) {
-  let el = e.target;
-  playerSetStatus(el);
-  boardGrid();
-  chkWinner(blockStatus);
-  console.log(winningList);
+  onPieceClick(e);
 });
 
 
+function onGameOver(){
+  playerTurn=playerTurn%2+1;
+  playerTurnDiv.classList.remove('playerTurn' + playerTurn);
+  playerTurnDiv.classList.add('gameOver'+ playerTurn);
+  elPlayer.id = 'gameOver' + playerTurn;
+  elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
+}
 
-// BUG: unexpected EOF
-// DEBUG: added } to boardGrid()
+function gameOverMessage(){ // will use switch case later
+  return 'Game Over! Player ' + playerTurn + ' has won!';
+}
+
+function onPieceClick(e){
+  let el = e.target;
+  if (!ifGameOver()) {
+    console.log(ifGameOver());
+    let canChange = playerSetStatus(el);
+    boardGrid();
+    chkWinner(blockStatus);
+    playerChange(canChange);
+    console.log(winningList);
+    console.log(ifGameOver());
+  }
+  else {
+    console.log('GG');
+    console.log(ifGameOver());
+  }
+  if (ifGameOver()){
+    console.log('yay', ifGameOver());
+    onGameOver();
+  }
+
+
+
+}
+
     </script>
   </body>
 </html>
