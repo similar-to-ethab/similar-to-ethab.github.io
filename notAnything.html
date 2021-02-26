@@ -10,6 +10,7 @@
       --time-delay:2s;
       --button-width:33vw; /* not used rn */
       --player-text-size:20px;
+      --button-padding:20px;
     }
 
     * {
@@ -39,7 +40,8 @@
       #boardParent {
         display: flex;
         align-items: center;
-        height: 70vw;
+        height: 66vw;
+        margin-top: calc(8vw + var(--button-padding)/2);
       }
       .quadrant{
         display: grid;
@@ -105,62 +107,103 @@
         background-color: green;
         color: lightgreen;
         padding:auto;
-        /*margin: 0;*/
       }
       .gameOver2{
         background-color: green;
         color: lightgreen;
         padding:auto;
-        /*margin: 0;*/
       }
       #gameOver1, #gameOver2{
 
       }
       button{
         background-color: red;
-        height: 10%;
-        width:25%;
         padding:10px;
         margin:10px;
+        border: none;
+
+        transition: background-color 1s, border 1;
       }
-      button[name='topLeft2']{
-        position: relative;
-        top: 0;
-        left:0;
+      button:focus{
+        /*outline: solid blue;*/
+      }
+      button:active{
+        border:none;
+        background-color: black;
+        outline: none;
 
       }
+      button[name='topLeft2']{
+        position: absolute;
+        top: 0;
+        height: 8vw;
+        width:31vw;
+        left:17.3vw;
+      }
       button[name='topLeft1']{
-        position: fixed;
+        position: absolute;
+        height: 31vw;
+        width: 8vw;
+        left: 8.3vw;
+        top:9vw;
       }
       button[name='topRight2']{
-        position: fixed;
+        position: absolute;
+        top:0;
+        height: 8vw;
+        width: 31vw;
+        right:16.7vw;
       }
       button[name='topRight1']{
-        position:fixed;
+        position: absolute;
+        top:9vw;
+        height: 31vw;
+        width: 8vw;
+        right:7.6vw
       }
       button[name='bottomLeft2']{
-        position: fixed;
+
+        position: absolute;
+        height: 7.8vw;
+        width:31vw;
+        left:17.3vw;
+        top:74vw;
       }
       button[name='bottomLeft1']{
-        position: fixed;
+        position: absolute;
+        height: 31vw;
+        width: 8vw;
+        left:8.3vw;
+        top:42vw;
       }
       button[name='bottomRight2']{
-        position: fixed;
+        position: absolute;
+        height: 8vw;
+        width:31vw;
+        right:16.7vw;
+        top:74vw;
       }
       button[name='bottomRight1']{
-        position: fixed;
+
+        position: absolute;
+        height: 31vw;
+        width: 8vw;
+        right:7.6vw;
+        top:42vw;
       }
     </style>
   </head>
   <body>
     <label><button type="button" name="topLeft2" id='topLeft2' onclick="rotate(2,0)">Top Left Twice</button></label>
     <label><button type="button" name="topRight2" id='topRight2' onclick="rotate(2,1)">Top Right Twice</button></label>
-    <label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
-    <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
-    <label><button type="button" name="topLeft1" id='topLeft1' onclick="rotate(1,0)">Top Left Once</button></label>
     <label><button type="button" name="topRight1" id='topRight1' onclick="rotate(1,1)">Top Right Once</button></label>
-    <label><button type="button" name="bottomLeft1" id="bottomLeft1" onclick="rotate(1,2)">Bottom Left Once</button></label>
     <label><button type="button" name="bottomRight1" id="bottomRight1" onclick="rotate(1,3)">Bottom Right Once</button></label>
+    <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
+    <label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
+    <label><button type="button" name="bottomLeft1" id="bottomLeft1" onclick="rotate(1,2)">Bottom Left Once</button></label>
+    <label><button type="button" name="topLeft1" id='topLeft1' onclick="rotate(1,0)">Top Left Once</button></label>
+
+
 
 
 <div class="playerTurnDiv playerTurn1">
@@ -264,6 +307,7 @@
 
 var winningList = [];
 var winner;
+var gameOver = false;
 
 var playerTurn = 1;
 var playerBoxContent = 'Player Turn: ';
@@ -526,11 +570,15 @@ document.getElementById('quadrant4').addEventListener('click', function(e) {
 
 
 function onGameOver(){ // changes the player turn box to a game over box
-  playerTurn=playerTurn%2+1;
-  playerTurnDiv.classList.remove('playerTurn' + playerTurn);
-  playerTurnDiv.classList.add('gameOver'+ playerTurn);
-  elPlayer.id = 'gameOver' + playerTurn;
-  elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
+  if (!gameOver) {
+
+    playerTurn=playerTurn%2+1;
+    playerTurnDiv.classList.remove('playerTurn' + playerTurn);
+    playerTurnDiv.classList.add('gameOver'+ playerTurn);
+    elPlayer.id = 'gameOver' + playerTurn;
+    elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
+    gameOver = true;
+  }
 }
 
 function gameOverMessage(){ // will use switch case later
