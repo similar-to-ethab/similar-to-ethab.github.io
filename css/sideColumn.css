@@ -11,7 +11,7 @@
   height:100vh;
   flex:20%;
   background-color: red;
-
+  overflow-y: scroll;
   padding: 10px;
 
 
