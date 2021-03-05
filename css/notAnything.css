@@ -1,0 +1,393 @@
+:root {
+	--time-delay: 2s;
+	--button-width: 33vmin;
+	/* not used rn */
+	--player-text-size: 20px;
+	--button-padding: 20px;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+button {
+	transition: background-color 2s;
+}
+
+.darkmode {
+	background-color: black;
+	color: white;
+}
+
+.darkmode button {
+	background-color: darkred;
+	color: lightblue;
+}
+
+.darkmode button:focus {
+	border: none;
+	background-color: grey;
+	color: black;
+	outline: 0;
+}
+
+.darkmode button:hover {
+	background-color: hsla(300, 100%, 22%, 100%);
+	color: white;
+	transition: background-color 0.5s;
+}
+
+.darkmode button:active {
+	background-color: blue;
+	transition: background-color 0.2s;
+}
+
+.darkmode .quadrant {
+	background-color: lightgrey;
+}
+
+.darkmode .boardPiece {
+	background-color: white;
+}
+
+.darkmode .boardPiece:hover:not(.player1clicked):not(.player2clicked) {
+	background-color: hsla(0, 0%, 85%, 100%);
+	transition: background-color .5s;
+}
+
+.darkmode .player1clicked {
+	background-color: black;
+}
+
+.darkmode .player2clicked {
+	background-color: blue;
+}
+
+.darkmode .playerTurn1 {
+	background-color: hsla(0, 0%, 5%, 100%);
+	color: white;
+}
+
+.darkmode .playerTurn2 {
+	color: lightgrey;
+	background-color: blue;
+	margin-top: 90px;
+}
+
+.darkmode .gameOver1 {
+	background-color: green;
+	color: lightgreen;
+}
+
+.darkmode .gameOver2 {
+	background-color: green;
+	color: lightgreen;
+}
+
+.lightmode {
+	background-color: white;
+	color: black;
+}
+
+.lightmode button {
+	background-color: #FC4445;
+	color: #030f69;
+	/*#43ABC9;*/
+}
+
+.lightmode button:focus {
+	border: none;
+	background-color: grey;
+	color: white;
+	outline: 0;
+}
+
+.lightmode button:hover {
+	background-color: black;
+	color: white;
+}
+
+.lightmode .quadrant {
+	background-color: lightgrey;
+}
+
+.lightmode .boardPiece {
+	background-color: white;
+}
+
+.lightmode .boardPiece:hover:not(.player1clicked):not(.player2clicked) {
+	background-color: rgba(0, 0, 0, 25%);
+	transition: background-color .5s;
+}
+
+.lightmode .player1clicked {
+	background-color: black;
+}
+
+.lightmode .player2clicked {
+	background-color: blue;
+}
+
+.lightmode .playerTurn1 {
+	background-color: grey;
+	color: white;
+}
+
+.lightmode .playerTurn2 {
+	color: lightgrey;
+	background-color: blue;
+}
+
+.lightmode .gameOver1 {
+	background-color: green;
+	color: lightgreen;
+}
+
+.lightmode .gameOver2 {
+	background-color: green;
+	color: lightgreen;
+}
+
+@media only screen and (orientation: landscape) {
+	#board {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		width: 66vh;
+		height: 66vh;
+	}
+	#boardParent {
+		display: flex;
+		align-items: center;
+		height: 66vh;
+		width: 66vh;
+		margin: 0 auto;
+		margin-top: 8%;
+		position: relative;
+	}
+	.quadrant {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(4, 1fr);
+		height: 33vh;
+		width: 33vh;
+		border: 1px solid black;
+		/*  background-color: lightgrey;  moved to light mode dark mode */
+		text-align: center;
+	}
+	.boardPiece {
+		margin: auto;
+		padding-top: auto;
+		width: 70%;
+		height: 70%;
+		border-radius: 50%;
+		transition: background-color var(--time-delay);
+		cursor: pointer;
+	}
+	.playerTurnDiv {
+		border: 1px solid black;
+		margin-top: 90px;
+		margin-left: auto;
+		margin-right: auto;
+		transition: background-color .5s, color 1s;
+	}
+	.playerTurn {
+		font-size: var(--player-text-size);
+		text-align: center;
+	}
+	button {
+		padding: 10px;
+		margin: 10px;
+		border: none;
+		transition: background-color 1s, border 1s, color 1s;
+		text-align: center;
+	}
+	button[name='topLeft2'] {
+		position: absolute;
+		top: 0;
+		height: 8vh;
+		width: 31vh;
+		left: 0;
+		margin-top: -12%;
+	}
+	button[name='topLeft1'] {
+		position: absolute;
+		height: 31vh;
+		width: 8vh;
+		left: 0;
+		top: 9vh;
+		margin-left: -12%;
+		margin-top: -12%;
+	}
+	button[name='topRight2'] {
+		position: absolute;
+		top: 0;
+		height: 8vh;
+		width: 31vh;
+		right: 0;
+		margin-top: -8vh;
+	}
+	button[name='topRight1'] {
+		position: absolute;
+		top: 9vh;
+		height: 31vh;
+		width: 8vh;
+		right: 0;
+		margin-top: -12%;
+		margin-right: -12%;
+	}
+	button[name='bottomLeft2'] {
+		position: absolute;
+		height: 8vh;
+		width: 31vh;
+		left: 0;
+		top: 74vh;
+		margin-top: -12.3%;
+	}
+	button[name='bottomLeft1'] {
+		position: absolute;
+		height: 31vh;
+		width: 8vh;
+		left: 0;
+		top: 42vh;
+		margin-left: -12%;
+		margin-top: -12%;
+	}
+	button[name='bottomRight2'] {
+		position: absolute;
+		height: 8vh;
+		width: 31vh;
+		right: 0;
+		top: 74vh;
+		margin-top: -12.3%;
+	}
+	button[name='bottomRight1'] {
+		position: absolute;
+		height: 31vh;
+		width: 8vh;
+		right: 0;
+		top: 42vh;
+		margin-top: -12%;
+		margin-right: -12%;
+	}
+}
+
+@media only screen and (orientation: portrait) {
+	#board {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		width: 66vw;
+		height: 66vw;
+		background-color: lightblue;
+	}
+	#boardParent {
+		display: flex;
+		align-items: center;
+		height: 66vw;
+		width: 66vw;
+		margin: 0 auto;
+		margin-top: calc(8vw + var(--button-padding)/2);
+	}
+	.quadrant {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(4, 1fr);
+		height: 33vw;
+		width: 33vw;
+		border: 1px solid black;
+		text-align: center;
+	}
+	.boardPiece {
+		margin: auto;
+		padding-top: auto;
+		width: 70%;
+		height: 70%;
+		border-radius: 50%;
+		transition: background-color var(--time-delay, 1s);
+		cursor: pointer;
+	}
+	.playerTurnDiv {
+		border: 1px solid black;
+		margin-top: 90px;
+		margin-left: auto;
+		margin-right: auto;
+		transition: background-color .5s, color 1s;
+	}
+	.playerTurn {
+		font-size: var(--player-text-size);
+		text-align: center;
+	}
+	button {
+		background-color: red;
+		padding: 10px;
+		margin: 10px;
+		border: none;
+		transition: background-color 1s, border 1;
+	}
+	button:focus {
+		/*outline: solid blue;*/
+	}
+	button:active {
+		border: none;
+		background-color: black;
+		outline: none;
+	}
+	button[name='topLeft2'] {
+		position: absolute;
+		top: 0;
+		height: 8vw;
+		width: 31vw;
+		left: 17.3vw;
+	}
+	button[name='topLeft1'] {
+		position: absolute;
+		height: 31vw;
+		width: 8vw;
+		left: 8.3vw;
+		top: 9vw;
+	}
+	button[name='topRight2'] {
+		position: absolute;
+		top: 0;
+		height: 8vw;
+		width: 31vw;
+		right: 16.7vw;
+	}
+	button[name='topRight1'] {
+		position: absolute;
+		top: 9vw;
+		height: 31vw;
+		width: 8vw;
+		right: 7.6vw
+	}
+	button[name='bottomLeft2'] {
+		position: absolute;
+		height: 7.8vw;
+		width: 31vw;
+		left: 17.3vw;
+		top: 74vw;
+	}
+	button[name='bottomLeft1'] {
+		position: absolute;
+		height: 31vw;
+		width: 8vw;
+		left: 8.3vw;
+		top: 42vw;
+	}
+	button[name='bottomRight2'] {
+		position: absolute;
+		height: 8vw;
+		width: 31vw;
+		right: 16.7vw;
+		top: 74vw;
+	}
+	button[name='bottomRight1'] {
+		position: absolute;
+		height: 31vw;
+		width: 8vw;
+		right: 7.6vw;
+    top: 42vw;
+  }
+}

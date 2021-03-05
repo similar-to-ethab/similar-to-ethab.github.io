@@ -1,945 +1,437 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Rotating Game</title>
-    <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script src="./js/coreClassChanges.js" charset="utf-8"></script>
-    <style media="screen">
-
-    :root{
-      --time-delay:2s;
-      --button-width:33vmin; /* not used rn */
-      --player-text-size:20px;
-      --button-padding:20px;
-    }
-
-    html {
-      background-color: white;
-    }
-    * {
-      box-sizing: border-box;
-      padding:0;
-    }
-    .quadrant{
-      background-color: lightgrey;
-    }
-    .boardPiece{
-      background-color: white;
-    }
-    .player1clicked {
-      background-color: grey;
-    }
-    .player2clicked {
-      background-color: blue;
-    }
-    .playerTurn1{
-      background-color: grey;
-      color:white;
-      margin-top: 90px;
-    }
-    .playerTurn2{
-      color:lightgrey;
-      background-color: blue;
-      margin-top: 90px;
-    }
-    .gameOver1{
-      background-color: green;
-      color: lightgreen;
-      padding: auto;
-    }
-    .gameOver2{
-      background-color: green;
-      color: lightgreen;
-      padding: auto;
-    }
-    button:active{
-      border:none;
-      background-color: grey;
-      color:white;
-    }
-
-    @media (prefers-color-scheme: light) { /* need to keep this and the other class the same*/
-      html {
-        background-color: white;
-        color: black;
-      }
-      button {
-        background-color: #FC4445;
-        color: #030f69;/*#43ABC9;*/
-      }
-      button:focus{
-        border:none;
-        background-color: grey;
-        color:white;
-        outline: 0;
-      }
-      button:hover{
-        background-color: black;
-        color: white;
-      }
-      .quadrant{
-        background-color: lightgrey;
-      }
-      .boardPiece{
-        background-color: white;
-      }
-      .boardPiece:hover:not(.player1clicked):not(.player2clicked){
-        background-color: rgba(0,0,0,25%);
-        transition: background-color .5s;
-      }
-      .player1clicked {
-        background-color: black;
-      }
-      .player2clicked {
-        background-color: blue;
-      }
-      .playerTurn1{
-        background-color: grey;
-        color:white;
-      }
-      .playerTurn2{
-        color:lightgrey;
-        background-color: blue;
-      }
-      .gameOver1{
-        background-color: green;
-        color: lightgreen;
-      }
-      .gameOver2{
-        background-color: green;
-        color: lightgreen;
-      }
-    }
-    .lightmode html {
-      background-color: white;
-      color: black;
-    }
-    .lightmode button {
-      background-color: #FC4445;
-      color: #030f69;/*#43ABC9;*/
-    }
-    .lightmode button:focus{
-      border:none;
-      background-color: grey;
-      color:white;
-      outline: 0;
-    }
-    .lightmode button:hover{
-      background-color: black;
-      color: white;
-    }
-    .lightmode .quadrant{
-      background-color: lightgrey;
-    }
-    .lightmode .boardPiece{
-      background-color: white;
-    }
-    .lightmode .boardPiece:hover:not(.player1clicked):not(.player2clicked){
-      background-color: rgba(0,0,0,25%);
-      transition: background-color .5s;
-    }
-    .lightmode .player1clicked {
-      background-color: black;
-    }
-    .lightmode .player2clicked {
-      background-color: blue;
-    }
-    .lightmode .playerTurn1{
-      background-color: grey;
-      color:white;
-    }
-    .lightmode .playerTurn2{
-      color:lightgrey;
-      background-color: blue;
-    }
-    .lightmode .gameOver1{
-      background-color: green;
-      color: lightgreen;
-    }
-    .lightmode .gameOver2{
-      background-color: green;
-      color: lightgreen;
-    }
-
-
-    /* Dark mode */
-    @media (prefers-color-scheme: dark), (prefers-dark-interface) {
-      html {
-        background-color: black;
-        color: white;
-      }
-      button {
-        background-color: darkred;
-        color: lightblue;
-      }
-      button:focus{
-        border:none;
-        background-color: grey;
-        color:black;
-        outline: 0;
-      }
-      button:hover {
-        background-color: blue;
-        color: white;
-      }
-      .quadrant{
-        background-color: lightgrey;
-      }
-      .boardPiece{
-        background-color: white;
-      }
-      .boardPiece:hover:not(.player1clicked):not(.player2clicked){
-        background-color: rgba(0,0,0,25%);
-        transition: background-color .5s;
-      }
-      .player1clicked {
-        background-color: grey;
-      }
-      .player2clicked {
-        background-color: blue;
-      }
-      .playerTurn1{
-        background-color: grey;
-        color:white;
-      }
-      .playerTurn2{
-        color:lightgrey;
-        background-color: blue;
-      }
-      .gameOver1{
-        background-color: green;
-        color: lightgreen;
-      }
-      .gameOver2{
-        background-color: green;
-        color: lightgreen;
-      }
-
-    }
-    .darkmode{
-      background-color: black;
-      color: white;
-    }
-    .darkmode button {
-      background-color: darkred;
-      color: lightblue;
-    }
-    .darkmode button:focus{
-      border:none;
-      background-color: grey;
-      color:black;
-      outline: 0;
-    }
-    .darkmode button:hover {
-        background-color: blue;
-        color: white;
-    }
-    .darkmode .quadrant{
-        background-color: lightgrey;
-    }
-    .darkmode .boardPiece{
-        background-color: white;
-      }
-      .darkmode .boardPiece:hover:not(.player1clicked):not(.player2clicked){
-        background-color: rgba(0,0,0,25%);
-        transition: background-color .5s;
-      }
-      .darkmode .player1clicked {
-        background-color: grey;
-      }
-      .darkmode .player2clicked {
-        background-color: blue;
-      }
-      .darkmode .playerTurn1{
-        background-color: grey;
-        color:white;
       }
       .darkmode .playerTurn2{
-        color:lightgrey;
-        background-color: blue;
-      }
-      .darkmode .gameOver1{
-        background-color: green;
-        color: lightgreen;
-      }
-      .darkmode .gameOver2{
-        background-color: green;
-        color: lightgreen;
-      }
-
-
-    @media only screen and (orientation: landscape) {
-
-
-      #board {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        width:66vh;
-        height: 66vh;
-
-
-      }
-      #boardParent {
-        display: flex;
-        align-items: center;
-        height: 66vh;
-        width: 66vh;
-        margin: 0 auto;
-        margin-top: 8%;
-        position: relative;
-      }
-      .quadrant{
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        height: 33vh;
-        width:33vh;
-        /*border-style:solid;*/
-        border: 1px solid black;
-        /*  background-color: lightgrey;  moved to light mode dark mode */
-        text-align: center;
-      }
-      .boardPiece {
-        margin: auto;
-        padding-top:auto;
-        width:70%;
-        height:70%;
-        border-radius: 50%;
-        transition: background-color var(--time-delay);
-        cursor:pointer;
-      }
-
-      .playerTurnDiv{
-        border: 1px solid black;
-        margin-left: auto;
-        margin-right: auto;
-        transition: background-color .5s, color 1s;
-      }
-      .playerTurn{
-        font-size: var(--player-text-size);
-        text-align: center;
-      }
-
+   <head>
+      <meta charset="utf-8">
+      <title>Rotating Game</title>
+      <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script src="./js/coreClassChanges.js" charset="utf-8"></script>
+      <style media="screen">
       button{
-        padding:10px;
-        margin:10px;
-        border: none;
-        transition: background-color 1s, border 1s, color 1s;
-        text-align: center;
+        background-color: red;
       }
+      </style>
+      <link rel="stylesheet" href="./css/notAnything.css">
 
-
-      button[name='topLeft2']{
-        position: absolute;
-        top: 0;
-        height: 8vh;
-        width:31vh;
-        left:0;
-        margin-top: -12%;
-      }
-      button[name='topLeft1']{
-        position: absolute;
-        height: 31vh;
-        width: 8vh;
-        /*right: 71.7vw;/*8.3vw*/
-        left: 0;
-        top:9vh;
-        margin-left: -12%;
-        margin-top: -12%;
-      }
-      button[name='topRight2']{
-        position: absolute;
-        top:0;
-        height: 8vh;
-        width: 31vh;
-        right:0;
-        margin-top: -8vh;
-      }
-      button[name='topRight1']{
-        position: absolute;
-        top:9vh;
-        height: 31vh;
-        width: 8vh;
-        right:0;
-        margin-top: -12%;
-        margin-right:-12%;
-
-      }
-      button[name='bottomLeft2']{
-
-        position: absolute;
-        height: 8vh;
-        width:31vh;
-        left:0;
-        top:74vh;
-        margin-top:-12.3%;
-      }
-      button[name='bottomLeft1']{
-        position: absolute;
-        height: 31vh;
-        width: 8vh;
-        left:0;
-        top:42vh;
-        margin-left:-12%;
-        margin-top: -12%;
-      }
-      button[name='bottomRight2']{
-        position: absolute;
-        height: 8vh;
-        width:31vh;
-        right:0;
-        top:74vh;
-        margin-top:-12.3%;
-      }
-      button[name='bottomRight1']{
-
-        position: absolute;
-        height: 31vh;
-        width: 8vh;
-        right:0;
-        top:42vh;
-        margin-top:-12%;
-        margin-right:-12%;
-      }
-    }
-      @media only screen and (orientation: portrait) {
-        #board {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: repeat(2, 1fr);
-          width:66vw;
-          /*margin-top:8%;*/
-          height: 66vw;
-          background-color: lightblue;
-        }
-        #boardParent {
-          display: flex;
-          align-items: center;
-          height: 66vw;
-          width: 66vw;
-          margin: 0 auto;
-          margin-top: calc(8vw + var(--button-padding)/2);
-        }
-        .quadrant{
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(4, 1fr);
-          height: 33vw;
-          width:33vw;
-          /*border-style:solid;*/
-          border: 1px solid black;
-          text-align: center;
-        }
-        .boardPiece {
-          margin: auto;
-          padding-top:auto;
-          width:70%;
-          height:70%;
-          border-radius: 50%;
-          transition: background-color var(--time-delay, 1s);
-          cursor:pointer;
-        }
-
-
-        .playerTurnDiv {
-          border: 1px solid black;
-          margin-left: auto;
-          margin-right: auto;
-          transition: background-color .5s, color 1s;
-        }
-        .playerTurn{
-          font-size: var(--player-text-size);
-          text-align: center;
-        }
-        button{
-          background-color: red;
-          padding:10px;
-          margin:10px;
-          border: none;
-
-          transition: background-color 1s, border 1;
-        }
-        button:focus{
-          /*outline: solid blue;*/
-        }
-        button:active{
-          border:none;
-          background-color: black;
-          outline: none;
-
-        }
-        button[name='topLeft2']{
-          position: absolute;
-          top: 0;
-          height: 8vw;
-          width:31vw;
-          left:17.3vw;
-        }
-        button[name='topLeft1']{
-          position: absolute;
-          height: 31vw;
-          width: 8vw;
-          left: 8.3vw;
-          top:9vw;
-        }
-        button[name='topRight2']{
-          position: absolute;
-          top:0;
-          height: 8vw;
-          width: 31vw;
-          right:16.7vw;
-        }
-        button[name='topRight1']{
-          position: absolute;
-          top:9vw;
-          height: 31vw;
-          width: 8vw;
-          right:7.6vw
-        }
-        button[name='bottomLeft2']{
-
-          position: absolute;
-          height: 7.8vw;
-          width:31vw;
-          left:17.3vw;
-          top:74vw;
-        }
-        button[name='bottomLeft1']{
-          position: absolute;
-          height: 31vw;
-          width: 8vw;
-          left:8.3vw;
-          top:42vw;
-        }
-        button[name='bottomRight2']{
-          position: absolute;
-          height: 8vw;
-          width:31vw;
-          right:16.7vw;
-          top:74vw;
-        }
-        button[name='bottomRight1']{
-
-          position: absolute;
-          height: 31vw;
-          width: 8vw;
-          right:7.6vw;
-          top:42vw;
-        }
-      }
-    </style>
-  </head>
-  <body class="lightmode">
-
-
-
-
-
-
-
-    <div id='boardParent'>
-      <div id="board">
-        <div class="quadrant" id="quadrant1">
-          <h1 class='boardPiece 000' id='000'></h1><!--  colxrow  -->
-          <h1 class='boardPiece 001' id='001'></h1>
-          <h1 class='boardPiece 002' id='002'></h1>
-          <h1 class='boardPiece 003' id='003'></h1>
-
-          <h1 class='boardPiece 010' id='010'></h1>
-          <h1 class='boardPiece 011' id='011'></h1>
-          <h1 class='boardPiece 012' id='012'></h1>
-          <h1 class='boardPiece 013' id='013'></h1>
-
-          <h1 class='boardPiece 020' id='020'></h1>
-          <h1 class='boardPiece 021' id='021'></h1>
-          <h1 class='boardPiece 022' id='022'></h1>
-          <h1 class='boardPiece 023' id='023'></h1>
-
-          <h1 class='boardPiece 030' id='030'></h1>
-          <h1 class='boardPiece 031' id='031'></h1>
-          <h1 class='boardPiece 032' id='032'></h1>
-          <h1 class='boardPiece 033' id='033'></h1>
-
-
-        </div>
-        <div class="quadrant" id="quadrant2">
-          <h1 class='boardPiece 100' id='100'></h1>
-          <h1 class='boardPiece 101' id='101'></h1>
-          <h1 class='boardPiece 102' id='102'></h1>
-          <h1 class='boardPiece 103' id='103'></h1>
-
-          <h1 class='boardPiece 110' id='110'></h1>
-          <h1 class='boardPiece 111' id='111'></h1>
-          <h1 class='boardPiece 112' id='112'></h1>
-          <h1 class='boardPiece 113' id='113'></h1>
-
-          <h1 class='boardPiece 120' id='120'></h1>
-          <h1 class='boardPiece 121' id='121'></h1>
-          <h1 class='boardPiece 122' id='122'></h1>
-          <h1 class='boardPiece 123' id='123'></h1>
-
-          <h1 class='boardPiece 130' id='130'></h1>
-          <h1 class='boardPiece 131' id='131'></h1>
-          <h1 class='boardPiece 132' id='132'></h1>
-          <h1 class='boardPiece 133' id='133'></h1>
-        </div>
-        <div class="quadrant" id="quadrant3">
-          <h1 class='boardPiece 200' id='200'></h1>
-          <h1 class='boardPiece 201' id='201'></h1>
-          <h1 class='boardPiece 202' id='202'></h1>
-          <h1 class='boardPiece 203' id='203'></h1>
-
-          <h1 class='boardPiece 210' id='210'></h1>
-          <h1 class='boardPiece 211' id='211'></h1>
-          <h1 class='boardPiece 212' id='212'></h1>
-          <h1 class='boardPiece 213' id='213'></h1>
-
-          <h1 class='boardPiece 220' id='220'></h1>
-          <h1 class='boardPiece 221' id='221'></h1>
-          <h1 class='boardPiece 222' id='222'></h1>
-          <h1 class='boardPiece 223' id='223'></h1>
-
-          <h1 class='boardPiece 230' id='230'></h1>
-          <h1 class='boardPiece 231' id='231'></h1>
-          <h1 class='boardPiece 232' id='232'></h1>
-          <h1 class='boardPiece 233' id='233'></h1>
-        </div>
-        <div class="quadrant" id="quadrant4">
-          <h1 class='boardPiece 300' id='300'></h1>
-          <h1 class='boardPiece 301' id='301'></h1>
-          <h1 class='boardPiece 302' id='302'></h1>
-          <h1 class='boardPiece 303' id='303'></h1>
-
-          <h1 class='boardPiece 310' id='310'></h1>
-          <h1 class='boardPiece 311' id='311'></h1>
-          <h1 class='boardPiece 312' id='312'></h1>
-          <h1 class='boardPiece 313' id='313'></h1>
-
-          <h1 class='boardPiece 320' id='320'></h1>
-          <h1 class='boardPiece 321' id='321'></h1>
-          <h1 class='boardPiece 322' id='322'></h1>
-          <h1 class='boardPiece 323' id='323'></h1>
-
-          <h1 class='boardPiece 330' id='330'></h1>
-          <h1 class='boardPiece 331' id='331'></h1>
-          <h1 class='boardPiece 332' id='332'></h1>
-          <h1 class='boardPiece 333' id='333'></h1>
-        </div>
-
+   </head>
+   <body>
+      <div id='boardParent'>
+         <div id="board">
+            <div class="quadrant" id="quadrant1">
+               <h1 class='boardPiece 000' id='000'></h1>
+               <!--  colxrow  -->
+               <h1 class='boardPiece 001' id='001'></h1>
+               <h1 class='boardPiece 002' id='002'></h1>
+               <h1 class='boardPiece 003' id='003'></h1>
+               <h1 class='boardPiece 010' id='010'></h1>
+               <h1 class='boardPiece 011' id='011'></h1>
+               <h1 class='boardPiece 012' id='012'></h1>
+               <h1 class='boardPiece 013' id='013'></h1>
+               <h1 class='boardPiece 020' id='020'></h1>
+               <h1 class='boardPiece 021' id='021'></h1>
+               <h1 class='boardPiece 022' id='022'></h1>
+               <h1 class='boardPiece 023' id='023'></h1>
+               <h1 class='boardPiece 030' id='030'></h1>
+               <h1 class='boardPiece 031' id='031'></h1>
+               <h1 class='boardPiece 032' id='032'></h1>
+               <h1 class='boardPiece 033' id='033'></h1>
+            </div>
+            <div class="quadrant" id="quadrant2">
+               <h1 class='boardPiece 100' id='100'></h1>
+               <h1 class='boardPiece 101' id='101'></h1>
+               <h1 class='boardPiece 102' id='102'></h1>
+               <h1 class='boardPiece 103' id='103'></h1>
+               <h1 class='boardPiece 110' id='110'></h1>
+               <h1 class='boardPiece 111' id='111'></h1>
+               <h1 class='boardPiece 112' id='112'></h1>
+               <h1 class='boardPiece 113' id='113'></h1>
+               <h1 class='boardPiece 120' id='120'></h1>
+               <h1 class='boardPiece 121' id='121'></h1>
+               <h1 class='boardPiece 122' id='122'></h1>
+               <h1 class='boardPiece 123' id='123'></h1>
+               <h1 class='boardPiece 130' id='130'></h1>
+               <h1 class='boardPiece 131' id='131'></h1>
+               <h1 class='boardPiece 132' id='132'></h1>
+               <h1 class='boardPiece 133' id='133'></h1>
+            </div>
+            <div class="quadrant" id="quadrant3">
+               <h1 class='boardPiece 200' id='200'></h1>
+               <h1 class='boardPiece 201' id='201'></h1>
+               <h1 class='boardPiece 202' id='202'></h1>
+               <h1 class='boardPiece 203' id='203'></h1>
+               <h1 class='boardPiece 210' id='210'></h1>
+               <h1 class='boardPiece 211' id='211'></h1>
+               <h1 class='boardPiece 212' id='212'></h1>
+               <h1 class='boardPiece 213' id='213'></h1>
+               <h1 class='boardPiece 220' id='220'></h1>
+               <h1 class='boardPiece 221' id='221'></h1>
+               <h1 class='boardPiece 222' id='222'></h1>
+               <h1 class='boardPiece 223' id='223'></h1>
+               <h1 class='boardPiece 230' id='230'></h1>
+               <h1 class='boardPiece 231' id='231'></h1>
+               <h1 class='boardPiece 232' id='232'></h1>
+               <h1 class='boardPiece 233' id='233'></h1>
+            </div>
+            <div class="quadrant" id="quadrant4">
+               <h1 class='boardPiece 300' id='300'></h1>
+               <h1 class='boardPiece 301' id='301'></h1>
+               <h1 class='boardPiece 302' id='302'></h1>
+               <h1 class='boardPiece 303' id='303'></h1>
+               <h1 class='boardPiece 310' id='310'></h1>
+               <h1 class='boardPiece 311' id='311'></h1>
+               <h1 class='boardPiece 312' id='312'></h1>
+               <h1 class='boardPiece 313' id='313'></h1>
+               <h1 class='boardPiece 320' id='320'></h1>
+               <h1 class='boardPiece 321' id='321'></h1>
+               <h1 class='boardPiece 322' id='322'></h1>
+               <h1 class='boardPiece 323' id='323'></h1>
+               <h1 class='boardPiece 330' id='330'></h1>
+               <h1 class='boardPiece 331' id='331'></h1>
+               <h1 class='boardPiece 332' id='332'></h1>
+               <h1 class='boardPiece 333' id='333'></h1>
+            </div>
+         </div>
+         <div id='buttonDiv'>
+            <label><button type="button" name="topLeft2" id='topLeft2' onclick="rotate(2,0)">Top Left Twice</button></label>
+            <label><button type="button" name="topRight2" id='topRight2' onclick="rotate(2,1)">Top Right Twice</button></label>
+            <label><button type="button" name="topRight1" id='topRight1' onclick="rotate(1,1)">Top Right Once</button></label>
+            <label><button type="button" name="bottomRight1" id="bottomRight1" onclick="rotate(1,3)">Bottom Right Once</button></label>
+            <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
+            <label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
+            <label><button type="button" name="bottomLeft1" id="bottomLeft1" onclick="rotate(1,2)">Bottom Left Once</button></label>
+            <label><button type="button" name="topLeft1" id='topLeft1' onclick="rotate(1,0)">Top Left Once</button></label>
+         </div>
       </div>
-      <label><button type="button" name="topLeft2" id='topLeft2' onclick="rotate(2,0)">Top Left Twice</button></label>
-      <label><button type="button" name="topRight2" id='topRight2' onclick="rotate(2,1)">Top Right Twice</button></label>
-      <label><button type="button" name="topRight1" id='topRight1' onclick="rotate(1,1)">Top Right Once</button></label>
-      <label><button type="button" name="bottomRight1" id="bottomRight1" onclick="rotate(1,3)">Bottom Right Once</button></label>
-      <label><button type="button" name="bottomRight2" id="bottomRight2" onclick="rotate(2,3)">Bottom Right Twice</button></label>
-      <label><button type="button" name="bottomLeft2" id="bottomLeft2" onclick="rotate(2,2)">Bottom Left Twice</button></label>
-      <label><button type="button" name="bottomLeft1" id="bottomLeft1" onclick="rotate(1,2)">Bottom Left Once</button></label>
-      <label><button type="button" name="topLeft1" id='topLeft1' onclick="rotate(1,0)">Top Left Once</button></label>
+      <div class="playerTurnDiv playerTurn1">
+         <h2 class='playerTurn' id='playerTurn1'>Player Turn: 1</h2>
+      </div>
+      <script type="text/javascript">
+         //document.getElementsByTagName('html')[0].classList = 'lightmode';
 
-    </div>
-    <div class="playerTurnDiv playerTurn1">
-      <h2 class='playerTurn' id='playerTurn1'>Player Turn: 1</h2>
-    </div>
-    <script type="text/javascript">
+         const bodyTag = document.getElementsByTagName('html')[0];
+         if (localStorage.getItem('colormode') == 'dark')
+           document.getElementsByTagName('html')[0].classList = 'darkmode';
 
-var winningList = [];
-var winner;
-var gameOver = false;
+         else if (localStorage.getItem('colormode') == 'light')
+           document.getElementsByTagName('html')[0].classList = 'lightmode';
 
-var playerTurn = 1;
-var playerBoxContent = 'Player Turn: ';
+         else {
+           if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+             document.getElementsByTagName('html')[0].classList = 'darkmode';
+             console.log('test2');
+           }
+           else{
+             document.getElementsByTagName('html')[0].classList = 'darkmode';
+             console.log('test');
+           }
 
-const playerTurnDiv = document.getElementsByClassName('playerTurnDiv')[0];
-const elPlayer = document.getElementsByClassName('playerTurn')[0];
 
-var blocks = [];
-var blockStatus = [];
-for (let q = 0; q < 4; q++) {
-  blocks[q]=[];
-  for (let c = 0; c < 4; c++) {
-    blocks[q][c]=[];
-    for (let r = 0; r < 4; r++) {
-      blocks[q][c][r] = {group:(c+1).toString() + "x" + (r+1).toString(), status:0, oldStatus:0};
-      blocks[q][c][r].el = document.getElementById(q.toString() + c.toString() + r.toString());
-    }
-  }
-}
+           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+             if (event.matches)
+               document.getElementsByTagName('html')[0].classList = 'darkmode';
+             else
+               document.getElementsByTagName('html')[0].classList = 'lightmode';
+           });
+         }
 
 
 
-// rotate functions
-function rotate(rotations, q=0){ // collection of rotation functions
-  if (!ifGameOver()) {
-    if (rotations == 2)
-      doRotateTwice(q);
-    else
-      doRotateOnce(q);
+      </script>
+      <script type="text/javascript">
+         var winningList = [];
+         var winner;
+         var gameOver = false;
 
-    boardGrid();
-    playerChange(true);
-    chkWinner(blockStatus);
-    console.log(winningList);
-  }
-  if (ifGameOver()) {
-    onGameOver();
-  }
-}
+         var playerTurn = 1;
+         var playerBoxContent = 'Player Turn: ';
 
-function doRotateTwice(q = 0) {
-  blocks[q].forEach(function(c){
-    c.forEach(function(r){
-      r.oldStatus = r.status;
-    });
-  });
-  blocks[q].forEach(function(c, indexC){ /*  use jquery and change class styles and classes  */
-    c.forEach(function(r, indexR){
-        // changing the C x R
-      let classNamePathI = q.toString() + (3 - indexC).toString() + (3 - indexR).toString(); // initial after rotation
-      let classNamePathF = q.toString() + indexC.toString() + indexR.toString(); // final
+         const playerTurnDiv = document.getElementsByClassName('playerTurnDiv')[0];
+         const elPlayer = document.getElementsByClassName('playerTurn')[0];
 
-      changeStatus(classNamePathI, r); // iffy on this :(
-      colorChange(r);
-
-
-      // so first, i will change the values in blocks
-      // then i will change the colors of each block
-      // from there, things will go by ear
-
-    });
-  });
-}
-
-function doRotateOnce(q = 0){ // rotates once, 90º to the right
-  blocks[q].forEach((c, indexC) => {
-    c.forEach((r, indexR) => {
-      r.oldStatus = r.status;
-    });
-  });
-  blocks[q].forEach((c, indexC) => {
-    c.forEach((r, indexR) => {
-      let originalPath = q.toString() + indexC.toString() + indexR.toString();
-      let newPath = q.toString() + (3 - indexR).toString() + indexC.toString(); // not the path of where it is going, but where it came from if that makes any sense
-
-      changeStatus(newPath, r);
-      colorChange(r);
-
-        //console.log(originalPath, originalPath[0] + /*originalPath[2]*/ '3' + (indexR + indexC).toString());
-      console.log(originalPath, originalPath[0] + (3 - indexR).toString() + originalPath[1]);//originalPath[0] + originalPath[2] + (3 - indexC).toString(), newPath);
-      /* need ideas
-
-
-      last resort - manually change for each thing
-
-      */
-    });
-
-  });
-  console.log(blocks[q]);
-
-}
+         var blocks = [];
+         var blockStatus = [];
+         for (let q = 0; q < 4; q++) {
+           blocks[q]=[];
+           for (let c = 0; c < 4; c++) {
+             blocks[q][c]=[];
+             for (let r = 0; r < 4; r++) {
+               blocks[q][c][r] = {group:(c+1).toString() + "x" + (r+1).toString(), status:0, oldStatus:0};
+               blocks[q][c][r].el = document.getElementById(q.toString() + c.toString() + r.toString());
+             }
+           }
+         }
 
 
 
+         // rotate functions
+         function rotate(rotations, q=0){ // collection of rotation functions
+           if (!ifGameOver()) {
+             if (rotations == 2)
+               doRotateTwice(q);
+             else
+               doRotateOnce(q);
+
+             boardGrid();
+             playerChange(true);
+             chkWinner(blockStatus);
+             console.log(winningList);
+           }
+           if (ifGameOver()) {
+             onGameOver();
+           }
+         }
+
+         function doRotateTwice(q = 0) {
+           blocks[q].forEach(function(c){
+             c.forEach(function(r){
+               r.oldStatus = r.status;
+             });
+           });
+           blocks[q].forEach(function(c, indexC){ /*  use jquery and change class styles and classes  */
+             c.forEach(function(r, indexR){
+                 // changing the C x R
+               let classNamePathI = q.toString() + (3 - indexC).toString() + (3 - indexR).toString(); // initial after rotation
+               let classNamePathF = q.toString() + indexC.toString() + indexR.toString(); // final
+
+               changeStatus(classNamePathI, r); // iffy on this :(
+               colorChange(r);
 
 
+               // so first, i will change the values in blocks
+               // then i will change the colors of each block
+               // from there, things will go by ear
+
+             });
+           });
+         }
+
+         function doRotateOnce(q = 0){ // rotates once, 90º to the right
+           blocks[q].forEach((c, indexC) => {
+             c.forEach((r, indexR) => {
+               r.oldStatus = r.status;
+             });
+           });
+           blocks[q].forEach((c, indexC) => {
+             c.forEach((r, indexR) => {
+               let originalPath = q.toString() + indexC.toString() + indexR.toString();
+               let newPath = q.toString() + (3 - indexR).toString() + indexC.toString(); // not the path of where it is going, but where it came from if that makes any sense
+
+               changeStatus(newPath, r);
+               colorChange(r);
+
+                 //console.log(originalPath, originalPath[0] + /*originalPath[2]*/ '3' + (indexR + indexC).toString());
+               console.log(originalPath, originalPath[0] + (3 - indexR).toString() + originalPath[1]);//originalPath[0] + originalPath[2] + (3 - indexC).toString(), newPath);
+               /* need ideas
 
 
+               last resort - manually change for each thing
 
+               */
+             });
 
-function playerChange(canChange){
-//  console.warn(!ifGameOver(),canChange,!ifGameOver() && canChange );
-  if (!(!ifGameOver() && !canChange)) {
-//    console.log(canChange);
-    playerTurnDiv.classList.remove('playerTurn' + playerTurn);
+           });
+           console.log(blocks[q]);
 
-
-    playerTurn=playerTurn%2+1;
-
-    playerTurnDiv.classList.add('playerTurn' + playerTurn);
-    elPlayer.id = 'playerTurn' + playerTurn;
-
-    elPlayer.innerHTML = playerBoxContent + playerTurn;
-  }
-  else {
-//    console.warn('did not change playerTurn');
-  }
-}
-
-
-
-function boardGrid(){  // converts board to 2d array
-  blockStatus=[];
-  for (let q = 0; q < blocks.length; q++) {
-    for (let c = 0; c < blocks[q].length; c++) {
-      let cStatus = []; // temp array for each column
-      for (let r = 0; r < blocks[q][c].length; r++) {
-        cStatus.push(blocks[q][c][r].status);
-      }
-      blockStatus.push(cStatus);
-    }
-  }
-
-  for (let i=0; i < 4; i++) {
-    blockStatus[i+4].forEach(function(item, index) {
-      blockStatus[i].push(item);
-    });
-  }
-
-  blockStatus = blockStatus.slice(0,4).concat(blockStatus.slice(8));
-  for (let i=4; i < 8; i++) {
-    blockStatus[i+4].forEach(function(item, index){
-      blockStatus[i].push(item);
-    });
-  }
-  blockStatus = blockStatus.slice(0,8);
-}
-
-function changeStatus(FinalPath,r){ // call near beginning of rotate function
-  r.status = blocks[FinalPath[0]][FinalPath[1]][FinalPath[2]].oldStatus;
-}
-
-function colorChange(r){ // changes the class of each piece based on its current status
-  if (r.status == 0){
-    r.el.classList.remove('player1clicked','player2clicked');
-  }
-  else if (r.status == 1){
-    r.el.classList.add('player1clicked');
-    r.el.classList.remove('player2clicked');
-  }
-  else {
-    r.el.classList.add('player2clicked');
-    r.el.classList.remove('player1clicked');
-  }
-}
-
-
-function playerSetStatus(el) {
-  // returns if the piece has been clicked on already or is not a piece
-  // also changes the status of the piece in blocks
-  // oldStatus is for rotating
-  if (!el.classList.contains('player1clicked') && !el.classList.contains('player2clicked') && el.tagName != 'DIV') {
-    el.classList.add('player' + playerTurn + 'clicked');
-    blocks[el.id[0]][el.id[1]][el.id[2]].status = playerTurn;
-    blocks[el.id[0]][el.id[1]][el.id[2]].oldStatus = playerTurn;
-    // playerChange(); moved to end of big function
-    return true;
-  }
-  return false;
-}
-
-
-function chkLine(a,b,c,d,e) {
-    // Check first cell non-zero and all cells match
-    return ((a != 0) && (a == b) && (a == c) && (a == d) && (a == e));
-}
-
-function chkWinner(bd) {
-  winningList = [];
-  // Check down
-  for (r = 0; r < 4; r++)
-    for (c = 0; c < 8; c++)
-      if (chkLine(bd[r][c], bd[r+1][c], bd[r+2][c], bd[r+3][c], bd[r+4][c]))
-        winningList.push(bd[r][c]);
-
-  // Check right
-  for (r = 0; r < 8; r++)
-    for (c = 0; c < 5; c++)
-      if (chkLine(bd[r][c], bd[r][c+1], bd[r][c+2], bd[r][c+3], bd[r][c+4]))
-        winningList.push(bd[r][c]);
-
-  // Check down-right
-  for (r = 0; r < 4; r++)
-    for (c = 0; c < 4; c++)
-      if (chkLine(bd[r][c], bd[r+1][c+1], bd[r+2][c+2], bd[r+3][c+3], bd[r+4][c+4]))
-        winningList.push(bd[r][c]);
-
-  // Check down-left
-  for (r = 4; r < 8; r++)
-    for (c = 0; c < 5; c++)
-      if (chkLine(bd[r][c], bd[r-1][c+1], bd[r-2][c+2], bd[r-3][c+3], bd[r-4][c+4]))
-        winningList.push(bd[r][c]);
-}
-
-function ifGameOver(){ // returns false if game is not over
-  // if there are more than one 5 in a row, then whoever has more will win
-  winner = [0,0,0];
-  if (!(winningList === [])) {
-    winningList.forEach(function(winStatus) {
-      if (winStatus === 1) {
-        winner[0]+=1;
-      }
-      else {
-        winner[1]+=1;
-      }
-    });
-    if (winner[0] > winner[1]) {
-      winner[2] = 1;
-      return true;
-    }
-    else if (winner[1] > winner[0]) {
-      winner[2] = 2;
-      return true;
-    }
-    else {
-      winner[2] = 0;
-      return false;
-    }
-  }
-  return false;
-}
+         }
 
 
 
 
 
-document.getElementById('quadrant1').addEventListener('click', function(e) {
-  onPieceClick(e);
-});
-document.getElementById('quadrant2').addEventListener('click', function(e) {
-  onPieceClick(e);
-});
-document.getElementById('quadrant3').addEventListener('click', function(e) {
-  onPieceClick(e);
-});
-document.getElementById('quadrant4').addEventListener('click', function(e) {
-  onPieceClick(e);
-});
 
 
-function onGameOver(){ // changes the player turn box to a game over box
-  if (!gameOver) {
 
-    playerTurn=playerTurn%2+1;
-    playerTurnDiv.classList.remove('playerTurn' + playerTurn);
-    playerTurnDiv.classList.add('gameOver'+ playerTurn);
-    elPlayer.id = 'gameOver' + playerTurn;
-    elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
-    gameOver = true;
-  }
-}
 
-function gameOverMessage(){ // will use switch case later
-  return 'Game Over! Player ' + playerTurn + ' has won!';
-}
+         function playerChange(canChange){
+         //  console.warn(!ifGameOver(),canChange,!ifGameOver() && canChange );
+           if (!(!ifGameOver() && !canChange)) {
+         //    console.log(canChange);
+             playerTurnDiv.classList.remove('playerTurn' + playerTurn);
 
-function onPieceClick(e){
-  let el = e.target;
-  if (!ifGameOver()) {
-    let canChange = playerSetStatus(el);
-    boardGrid();
-    chkWinner(blockStatus);
-    playerChange(canChange);
-  }
-  // separated so it doesnt change after game over
-  if (ifGameOver()){
-  //  console.log('yay', ifGameOver());
-    onGameOver();
-  }
 
-}
+             playerTurn=playerTurn%2+1;
 
-    </script>
-  </body>
+             playerTurnDiv.classList.add('playerTurn' + playerTurn);
+             elPlayer.id = 'playerTurn' + playerTurn;
+
+             elPlayer.innerHTML = playerBoxContent + playerTurn;
+           }
+         }
+
+
+
+         function boardGrid(){  // converts board to 2d array
+           blockStatus=[];
+           for (let q = 0; q < blocks.length; q++) {
+             for (let c = 0; c < blocks[q].length; c++) {
+               let cStatus = []; // temp array for each column
+               for (let r = 0; r < blocks[q][c].length; r++) {
+                 cStatus.push(blocks[q][c][r].status);
+               }
+               blockStatus.push(cStatus);
+             }
+           }
+
+           for (let i=0; i < 4; i++) {
+             blockStatus[i+4].forEach(function(item, index) {
+               blockStatus[i].push(item);
+             });
+           }
+           blockStatus.splice(4,4);
+           for (let i=4; i < 8; i++) {
+             blockStatus[i+4].forEach(function(item, index){
+               blockStatus[i].push(item);
+             });
+           }
+           blockStatus.splice(8);
+         }
+
+         function changeStatus(FinalPath,r){ // call near beginning of rotate function
+           r.status = blocks[FinalPath[0]][FinalPath[1]][FinalPath[2]].oldStatus;
+         }
+
+         function colorChange(r){ // changes the class of each piece based on its current status
+           if (r.status == 0){
+             r.el.classList.remove('player1clicked','player2clicked');
+           }
+           else if (r.status == 1){
+             r.el.classList.add('player1clicked');
+             r.el.classList.remove('player2clicked');
+           }
+           else {
+             r.el.classList.add('player2clicked');
+             r.el.classList.remove('player1clicked');
+           }
+         }
+
+
+         function playerSetStatus(el) {
+           // returns if the piece has been clicked on already or is not a piece
+           // also changes the status of the piece in blocks
+           // oldStatus is for rotating
+           if (!el.classList.contains('player1clicked') && !el.classList.contains('player2clicked') && el.tagName != 'DIV') {
+             el.classList.add('player' + playerTurn + 'clicked');
+             blocks[el.id[0]][el.id[1]][el.id[2]].status = playerTurn;
+             blocks[el.id[0]][el.id[1]][el.id[2]].oldStatus = playerTurn;
+             // playerChange(); moved to end of big function
+             return true;
+           }
+           return false;
+         }
+
+
+         function chkLine(a,b,c,d,e) {
+             // Check first cell non-zero and all cells match
+             return ((a != 0) && (a == b) && (a == c) && (a == d) && (a == e));
+         }
+
+         function chkWinner(bd) {
+           winningList = [];
+           // Check down
+           for (r = 0; r < 4; r++)
+             for (c = 0; c < 8; c++)
+               if (chkLine(bd[r][c], bd[r+1][c], bd[r+2][c], bd[r+3][c], bd[r+4][c]))
+                 winningList.push(bd[r][c]);
+
+           // Check right
+           for (r = 0; r < 8; r++)
+             for (c = 0; c < 5; c++)
+               if (chkLine(bd[r][c], bd[r][c+1], bd[r][c+2], bd[r][c+3], bd[r][c+4]))
+                 winningList.push(bd[r][c]);
+
+           // Check down-right
+           for (r = 0; r < 4; r++)
+             for (c = 0; c < 4; c++)
+               if (chkLine(bd[r][c], bd[r+1][c+1], bd[r+2][c+2], bd[r+3][c+3], bd[r+4][c+4]))
+                 winningList.push(bd[r][c]);
+
+           // Check down-left
+           for (r = 4; r < 8; r++)
+             for (c = 0; c < 5; c++)
+               if (chkLine(bd[r][c], bd[r-1][c+1], bd[r-2][c+2], bd[r-3][c+3], bd[r-4][c+4]))
+                 winningList.push(bd[r][c]);
+         }
+
+         function ifGameOver(){ // returns false if game is not over
+           // if there are more than one 5 in a row, then whoever has more will win
+           winner = [0,0,0];
+           if (!(winningList === [])) {
+             winningList.forEach(function(winStatus) {
+               if (winStatus === 1) {
+                 winner[0]+=1;
+               }
+               else {
+                 winner[1]+=1;
+               }
+             });
+             if (winner[0] > winner[1]) {
+               winner[2] = 1;
+               return true;
+             }
+             else if (winner[1] > winner[0]) {
+               winner[2] = 2;
+               return true;
+             }
+             else {
+               winner[2] = 0;
+               return false;
+             }
+           }
+           return false;
+         }
+
+
+
+
+
+         document.getElementById('quadrant1').addEventListener('click', function(e) {
+           onPieceClick(e);
+         });
+         document.getElementById('quadrant2').addEventListener('click', function(e) {
+           onPieceClick(e);
+         });
+         document.getElementById('quadrant3').addEventListener('click', function(e) {
+           onPieceClick(e);
+         });
+         document.getElementById('quadrant4').addEventListener('click', function(e) {
+           onPieceClick(e);
+         });
+
+
+         function onGameOver(){ // changes the player turn box to a game over box
+           if (!gameOver) {
+
+             playerTurn=playerTurn%2+1;
+             playerTurnDiv.classList.remove('playerTurn' + playerTurn);
+             playerTurnDiv.classList.add('gameOver'+ playerTurn);
+             elPlayer.id = 'gameOver' + playerTurn;
+             elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
+             gameOver = true;
+           }
+         }
+
+         function gameOverMessage(){ // will use switch case later
+           return 'Game Over! Player ' + playerTurn + ' has won!';
+         }
+
+         function onPieceClick(e){
+           let el = e.target;
+           if (!ifGameOver()) {
+             let canChange = playerSetStatus(el);
+             boardGrid();
+             chkWinner(blockStatus);
+             playerChange(canChange);
+           }
+           // separated so it doesnt change after game over
+           if (ifGameOver()){
+           //  console.log('yay', ifGameOver());
+             onGameOver();
+           }
+
+         }
+
+
+      </script>
+   </body>
 </html>

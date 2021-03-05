@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Settings</title>
+    <style media="screen">
+    .hide{
+      display: none;
+      /* FIXME: only removes heading, not actual inputs */
+
+    }
+
+    </style> <data value=""></data>
+  </head>
+  <body>
+    <h1>Settings</h1>
+    <label for="dropdown"><h4>See certain settings</h4></label>
+
+
+
+      <select class="settingstuff" name="dropdown"id='dropdown' onchange='toggleVisibility(this.value);'>
+        <option class='select-items' value="default"  selected >Default</option>
+        <option class="select-items" value="generalSettings">General Settings</option>
+        <option class="select-items" value="preferences">Preferences</option>
+        <option class='select-items' value="otherSettings">Other</option>
+      </select>
+      <div class="generalSettings">
+        <h2 id='generalSettings'>General Settings</h2>
+        <label><input type='text' name='tbd' id='tbd' value=''></label>
+      </div>
+      <div class="preferences">
+        <h2 id='preferences' class='preferences head'>Preferences</h2>
+        <h3 class='preferences subhead'>Color Theme</h3>
+        <label><input type='radio' name='colormode' class='colormode preferences' id='lightmode' value='light'>Light Mode</label>
+        <label><input type='radio' name='colormode' class='colormode preferences' id='darkmode' value='dark'>Dark Mode</label>
+        <label><input type='radio' name='colormode' class='colormode preferences' id='systemdefault' value='systemdefault'>System Default</label>
+
+        <h4>*Note: the language setting is not 'hooked up'</h4>
+        <select class="preferences dropdown" name="dropdown">
+          <optgroup label="100% Completion" class='select-items-group preferences'>
+            <option value="en" class='select-items preferences'>English</option>
+          </optgroup>
+          <optgroup label="80-99% Completion">
+            <option value="">none yet</option>
+          </optgroup>
+          <optgroup label="60-79%">
+            <option value="">none yet</option>
+          </optgroup>
+          <optgroup label="40-59%">
+            <option value="">none yet</option>
+          </optgroup>
+          <optgroup label="20-39%">
+            <option value="">none yet</option>
+          </optgroup>
+          <optgroup label="0-19%">
+            <option value="">none yet</option>
+          </optgroup>
+          <optgroup label="no translation whatsoever">
+            <option value="es">Español</option>
+            <option value="af">Afrikaans</option>
+            <option value="ak">Akan</option>
+            <option value="sq">Shqip</option>
+            <option value="am">አማርኛ</option>
+            <option value="ar">العربية</option>
+            <option value="an">aragonés</option>
+            <option value="ru">русский</option>
+            <option value="zh">中国人</option>
+            <option value="pt">Português</option>
+          </optgroup>
+
+        </select>
+        <h3></h3>
+      </div>
+      <div class="otherSettings">
+
+
+        <h2 id='otherSettings'>Other Settings</h2>
+
+        <label>Name: <input type="text" name="name" value="" id='name'></label><label><button type='button' name='removeName' id='removeName'>Remove</button></label>
+      </div>
+
+        <label><button type="button" name="savebutton" id='savebutton' onclick="onSave();">Save</button></label>
+        <label><button type='button' name='setToDefault' id='setToDefault' onclick="setToDefault();">To Default</button></label>
+
+
+
+<script type="text/javascript">
+  // translating language
+  /*
+  var language = 'es';
+  var h1El = document.getElementsByTagName('h1');
+  var h2El = document.getElementsByTagName('h2');
+  var h3El = document.getElementsByTagName('h3');
+  var h4El = document.getElementsByTagName('h4');
+  var h5El = document.getElementsByTagName('h5');
+  var h6El = document.getElementsByTagName('h6');
+  var pEl = document.getElementsByTagName('p');
+
+  Array.prototype.forEach.call(h1, function(el,elIndex){
+
+  });
+  Array.prototype.forEach.call(h2, function(el,elIndex){
+
+  });
+  Array.prototype.forEach.call(h3, function(el,elIndex){
+
+  });
+  Array.prototype.forEach.call(h4, function(el,elIndex){
+
+  });
+  Array.prototype.forEach.call(h5, function(el,elIndex){
+
+  });
+  Array.prototype.forEach.call(h6, function(el,elIndex){
+
+  });
+  */
+</script>
+
+    <script type="text/javascript">
+var changed = false;
+
+var button = document.getElementById('savebutton');
+var nameInput = document.getElementById('name');
+var name = localStorage.getItem('name');
+
+
+
+
+//localStorage.setItem('tbd', localStorage.getItem('tbd') ?? '');
+document.getElementById('tbd').value = localStorage.getItem('tbd') || '';
+
+
+let colorModeRadio = localStorage.getItem('colormode');
+
+if (!colorModeRadio || colorModeRadio == 'system')
+  document.getElementById('systemdefault').checked = true;
+
+else if (colorModeRadio == 'dark')
+  document.getElementById('darkmode').checked = true;
+
+else
+  document.getElementById('lightmode').checked = true;
+
+
+if (!name)
+  nameInput.setAttributeNode('placeholder', 'No name has been set');
+else
+  nameInput.value = localStorage.getItem('name');
+
+
+function toggleVisibility(sel){
+
+  sel = sel.split(' ')[0]
+
+  let settingsList = ['generalSettings','preferences','otherSettings'];
+  console.log(sel);
+  if (sel == 'default'){
+    settingsList.forEach(function(el){
+      Array.prototype.forEach.call(document.getElementsByClassName(el), function(foo) {
+        foo.classList.remove('hide');
+      });
+    });
+  }
+  else {
+    // FIXME:
+    settingsList.indexOf(sel) == '-1' ? console.error('Index not found') : console.log();
+    settingsList.splice(settingsList.indexOf(sel),1);
+
+    settingsList.forEach(function(el){
+      Array.prototype.forEach.call(document.getElementsByClassName(el), function(foo) {
+        foo.classList.add('hide');
+        console.log(foo,1);
+      });
+    });
+
+    Array.prototype.forEach.call(document.getElementsByClassName(sel), function(foo) {
+      foo.classList.remove('hide');
+      console.log(foo,2);
+    });
+    console.log(settingsList);
+  }
+
+}
+
+
+function onSave() {
+  if (document.getElementById('tbd').value != localStorage.getItem('tbd')) {
+    localStorage.setItem('tbd', document.getElementById('tbd').value)
+    changed = true;
+  }
+
+  let elGroup = document.getElementsByClassName('colormode');
+  for (let i = 0; i < 3; i++)
+      if (elGroup[i].checked) {
+          if (elGroup[i].value != localStorage.getItem('colormode')) {
+              localStorage.setItem('colormode', elGroup[i].value);
+              console.log(elGroup[i].value, 'hi');
+              changed = true;
+          }
+      }
+
+  if (name != document.getElementById('name').value) {
+    localStorage.setItem('name', document.getElementById('name').value);
+    changed = true;
+  }
+}
+
+
+
+function setToDefault(){
+  localStorage.removeItem('tbd');
+  localStorage.removeItem('colormode');
+  localStorage.removeItem('name');
+
+  document.getElementById('tbd').value = '';
+  document.getElementById('systemdefault').checked = true;
+  document.getElementById('name').value = '';
+}
+
+    </script>
+  </body>
+</html>
