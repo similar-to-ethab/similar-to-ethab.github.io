@@ -3,27 +3,70 @@
   <head>
     <meta charset="utf-8">
     <title>Settings</title>
+    <script type="text/javascript" src='./js/darkmodeLightmode.js'></script>
+    <script type="text/javascript" src='./js/customDropdown.js'></script>
+
+    <link rel="stylesheet" href="./css/customDropdown.css">
+
     <style media="screen">
     .hide{
       display: none;
       /* FIXME: only removes heading, not actual inputs */
 
     }
+    .colormodePreviewHide{
+      display: none;
+    }
+    .colormodePreviewShow{
+      display:block;
+    }
+    .colormodePreview{
 
-    </style> <data value=""></data>
+    }
+
+    .lightmode .colormodePreview {
+
+    }
+    /*.lightmode .select-items {
+      background-color: white;
+      color: black;
+    }*/
+    /*.darkmode .select-items{
+      background-color: black;
+      color: white;
+    }*/
+    .darkmode {
+      background-color: black;
+      color:white;
+      font: monospace;
+
+    }
+    li {
+      list-style:none;
+    }
+
+
+    </style>
   </head>
   <body>
     <h1>Settings</h1>
-    <label for="dropdown"><h4>See certain settings</h4></label>
+    <label for="filterSelect"><h4>See certain settings</h4></label>
 
+    <div class="settingsstuff2">
+      <h3>See certain settings</h3>
+      <h4 class="settingsstuff2show" id='selectedOption'>default</h4>
+      <div class="selectDiv">
+        <select id='filterSelect' name='filterSelect' class="filterSelect">
+          <option value="none">Default</option>
+          <option value="default">Default</option>
+          <option value="generalSettings">General Settings</option>
+          <option value="preferences">Preferences</option>
+          <option value="otherSettings">Other</option>
+        </select>
+      </div>
 
+    </div>
 
-      <select class="settingstuff" name="dropdown"id='dropdown' onchange='toggleVisibility(this.value);'>
-        <option class='select-items' value="default"  selected >Default</option>
-        <option class="select-items" value="generalSettings">General Settings</option>
-        <option class="select-items" value="preferences">Preferences</option>
-        <option class='select-items' value="otherSettings">Other</option>
-      </select>
       <div class="generalSettings">
         <h2 id='generalSettings'>General Settings</h2>
         <label><input type='text' name='tbd' id='tbd' value=''></label>
@@ -34,11 +77,11 @@
         <label><input type='radio' name='colormode' class='colormode preferences' id='lightmode' value='light'>Light Mode</label>
         <label><input type='radio' name='colormode' class='colormode preferences' id='darkmode' value='dark'>Dark Mode</label>
         <label><input type='radio' name='colormode' class='colormode preferences' id='systemdefault' value='systemdefault'>System Default</label>
-
+        <h4 id='colormodePreview'class='colormodePreviewHide'>preview</h4>
         <h4>*Note: the language setting is not 'hooked up'</h4>
         <select class="preferences dropdown" name="dropdown">
-          <optgroup label="100% Completion" class='select-items-group preferences'>
-            <option value="en" class='select-items preferences'>English</option>
+          <optgroup label="100% Completion" class='preferences'>
+            <option value="en" class='preferences'>English</option>
           </optgroup>
           <optgroup label="80-99% Completion">
             <option value="">none yet</option>
@@ -82,8 +125,6 @@
         <label><button type="button" name="savebutton" id='savebutton' onclick="onSave();">Save</button></label>
         <label><button type='button' name='setToDefault' id='setToDefault' onclick="setToDefault();">To Default</button></label>
 
-
-
 <script type="text/javascript">
   // translating language
   /*
@@ -118,35 +159,81 @@
 </script>
 
     <script type="text/javascript">
-var changed = false;
 
-var button = document.getElementById('savebutton');
-var nameInput = document.getElementById('name');
-var name = localStorage.getItem('name');
+        var changed = false;
 
+        var button = document.getElementById('savebutton');
+        var nameInput = document.getElementById('name');
+        var name = localStorage.getItem('name');
 
-
-
-//localStorage.setItem('tbd', localStorage.getItem('tbd') ?? '');
-document.getElementById('tbd').value = localStorage.getItem('tbd') || '';
+  document.getElementById('tbd').value = localStorage.getItem('tbd') || '';
 
 
-let colorModeRadio = localStorage.getItem('colormode');
+  let colorModeRadio = localStorage.getItem('colormode');
+  console.log(colorModeRadio);
 
-if (!colorModeRadio || colorModeRadio == 'system')
-  document.getElementById('systemdefault').checked = true;
+  if (!colorModeRadio || colorModeRadio == 'systemdefault'){
+    document.getElementById('systemdefault').checked = true;
+    console.log(1);
+  }
 
-else if (colorModeRadio == 'dark')
-  document.getElementById('darkmode').checked = true;
+  else if (colorModeRadio == 'dark'){
+    document.getElementById('darkmode').checked = true;
+    console.log(2);
+  }
 
-else
-  document.getElementById('lightmode').checked = true;
+  else{
+    document.getElementById('lightmode').checked = true;
+    console.log(3);
+  }
 
 
-if (!name)
-  nameInput.setAttributeNode('placeholder', 'No name has been set');
-else
-  nameInput.value = localStorage.getItem('name');
+  /*if (!name)
+    nameInput.setAttributeNode('placeholder', 'No name has been set');
+  else*/
+    nameInput.value = localStorage.getItem('name');
+
+    document.getElementById('lightmode').addEventListener('change',function(){
+      if (document.getElementById('lightmode').checked){
+        document.getElementsByTagName('html')[0].classList = 'lightmode';
+
+        if (localStorage.getItem('colormode') === 'light')
+          document.getElementById('colormodePreview').classList.add('colormodePreviewHide');
+        else
+          document.getElementById('colormodePreview').classList.remove('colormodePreviewHide');
+      }
+
+
+    });
+    document.getElementById('darkmode').addEventListener('change',function(){
+      //document.getElementById('colormodePreview').classList = 'colormodePreviewShow';
+      if (document.getElementById('darkmode').checked){
+        document.getElementsByTagName('html')[0].classList = 'darkmode';
+
+        if (localStorage.getItem('colormode') === 'dark')
+          document.getElementById('colormodePreview').classList.add('colormodePreviewHide');
+        else
+          document.getElementById('colormodePreview').classList.remove('colormodePreviewHide');
+      }
+
+    });
+    document.getElementById('systemdefault').addEventListener('change',function(){
+      //document.getElementById('colormodePreview').classList = 'colormodePreviewShow';
+      if (document.getElementById('systemdefault').checked){
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.getElementsByTagName('html')[0].classList = 'darkmode';
+        else
+          document.getElementsByTagName('html')[0].classList = 'lightmode';
+
+        if (localStorage.getItem('colormode') === 'systemdefault')
+          document.getElementById('colormodePreview').classList.add('colormodePreviewHide');
+        else
+          document.getElementById('colormodePreview').classList.remove('colormodePreviewHide');
+      }
+
+    });
+
 
 
 function toggleVisibility(sel){
@@ -154,8 +241,8 @@ function toggleVisibility(sel){
   sel = sel.split(' ')[0]
 
   let settingsList = ['generalSettings','preferences','otherSettings'];
-  console.log(sel);
-  if (sel == 'default'){
+
+  if (sel == 'default' || sel == 'none'){
     settingsList.forEach(function(el){
       Array.prototype.forEach.call(document.getElementsByClassName(el), function(foo) {
         foo.classList.remove('hide');
@@ -163,22 +250,19 @@ function toggleVisibility(sel){
     });
   }
   else {
-    // FIXME:
-    settingsList.indexOf(sel) == '-1' ? console.error('Index not found') : console.log();
+
+
     settingsList.splice(settingsList.indexOf(sel),1);
 
     settingsList.forEach(function(el){
       Array.prototype.forEach.call(document.getElementsByClassName(el), function(foo) {
         foo.classList.add('hide');
-        console.log(foo,1);
       });
     });
 
     Array.prototype.forEach.call(document.getElementsByClassName(sel), function(foo) {
       foo.classList.remove('hide');
-      console.log(foo,2);
     });
-    console.log(settingsList);
   }
 
 }
@@ -192,13 +276,13 @@ function onSave() {
 
   let elGroup = document.getElementsByClassName('colormode');
   for (let i = 0; i < 3; i++)
-      if (elGroup[i].checked) {
-          if (elGroup[i].value != localStorage.getItem('colormode')) {
-              localStorage.setItem('colormode', elGroup[i].value);
-              console.log(elGroup[i].value, 'hi');
-              changed = true;
-          }
+
+      if (elGroup[i].checked && elGroup[i].value != localStorage.getItem('colormode')) {
+        localStorage.setItem('colormode', elGroup[i].value);
+        changed = true;
+        document.getElementById('colormodePreview').classList.add('colormodePreviewHide');
       }
+
 
   if (name != document.getElementById('name').value) {
     localStorage.setItem('name', document.getElementById('name').value);
@@ -208,16 +292,30 @@ function onSave() {
 
 
 
-function setToDefault(){
-  localStorage.removeItem('tbd');
-  localStorage.removeItem('colormode');
-  localStorage.removeItem('name');
+      function setToDefault(){
+        localStorage.removeItem('tbd');
+        localStorage.removeItem('colormode');
+        localStorage.removeItem('name');
 
-  document.getElementById('tbd').value = '';
-  document.getElementById('systemdefault').checked = true;
-  document.getElementById('name').value = '';
-}
+        document.getElementById('tbd').value = '';
+        document.getElementById('systemdefault').checked = true;
+        document.getElementById('name').value = '';
+      }
 
+
+
+
+    </script>
+
+    <script type="text/javascript">
+      styleDropdowns();
+      document.getElementsByClassName('filterSelect')[0].addEventListener('change',function(){
+        toggleVisibility(this.value);
+      });
+      document.getElementsByClassName('selectDiv')[0].addEventListener('click',function(e){
+        if (!e.target.classList.contains('selectedOption'))
+          toggleVisibility(document.getElementById('filterSelect').value);
+      });
     </script>
   </body>
 </html>

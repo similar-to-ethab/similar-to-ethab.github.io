@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src='./js/customDropdown.js'></script>
+<link rel="stylesheet" href="./css/customDropdown.css">
+</head>
+
+<body>
+
+<h2>Custom Select</h2>
+
+<!--surround the select box with a "filterSelect" DIV element. Remember to set the width:-->
+<h3>See certain settings</h3>
+<h4>default</h4>
+
+<div class="selectDiv">
+  <select id='filterSelect' class="filterSelect">
+    <option value="default">Default</option>
+    <option value="generalSettings">General Settings</option>
+    <option value="preferences">Preferences</option>
+    <option value="otherSettings">Other</option>
+  </select>
+</div>
+
+<h3>good</h3>
+
+<script type="text/javascript">
+  styleDropdowns();
+</script>
+
+</body>
+</html>

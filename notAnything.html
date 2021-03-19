@@ -4,13 +4,18 @@
       <meta charset="utf-8">
       <title>Rotating Game</title>
       <script data-ad-client="ca-pub-9788790171365022" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <script src="./js/coreClassChanges.js" charset="utf-8"></script>
+      <script src="./js/coreClassChanges.js" type="text/javascript"></script>
+      <script type="text/javascript" src='./js/darkmodeLightmode.js'></script>
+      <script type="text/javascript" src=".js/customDropdown.js">
+
+      </script>
       <style media="screen">
       button{
         background-color: red;
       }
       </style>
       <link rel="stylesheet" href="./css/notAnything.css">
+      <link rel="stylesheet" href="./css/customDropdown.css">
 
    </head>
    <body>
@@ -104,38 +109,7 @@
       <div class="playerTurnDiv playerTurn1">
          <h2 class='playerTurn' id='playerTurn1'>Player Turn: 1</h2>
       </div>
-      <script type="text/javascript">
-         //document.getElementsByTagName('html')[0].classList = 'lightmode';
 
-         const bodyTag = document.getElementsByTagName('html')[0];
-         if (localStorage.getItem('colormode') == 'dark')
-           document.getElementsByTagName('html')[0].classList = 'darkmode';
-
-         else if (localStorage.getItem('colormode') == 'light')
-           document.getElementsByTagName('html')[0].classList = 'lightmode';
-
-         else {
-           if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
-             document.getElementsByTagName('html')[0].classList = 'darkmode';
-             console.log('test2');
-           }
-           else{
-             document.getElementsByTagName('html')[0].classList = 'darkmode';
-             console.log('test');
-           }
-
-
-           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-             if (event.matches)
-               document.getElementsByTagName('html')[0].classList = 'darkmode';
-             else
-               document.getElementsByTagName('html')[0].classList = 'lightmode';
-           });
-         }
-
-
-
-      </script>
       <script type="text/javascript">
          var winningList = [];
          var winner;
