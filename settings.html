@@ -5,6 +5,7 @@
     <title>Settings</title>
     <script type="text/javascript" src='./js/darkmodeLightmode.js'></script>
     <script type="text/javascript" src='./js/customDropdown.js'></script>
+    <script type="text/javascript">if (window.location.origin != 'http://192.168.64.3') var canUsePhp = false; else var canUsePhp = true;</script>
 
     <link rel="stylesheet" href="./css/customDropdown.css">
 
@@ -74,9 +75,39 @@
       <div class="preferences">
         <h2 id='preferences' class='preferences head'>Preferences</h2>
         <h3 class='preferences subhead'>Color Theme</h3>
-        <label><input type='radio' name='colormode' class='colormode preferences' id='lightmode' value='light'>Light Mode</label>
-        <label><input type='radio' name='colormode' class='colormode preferences' id='darkmode' value='dark'>Dark Mode</label>
-        <label><input type='radio' name='colormode' class='colormode preferences' id='systemdefault' value='systemdefault'>System Default</label>
+
+        <style>
+
+        </style>
+        <div class="colormodeRadioDiv">
+
+          <label class='radio'>
+            <span class="radio__input">
+              <input type='radio' name='colormode' class='colormode preferences' id='lightmode' value='light'>
+              <span class="radio__control"></span>
+            </span>
+            <span class="radio__label">Light Mode</span>
+          </label>
+          <label class='radio'>
+            <span class="radio_input">
+              <input type='radio' name='colormode' class='colormode preferences' id='darkmode' value='dark'>
+              <span class="radio__control"></span>
+            </span>
+            <span class="radio__label">Dark Mode</span>
+          </label>
+          <label class='radio'>
+            <span class='radio_input'>
+              <input type='radio' name='colormode' class='colormode preferences' id='systemdefault' value='systemdefault'>
+              <span class='radio__control'></span>
+            </span>
+            <span class='radio__label'>System Default</span>
+          </label>
+
+          <label><button type="button" name="button" onclick='document.getElementById("lightmode").click();'>circle</button>lightmode</label>
+          <label><button type="button" name="button" onclick='document.getElementById("darkmode").click();'>circle</button>darkmode</label>
+          <label><button type="button" name="button" onclick='document.getElementById("systemdefault").click();'>circle</button>systemdefault</label>
+        </div>
+
         <h4 id='colormodePreview'class='colormodePreviewHide'>preview</h4>
         <h4>*Note: the language setting is not 'hooked up'</h4>
         <select class="preferences dropdown" name="dropdown">
@@ -114,6 +145,9 @@
         </select>
         <h3></h3>
       </div>
+      <style>
+
+      </style>
       <div class="otherSettings">
 
 
