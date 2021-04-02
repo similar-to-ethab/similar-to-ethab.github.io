@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir='ltr'>
   <head>
-    <meta name="twitter:widgets:theme" content="dark">
+    <meta name="twitter:widgets:theme" content="light">
     <meta name="twitter:widgets:csp" content="on">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@similartoethab">
     <meta name="twitter:creator" content="@similartoethab">
     <meta name="twitter:title" content="Dropdown Heading">
-     <meta name="twitter:description" content="A page storing miscellaneous code.">
+    <meta name="twitter:description" content="A page storing miscellaneous code.">
     <meta name="twitter:image" content="https://similar-to-ethab.github.io/favicon.ico">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,6 +57,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/headerscript.js" type="text/javascript"></script>
+    <script src="./js/darkmodeLightmode.js" type="text/javascript"></script>
+    <script src="./js/twitterTweets.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="./css/dropdownStyles.css">
 
     <title>loc</title>
@@ -155,8 +157,40 @@
     </div>
 
     <div class="tweets">
-      <blockquote class="twitter-tweet tw-align-center" style="data-theme:dark;"><p lang="en" dir="ltr">creating a website from scratch - <a href="https://t.co/PTgg0dyuvE">https://t.co/PTgg0dyuvE</a>*<br><br>not fitted for mobile<br>* not very good yet - dont judge</p>&mdash; Ethan Smith (@similartoethab) <a href="https://twitter.com/similartoethab/status/1356762488612794371?ref_src=twsrc%5Etfw">February 3, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">creating a website from scratch - <a href="https://t.co/PTgg0dyuvE">https://t.co/PTgg0dyuvE</a>*<br><br>not fitted for mobile<br>* not very good yet - dont judge</p>&mdash; Ethan Smith (@similartoethab) <a href="https://twitter.com/similartoethab/status/1356762488612794371?ref_src=twsrc%5Etfw">February 3, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
+    <script>
+    var timelineWidth = document.documentElement.clientWidth * 0.65;;
+
+    if (document.getElementsByTagName('html')[0].classList.contains('darkmode')) {
+      let a = document.createElement('a');
+      a.innerHTML = "Tweets by @similartoethab";
+      a.setAttribute('href','https://twitter.com/similartoethab?ref_src=twsrc%5Etfw');
+      a.setAttribute('data-width',timelineWidth);
+      a.classList = 'twitter-timeline tw-align-center align-hor-center';
+      //a.setAttribute('data-height',timelineHeight);
+      a.setAttribute('data-theme','dark');
+
+      document.getElementsByClassName('tweets')[0].appendChild(a);
+    }
+    else {
+      let a = document.createElement('a');
+      a.innerHTML = "Tweets by @similartoethab";
+      a.setAttribute('href','https://twitter.com/similartoethab?ref_src=twsrc%5Etfw');
+      a.setAttribute('data-width',timelineWidth);
+      //a.setAttribute('data-height',timelineHeight);
+      a.classList = 'twitter-timeline tw-align-center align-hor-center';
+
+      document.getElementsByClassName('tweets')[0].appendChild(a);
+    }
+    </script>
+    <a class="twitter-timeline tw-align-center"
+      href="https://twitter.com/similartoethab"
+      data-width="300"
+      data-height="300">
+      Tweets by @similartoethab
+    </a>
+
 
   </body>
 <link rel="stylesheet" href="/css/fonts/external_fonts.css">

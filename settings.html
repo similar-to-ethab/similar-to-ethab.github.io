@@ -12,8 +12,6 @@
     <style media="screen">
     .hide{
       display: none;
-      /* FIXME: only removes heading, not actual inputs */
-
     }
     .colormodePreviewHide{
       display: none;
@@ -44,6 +42,14 @@
     }
     li {
       list-style:none;
+    }
+
+    .radioButton {
+      border-radius: 50%;
+      width: 50px;
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: red;
     }
 
 
@@ -103,9 +109,9 @@
             <span class='radio__label'>System Default</span>
           </label>
 
-          <label><button type="button" name="button" onclick='document.getElementById("lightmode").click();'>circle</button>lightmode</label>
-          <label><button type="button" name="button" onclick='document.getElementById("darkmode").click();'>circle</button>darkmode</label>
-          <label><button type="button" name="button" onclick='document.getElementById("systemdefault").click();'>circle</button>systemdefault</label>
+          <label><button class='radioButton' type="button" name="button" onclick='document.getElementById("lightmode").click();'>circle</button>lightmode</label>
+          <label><button class='radioButton' type="button" name="button" onclick='document.getElementById("darkmode").click();'>circle</button>darkmode</label>
+          <label><button class='radioButton' type="button" name="button" onclick='document.getElementById("systemdefault").click();'>circle</button>systemdefault</label>
         </div>
 
         <h4 id='colormodePreview'class='colormodePreviewHide'>preview</h4>

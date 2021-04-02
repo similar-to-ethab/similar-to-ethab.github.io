@@ -3,6 +3,8 @@
   margin:0;
   box-sizing:border-box;
 }
+
+@media (min-width:751px) {
 #title:hover{color:white;}
 
 .column_left {
@@ -68,4 +70,5 @@ div.fixed {
 }
 div.absolute {
   position: absolute;
+}
 }
