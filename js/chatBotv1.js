@@ -65,7 +65,7 @@ function generateResponse(userInput){
       return homerQuotes(getRandomInt(0,20));
       break;
     case 'hello':
-      return hello(userInput, getRandomInt);
+      return hello(userInput, getRandomInt(0,20));
       break;
 
     case 'age':
@@ -87,7 +87,7 @@ function generateResponse(userInput){
       return userName(userInput, getRandomInt(0,20));
       break;
     default:
-      return 'Due to my limited scope, I am unable to understand you. My apologies';
+      return long(userInput, getRandomInt(0,20));
   }
 }
 
@@ -111,7 +111,6 @@ function addElement (user) {
 }
 
 function keyPressFunction() {
-  console.log('hrllo');
   var el = document.getElementById("userInput");
   if (el.value == "" || el.value.trim() == ""){
     //el.value = "";

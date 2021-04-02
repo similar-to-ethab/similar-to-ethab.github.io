@@ -1,109 +1,118 @@
 function homerQuotes(userInput, number) {
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   switch (number) {
     case 0:
-      return 'D\'oh!';
+      botResponse = 'D\'oh!';
       break;
     case 1:
-      return 'I\'m going to Moe\'s';
+      botResponse = 'I\'m going to Moe\'s';
       break;
     case 2:
-      return 'It takes two to lie'
+      botResponse = 'It takes two to lie';
       break;
     default:
+      botResponse = 'haw haw';
+      break;
   }
+  return botResponse;
 }
 function bye(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   if (!localStorage.getItem('name') || getRandomInt(0,1) == 0){
     switch (getRandomInt(0,7)) {
       case 0:
-        return 'bye!';
+        botResponse = 'bye!';
         break;
       case 1:
-        return 'see you later';
+        botResponse = 'see you later';
         break;
       case 2:
-        return 'get lost kid';
+        botResponse = 'get lost kid';
         break;
       case 3:
-        return 'fine. be like that.';
+        botResponse = 'fine. be like that.';
         break;
       case 4:
-        return 'adios';
+        botResponse = 'adios';
         break;
       case 5:
-        return 'Goodbye!';
+        botResponse = 'Goodbye!';
         break;
       case 6:
-        return 'It has been fun!';
+        botResponse = 'It has been fun!';
         break;
       case 7:
         d = new Date();
         if (d.getHours() <= 11){ // 11:00 AM
-          return 'have a pleasant morning!';
+          botResponse = 'have a pleasant morning!';
         }
         else if (d.getHours() > 20) {
-          return 'Have a nice evening!';
+          botResponse = 'Have a nice evening!';
         }
         else if (d.getHours() > 11) {
-          return 'Have a nice afternoon!';
+          botResponse = 'Have a nice afternoon!';
         }
         else {
-          return 'See you later!';
+          botResponse = 'See you later!';
         }
+        break;
       default:
-        return 'bye';
+        botResponse = 'bye';
         break;
     }
   }
   else {
     switch (getRandomInt(0,7)) {
       case 0:
-        return 'bye ' + localStorage.getItem('name') + '!';
+        botResponse = 'bye ' + localStorage.getItem('name') + '!';
         break;
       case 1:
-        return 'see you later '  + localStorage.getItem('name');
+        botResponse = 'see you later '  + localStorage.getItem('name');
         break;
       case 2:
-        return 'get lost kid ' + localStorage.getItem('name');
+        botResponse = 'get lost kid ' + localStorage.getItem('name');
         break;
       case 3:
-        return 'fine. be like that.';
+        botResponse = 'fine. be like that.';
         break;
       case 4:
-        return 'adios amigo';
+        botResponse = 'adios amigo';
         break;
       case 5:
-        return 'Goodbye ' + localStorage.getItem('name') + '!';
+        botResponse = 'Goodbye ' + localStorage.getItem('name') + '!';
         break;
       case 6:
-        return 'It has been fun ' + localStorage.getItem('name');
+        botResponse = 'It has been fun ' + localStorage.getItem('name');
         break;
       case 7:
         d = new Date();
         if (d.getHours() <= 11){ // 11:00 AM
-          return 'have a pleasant morning ' + localStorage.getItem('name') + '!';
+          botResponse = 'have a pleasant morning ' + localStorage.getItem('name') + '!';
         }
         else if (d.getHours() > 20) {
-          return 'Have a nice evening ' + localStorage.getItem('name') + '!';
+          botResponse = 'Have a nice evening ' + localStorage.getItem('name') + '!';
         }
         else if (d.getHours() > 11) {
-          return 'Have a nice afternoon ' + localStorage.getItem('name') + '!';
+          botResponse = 'Have a nice afternoon ' + localStorage.getItem('name') + '!';
         }
         else {
-          return 'See you later ' + localStorage.getItem('name') + '!';
+          botResponse = 'See you later ' + localStorage.getItem('name') + '!';
         }
       default:
-        return 'bye ' + localStorage.getItem('name');
+        botResponse = 'bye ' + localStorage.getItem('name');
         break;
 
     }
   }
+  return botResponse;
 }
+
 function feeling(userInput, number) {
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   if (!localStorage.getItem('name') || getRandomInt(0,1) == 0){
     switch (number) {
       case 0:
-        return "I'm good, How are you?";
+        botResponse = "I'm good, How are you?";
         break;
       default:
         break;
@@ -112,56 +121,62 @@ function feeling(userInput, number) {
   else {
     switch (number){
       case 0:
-        return "I'm good, " + localStorage.getItem('name') + 'How are you?';
+        botResponse = "I'm good, " + localStorage.getItem('name') + 'How are you?';
         break;
     }
   }
+  return botResponse;
 }
+
 function age(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   groups = userInput.match(regex_intents.userAgeNum[0]);
   if (groups[2]) {
     localStorage.setItem('age', groups[2]);
     switch (groups[2].toString().substr(-1)) { // gets last digit of number
       case 1:
-        return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'st birthday?';
+        botResponse = 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'st birthday?';
         break;
       case 2:
-        return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'nd birthday?';
+        botResponse = 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'nd birthday?';
         break;
       case 3:
-        return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'rd birthday?';
+        botResponse = 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'rd birthday?';
         break;
       default:
-        return 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'th birthday?';
+        botResponse = 'When is your ' + parseInt(localStorage.getItem('age')) + 1 + 'th birthday?';
 
     }
-    return groups[1];
+    botResponse = groups[1];
   }
   else {
     localStorage.setItem('age', groups[3]);
     switch (groups[3].toString().substr(-1)) { // gets last digit of number
       case 1:
-        return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'st birthday?';
+        botResponse = 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'st birthday?';
         break;
       case 2:
-        return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'nd birthday?';
+        botResponse = 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'nd birthday?';
         break;
       case 3:
-        return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'rd birthday?';
+        botResponse = 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'rd birthday?';
         break;
       default:
-        return 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'th birthday?';
+        botResponse = 'When is your ' + (parseInt(localStorage.getItem('age')) + 1) + 'th birthday?';
     }
-    //return groups[2];
+    //botResponse = groups[2];
   }
+  return botResponse;
 }
+
 function long(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   switch(number){ //(getRandomInt(0,25)) {
     case 1:
-      return 'Wow!';
+      botResponse = 'Wow!';
       break;
     case 2:
-      return 'The average length of a word is 4.7 letters';
+      botResponse = 'The average length of a word is 4.7 letters';
       break;
     case 3:
       const a = new Date("2020-12-20"),
@@ -169,165 +184,171 @@ function long(userInput, number){
       difference = dateDiffInWeeks(a,b);
       yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      return 'I have been working on this project for ' + difference + ' weeks as of ' + yesterday.toLocaleDateString() + '!';
+      botResponse = 'I have been working on this project for ' + difference + ' weeks as of ' + yesterday.toLocaleDateString() + '!';
       break;
     case 4:
-      return 'I am running out of ideas.';
+      botResponse = 'I am running out of ideas.';
       break;
     case 5:
-      return 'Woohoo';
+      botResponse = 'Woohoo';
       break;
     case 6:
-      return "Wouldn't Harm a Fly";
+      botResponse = "Wouldn't Harm a Fly";
       break;
     case 7:
-      return 'Every Cloud Has a Silver Lining';
+      botResponse = 'Every Cloud Has a Silver Lining';
       break;
     case 8:
-      return 'In a Pickle';
+      botResponse = 'In a Pickle';
       break;
     case 9:
-      return 'Hands Down';
+      botResponse = 'Hands Down';
       break;
     case 10:
-      return 'Everything But The Kitchen Sink';
+      botResponse = 'Everything But The Kitchen Sink';
       break;
     case 11:
-      return 'Wake Up Call';
+      botResponse = 'Wake Up Call';
       break;
     case 12:
-      return 'Know the Ropes';
+      botResponse = 'Know the Ropes';
       break;
     case 13:
-      return 'Up In Arms';
+      botResponse = 'Up In Arms';
       break;
     case 14:
-      return 'An Arm and a Leg';
+      botResponse = 'An Arm and a Leg';
       break;
     case 15:
-      return 'Short End of the Stick';
+      botResponse = 'Short End of the Stick';
       break;
     case 16:
-      return 'Par For the Course';
+      botResponse = 'Par For the Course';
       break;
     case 17:
-      return 'A Fool and His Money are Soon Parted';
+      botResponse = 'A Fool and His Money are Soon Parted';
       break;
     case 18:
-      return 'Son of a Gun';
+      botResponse = 'Son of a Gun';
       break;
     case 19:
-      return 'Shot In the Dark';
+      botResponse = 'Shot In the Dark';
       break;
     case 20:
-      return 'Go Out On a Limb';
+      botResponse = 'Go Out On a Limb';
       break;
     case 21:
-      return 'Dropping Like Flies';
+      botResponse = 'Dropping Like Flies';
       break;
     case 22:
-      return 'Eat My Hat';
+      botResponse = 'Eat My Hat';
       break;
     case 23:
-      return 'Greased Lightning';
+      botResponse = 'Greased Lightning';
       break;
     case 24:
-      return 'Barking Up The Wrong Tree';
+      botResponse = 'Barking Up The Wrong Tree';
       break;
     case 25:
-      return 'A Piece of Cake';
+      botResponse = 'A Piece of Cake';
       break;
     default:
-      return 'interesting';
+      botResponse = 'interesting';
       break;
   }
+  return botResponse;
 }
+
 function userName(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   var name = userInput.match(regex_intents.userName[0])[1];
   localStorage.setItem('name',name);
   if (localStorage.getItem('name') != '') {
-    return 'It is nice to meet you, ' + name;
+    botResponse = 'It is nice to meet you, ' + name;
   }
   localStorage.removeItem('name');
+
   return 'Not this time bud';
 }
+
 function hello(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
   if (localStorage.getItem('name') || getRandomInt(0,1) == 0){
     switch (number) {
       case 0:
-        return 'hi ' + localStorage.getItem('name') + '!';
+        botResponse = 'hi ' + localStorage.getItem('name') + '!';
         break;
       case 1:
-        return 'Hi ' + localStorage.getItem('name') + '!';
+        botResponse = 'Hi ' + localStorage.getItem('name') + '!';
         break;
       case 2:
-        return 'hi ' + localStorage.getItem('name');
+        botResponse = 'hi ' + localStorage.getItem('name');
         break;
       case 3:
-        return 'hey ' + localStorage.getItem('name');
+        botResponse = 'hey ' + localStorage.getItem('name');
         break;
       case 4:
-        return 'Hey ' + localStorage.getItem('name');
+        botResponse = 'Hey ' + localStorage.getItem('name');
         break;
       case 5:
-        return 'hey ' + localStorage.getItem('name') + '!';
+        botResponse = 'hey ' + localStorage.getItem('name') + '!';
         break;
       case 6:
-        return 'Hello ' + localStorage.getItem('name') + '!';
+        botResponse = 'Hello ' + localStorage.getItem('name') + '!';
         break;
       case 7:
-        return 'hi ' + localStorage.getItem('name') + '!';
+        botResponse = 'hi ' + localStorage.getItem('name') + '!';
         break;
       case 8:
-        return 'sup ' + localStorage.getItem('name');
+        botResponse = 'sup ' + localStorage.getItem('name');
         break;
       case 9:
-        return 'howdy ' + localStorage.getItem('name');
+        botResponse = 'howdy ' + localStorage.getItem('name');
         break;
       case 10:
-        return 'hey you';
+        botResponse = 'hey you';
         break;
       case 11:
-        return "Hey! What's up " + localStorage.getItem('name') + "!";
+        botResponse = "Hey! What's up " + localStorage.getItem('name') + "!";
         break;
       case 12:
-        return 'Hola ' + localStorage.getItem('name');
+        botResponse = 'Hola ' + localStorage.getItem('name');
         break;
       case 13:
-        return 'Greetings ' + localStorage.getItem('name') + '!';
+        botResponse = 'Greetings ' + localStorage.getItem('name') + '!';
         break;
       case 14:
         d = new Date();
         if (d.getHours() <= 11){ // 11:00 AM
-          return 'good morning ' + localStorage.getItem('name');
+          botResponse = 'good morning ' + localStorage.getItem('name');
         }
         else if (d.getHours() > 20) {
-          return "a nice evening, isn't it?";
+          botResponse = "a nice evening, isn't it?";
         }
         else if (d.getHours() > 11) {
-          return 'good afternoon ' + localStorage.getItem('name');
+          botResponse = 'good afternoon ' + localStorage.getItem('name');
         }
         else {
-          return 'See you later ' + localStorage.getItem('name') + '!';
+          botResponse = 'See you later ' + localStorage.getItem('name') + '!';
         }
         break;
       case 15:
-        return 'Hi ' + localStorage.getItem('name') + '!';
+        botResponse = 'Hi ' + localStorage.getItem('name') + '!';
         break;
       case 16:
-        return 'hi ' + localStorage.getItem('name');
+        botResponse = 'hi ' + localStorage.getItem('name');
         break;
       case 17:
-        return 'hey ' + localStorage.getItem('name');
+        botResponse = 'hey ' + localStorage.getItem('name');
         break;
       case 18:
-        return 'Hey ' + localStorage.getItem('name');
+        botResponse = 'Hey ' + localStorage.getItem('name');
         break;
       case 19:
-        return 'hey ' + localStorage.getItem('name') + '!';
+        botResponse = 'hey ' + localStorage.getItem('name') + '!';
         break;
       case 20:
-        return 'Hello ' + localStorage.getItem('name') + '!';
+        botResponse = 'Hello ' + localStorage.getItem('name') + '!';
         break;
       default:
         break;
@@ -336,82 +357,83 @@ function hello(userInput, number){
   else {
     switch (number) {
       case 0:
-        return 'hi!';
+        botResponse = 'hi!';
         break;
       case 1:
-        return 'Hi!';
+        botResponse = 'Hi!';
         break;
       case 2:
-        return 'hi';
+        botResponse = 'hi';
         break;
       case 3:
-        return 'hey';
+        botResponse = 'hey';
         break;
       case 4:
-        return 'Hey';
+        botResponse = 'Hey';
         break;
       case 5:
-        return 'hey!';
+        botResponse = 'hey!';
         break;
       case 6:
-        return 'Hello!';
+        botResponse = 'Hello!';
         break;
       case 7:
-        return 'hi!';
+        botResponse = 'hi!';
         break;
       case 8:
-        return 'sup';
+        botResponse = 'sup';
         break;
       case 9:
-        return 'howdy';
+        botResponse = 'howdy';
         break;
       case 10:
-        return 'hey you';
+        botResponse = 'hey you';
         break;
       case 11:
-        return "Hey! What's up!";
+        botResponse = "Hey! What's up!";
         break;
       case 12:
-        return 'Hola';
+        botResponse = 'Hola';
         break;
       case 13:
-        return 'Greetings!';
+        botResponse = 'Greetings!';
         break;
       case 14:
         d = new Date();
         if (d.getHours() <= 11){ // 11:00 AM
-          return 'good morning';
+          botResponse = 'good morning';
         }
         else if (d.getHours() > 20) {
-          return "a nice evening, isn't it?";
+          botResponse = "a nice evening, isn't it?";
         }
         else if (d.getHours() > 11) {
-          return 'good afternoon';
+          botResponse = 'good afternoon';
         }
         else {
-          return 'See you later!';
+          botResponse = 'See you later!';
         }
         break;
       case 15:
-        return 'Hi!';
+        botResponse = 'Hi!';
         break;
       case 16:
-        return 'hi';
+        botResponse = 'hi';
         break;
       case 17:
-        return 'hey';
+        botResponse = 'hey';
         break;
       case 18:
-        return 'Hey';
+        botResponse = 'Hey';
         break;
       case 19:
-        return 'hey!';
+        botResponse = 'hey!';
         break;
       case 20:
-        return 'Hello!';
+        botResponse = 'Hello!';
         break;
       default:
         break;
     }
   }
+  return botResponse;
 }
