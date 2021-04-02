@@ -24,7 +24,24 @@ function topOffset() {
       //console.log($('#column_left')[0].getBoundingClientRect().top, "relative to viewport");
 
 }
+if (window.matchMedia('(min-width:751px;)').matches)
+  document.addEventListener("scroll", topOffset, true);
+else {
+  document.removeEventListener('scroll', topOffset, true);
+  $('#column_left').removeClass('fixed');
+  $('#column_left').removeClass('absolute');
+  console.log('helllllooo');
+}
 
-  document.addEventListener("scroll", function(){
-    topOffset();
-  });
+
+
+window.matchMedia('(min-width:751px;)').addEventListener('change', function(event){
+  if (event.matches)
+    document.addEventListener('scroll', topOffset, true);
+  else {
+    document.removeEventListener('scroll', topOffset, true);
+    $('#column_left').removeClass('fixed');
+    $('#column_left').removeClass('absolute');
+    console.log('heloo');
+  }
+});

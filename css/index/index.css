@@ -3,39 +3,37 @@
   margin:0;
   box-sizing:border-box;
 }
-
-@media (min-width:751px) {
 #title:hover{color:white;}
 
 .column_left {
-  float:left;
+/*float:left;
   width:20%;
   height:100vh;
-  flex:20%;
+  flex:20%;*/
   background-color: red;
-  overflow-y: scroll;
+/*  overflow-y: scroll;
   padding: 10px;
-
+*/
 
   display: block;
 }
 .column_right {
-  float:right;
+  /*float:right;
   width:80%;
-  flex:80%;
+  flex:80%;*/
   background-color: purple;
-  padding: 10px;
-  display: block;
+  /*padding: 10px;* /
+  display: block;*/
 }
 
-/* Clear floats after the columns */
+/* Clear floats after the columns * /
 .row::after {
   content: "";
   display: table;
 
   clear: both;
 }
-
+/*
 .subtitle {
   padding-top: 10px;
   font-size: 22px;
@@ -47,7 +45,7 @@
 .subsubtitle li {
   padding-top: 4px;
   padding-bottom: 4px;
-}
+}*/
 
 .img {
 
@@ -70,5 +68,4 @@ div.fixed {
 }
 div.absolute {
   position: absolute;
-}
 }
