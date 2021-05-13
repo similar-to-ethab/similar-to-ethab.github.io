@@ -266,9 +266,8 @@ function userName(userInput, number){
   if (localStorage.getItem('name') != '') {
     botResponse = 'It is nice to meet you, ' + name;
   }
-  localStorage.removeItem('name');
 
-  return 'Not this time bud';
+  return botResponse;
 }
 
 function hello(userInput, number){
@@ -434,6 +433,18 @@ function hello(userInput, number){
       default:
         break;
     }
+  }
+  return botResponse;
+}
+
+function defaultResponses(userInput, number){
+  let botResponse = 'if you are seeing this, then life sucks and this is broken';
+  switch (number){
+    case 0:
+    case 1:
+    default:
+      botResponse = "Your message, '" + userInput + ",' is not recognized. If you believe this to be an error, email ethanperson82@gmail.com";
+      break;
   }
   return botResponse;
 }

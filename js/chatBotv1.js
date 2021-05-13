@@ -87,7 +87,8 @@ function generateResponse(userInput){
       return userName(userInput, getRandomInt(0,20));
       break;
     default:
-      return long(userInput, getRandomInt(0,20));
+      return defaultResponses(userInput, getRandomInt(0,20));
+      break;
   }
 }
 
