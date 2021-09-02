@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: similar-to-ethab.github.io
+Token: 39364e4f6d6bf2db7c112d8c147487ada4b161547e577834470885d6115a32b6
