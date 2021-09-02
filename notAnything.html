@@ -166,19 +166,13 @@
                let classNamePathI = q.toString() + (3 - indexC).toString() + (3 - indexR).toString(); // initial after rotation
                let classNamePathF = q.toString() + indexC.toString() + indexR.toString(); // final
 
-               changeStatus(classNamePathI, r); // iffy on this :(
+               changeStatus(classNamePathI, r);
                colorChange(r);
-
-
-               // so first, i will change the values in blocks
-               // then i will change the colors of each block
-               // from there, things will go by ear
-
              });
            });
          }
 
-         function doRotateOnce(q = 0){ // rotates once, 90º to the right
+         function doRotateOnce(q = 0){ // rotates once, 90º to clockwise - to the right
            blocks[q].forEach((c, indexC) => {
              c.forEach((r, indexR) => {
                r.oldStatus = r.status;
@@ -192,19 +186,10 @@
                changeStatus(newPath, r);
                colorChange(r);
 
-                 //console.log(originalPath, originalPath[0] + /*originalPath[2]*/ '3' + (indexR + indexC).toString());
-               console.log(originalPath, originalPath[0] + (3 - indexR).toString() + originalPath[1]);//originalPath[0] + originalPath[2] + (3 - indexC).toString(), newPath);
-               /* need ideas
-
-
-               last resort - manually change for each thing
-
-               */
+               // for debugging - console.log(originalPath, originalPath[0] + (3 - indexR).toString() + originalPath[1]);//originalPath[0] + originalPath[2] + (3 - indexC).toString(), newPath);
              });
 
            });
-           console.log(blocks[q]);
-
          }
 
 
@@ -216,17 +201,11 @@
 
 
          function playerChange(canChange){
-         //  console.warn(!ifGameOver(),canChange,!ifGameOver() && canChange );
            if (!(!ifGameOver() && !canChange)) {
-         //    console.log(canChange);
              playerTurnDiv.classList.remove('playerTurn' + playerTurn);
-
-
              playerTurn=playerTurn%2+1;
-
              playerTurnDiv.classList.add('playerTurn' + playerTurn);
              elPlayer.id = 'playerTurn' + playerTurn;
-
              elPlayer.innerHTML = playerBoxContent + playerTurn;
            }
          }
@@ -378,12 +357,24 @@
              playerTurnDiv.classList.remove('playerTurn' + playerTurn);
              playerTurnDiv.classList.add('gameOver'+ playerTurn);
              elPlayer.id = 'gameOver' + playerTurn;
-             elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> Refresh Page to begin again';
+             elPlayer.innerHTML = gameOverMessage() + '<br role=\'presentation\'> <a href="#" onClick="window.location.reload();return false;">Click here to begin again!</a>';
              gameOver = true;
            }
          }
 
-         function gameOverMessage(){ // will use switch case later
+         function gameOverMessage(){
+           /*
+
+
+
+
+
+           // TODO: switch case
+
+
+
+
+           */
            return 'Game Over! Player ' + playerTurn + ' has won!';
          }
 
@@ -397,7 +388,6 @@
            }
            // separated so it doesnt change after game over
            if (ifGameOver()){
-           //  console.log('yay', ifGameOver());
              onGameOver();
            }
 
