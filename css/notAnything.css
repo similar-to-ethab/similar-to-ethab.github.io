@@ -305,7 +305,7 @@ button {
 		width: 70%;
 		height: 70%;
 		border-radius: 50%;
-		transition: background-color var(--time-delay, 1s);
+		transition: background-color var(--time-delay, 0.5s);
 		cursor: pointer;
 	}
 	.playerTurnDiv {
