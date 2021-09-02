@@ -5,6 +5,11 @@
   margin:auto;
   word-break: break-word;
   }
+
+textarea {
+  font-family: Arial, sans-serif;
+}
+
 #headconv {
   display: flex;
   flex-direction: row;
