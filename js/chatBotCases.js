@@ -349,7 +349,14 @@ function hello(userInput, number){
       case 20:
         botResponse = 'Hello ' + localStorage.getItem('name') + '!';
         break;
+      case 21:
+        botResponse = 'wassup ' + localStorage.getItem('name') + '!';
+        break;
+      case 22:
+        botResponse = 'wassup ' + localStorage.getItem('name');
+        break;
       default:
+        botResponse = 'I am unable to count if you can see this';
         break;
       }
   }
@@ -430,7 +437,14 @@ function hello(userInput, number){
       case 20:
         botResponse = 'Hello!';
         break;
+      case 21:
+        botResponse = 'wassup!';
+        break;
+      case 22:
+        botResponse = 'wassup';
+        break;
       default:
+        botResponse = 'I am unable to count if you can see this';
         break;
     }
   }
@@ -441,7 +455,11 @@ function defaultResponses(userInput, number){
   let botResponse = 'if you are seeing this, then life sucks and this is broken';
   switch (number){
     case 0:
+      botResponse = "Was that a typo?";
+      break;
     case 1:
+      botResponse = "Aaaaaaaaaaaargh";
+      break;
     default:
       botResponse = "Your message, '" + userInput + ",' is not recognized. If you believe this to be an error, email ethanperson82@gmail.com";
       break;

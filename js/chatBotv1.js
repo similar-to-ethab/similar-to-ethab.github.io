@@ -14,7 +14,7 @@ regex_intents.userAgeNum = [
   //new RegExp(/,'age')
 //];
 regex_intents.helloRe = [
-  new RegExp(/^(.* )?(hello|hey|hi)([ \,\.].*)?$/,'g'), "hello"
+  new RegExp(/^(.* )?(hello|hey|hi|wassup)([ \,\.].*)?$/,'g'), "hello"
 ];
 regex_intents.goodbyeRe = [
   new RegExp(/^(.* )*(bye|adios|goodbye|holla|see you later)([\.\, ].*)?$/),'bye'
@@ -65,7 +65,7 @@ function generateResponse(userInput){
       return homerQuotes(getRandomInt(0,20));
       break;
     case 'hello':
-      return hello(userInput, getRandomInt(0,20));
+      return hello(userInput, getRandomInt(0,22));
       break;
 
     case 'age':
@@ -87,7 +87,7 @@ function generateResponse(userInput){
       return userName(userInput, getRandomInt(0,20));
       break;
     default:
-      return defaultResponses(userInput, getRandomInt(0,20));
+      return defaultResponses(userInput, getRandomInt(0,3));
       break;
   }
 }
