@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Periodic Table</title>
+
+    <style media="screen">
+/* TODO: make it so parent border doesn't surround empty cells */
+      table {
+        border-top-style:none; /*not done*/
+      }
+/* TODO: set constant value for table cell size */
+      table, td:not(.empty) {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+
+      }
+      table {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      td{
+        width:5vw;
+        height: 5vw;
+      }
+      td:not(.range){
+        size:auto;
+      }
+
+/*color coding groups of elements by group - noble gasses, alkaline metals, transition metals, metaloids, etc. */
+
+/* TODO: better colors */
+.unknown {
+  background-color: darkgrey;
+}
+
+
+      .noble{
+        background-color: pink;
+      }
+
+      .metaloid {
+        background-color: yellow;
+      }
+      .alkaliMetals {
+        background-color: green; /* TODO: make this lighter eventually */
+      }
+      .alkaliEarth {
+        background-color: brown;
+      }
+
+      .lanthanide {
+        background-color:lightblue;
+      }
+      .actinide {
+        background-color:lightgreen;
+      }
+
+      .transition {
+        background-color:aqua;
+      }
+      .postTransition {
+        background-color: purple;
+      }
+
+      .reactiveNon {
+        background-color: violet;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <table>
+
+      <!--
+      copy/paste
+
+      <tr id='row#'>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+        <td id=''></td>
+      </tr>
+
+    -->
+
+
+      <tbody> <!-- make row id/class names more specific later, ex. noble gases-->
+        <tr id='row1'> <!--also add element groups as class names, ex. metal-->
+          <td class='reactiveNon' id='1'>H</td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='noble' id='2'>He</td>
+        </tr>
+        <tr id='row2'>
+          <td class='alkaliMetals' id='3'>Li</td>
+          <td class='alkaliEarth' id='4'>Be</td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='metaloid' id='5'>B</td>
+          <td class='reactiveNon' id='6'>C</td>
+          <td class='reactiveNon' id='7'>N</td>
+          <td class='reactiveNon' id='8'>O</td>
+          <td class='reactiveNon' id='9'>F</td>
+          <td class='noble' id='10'>Ne</td>
+        </tr>
+        <tr id='row3'>
+          <td class='alkaliMetals' id='11'>Na</td>
+          <td class='alkaliEarth' id='12'>Mg</td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='empty'></td>
+          <td class='postTransition' id='13'>Al</td>
+          <td class='metaloid' id='14'>Si</td>
+          <td class='reactiveNon' id='15'>P</td>
+          <td class='reactiveNon' id='16'>S</td>
+          <td class='reactiveNon' id='17'>Cl</td>
+          <td class='noble' id='18'>Ar</td>
+        </tr>
+        <tr id='row4'>
+          <td class='alkaliMetals' id='19'>K</td>
+          <td class='alkaliEarth' id='20'>Ca</td>
+          <td class='transition' id='21'>Sc</td>
+          <td class='transition' id='22'>Ti</td>
+          <td class='transition' id='23'>V</td>
+          <td class='transition' id='24'>Cr</td>
+          <td class='transition' id='25'>Mn</td>
+          <td class='transition' id='26'>Fe</td>
+          <td class='transition' id='27'>Co</td>
+          <td class='transition' id='28'>Ni</td>
+          <td class='transition' id='29'>Cu</td>
+          <td class='postTransition' id='30'>Zn</td>
+          <td class='postTransition' id='31'>Ga</td>
+          <td class='metaloid' id='32'>Ge</td>
+          <td class='metaloid' id='33'>As</td>
+          <td class='reactiveNon' id='34'>Se</td>
+          <td class='reactiveNon' id='35'>Br</td>
+          <td class='noble' id='36'>Kr</td>
+        </tr>
+        <tr id='row5'>
+          <td class='alkaliMetals' id='37'>Rb</td>
+          <td class='alkaliEarth' id='38'>Sr</td>
+          <td class='transition' id='39'>Y</td>
+          <td class='transition' id='40'>Zr</td>
+          <td class='transition' id='41'>Nb</td>
+          <td class='transition' id='42'>Mo</td>
+          <td class='transition' id='43'>Tc</td>
+          <td class='transition' id='44'>Ru</td>
+          <td class='transition' id='45'>Rh</td>
+          <td class='transition' id='46'>Pd</td>
+          <td class='transition' id='47'>Ag</td>
+          <td class='postTransition' id='48'>Cd</td>
+          <td class='postTransition' id='49'>Ln</td>
+          <td class='postTransition' id='50'>Sn</td>
+          <td class='metaloid' id='51'>Sb</td>
+          <td class='metaloid' id='52'>Te</td>
+          <td class='reactiveNon' id='53'>I</td>
+          <td class='noble' id='54'>Xe</td>
+        </tr>
+        <tr id='row6'>
+          <td class='alkaliMetals' id='55'>Cs</td>
+          <td class='alkaliEarth' id='56'>Ba</td>
+          <td class='lanthanide' id=''>57-71</td>
+          <td class='transition' id='72'>Hf</td>
+          <td class='transition' id='73'>Ta</td>
+          <td class='transition' id='74'>W</td>
+          <td class='transition' id='75'>Re</td>
+          <td class='transition' id='76'>Os</td>
+          <td class='transition' id='77'>Ir</td>
+          <td class='transition' id='78'>Pt</td>
+          <td class='transition' id='79'>Au</td>
+          <td class='postTransition' id='80'>Hg</td>
+          <td class='postTransition' id='81'>Tl</td>
+          <td class='postTransition' id='82'>Pb</td>
+          <td class='postTransition' id='83'>Bi</td>
+          <td id='84'>Po</td>
+          <td class='metaloid' id='85'>At</td>
+          <td class='noble' id='86'>Rn</td>
+        </tr>
+        <tr id='row7'>
+          <td class='alkaliMetals' id='87'>Fr</td>
+          <td class='alkaliEarth' id='88'>Ra</td>
+          <td class='actinide' id=''>89-103</td>
+          <td class='transition' id='104'>Rf</td>
+          <td class='transition' id='105'>Db</td>
+          <td class='transition' id='106'>Sg</td>
+          <td class='transition' id='107'>Bh</td>
+          <td class='transition' id='108'>Hs</td>
+          <td class='unknown' id='109'>Mt</td>
+          <td class='unknown' id='110'>Ds</td>
+          <td class='unknown' id='111'>Rg</td>
+          <td class='postTransition' id='112'>Cn</td>
+          <td class='unknown' id='113'>Nh</td>
+          <td class='unknown' id='114'>Fl</td>
+          <td class='unknown' id='115'>Mc</td>
+          <td class='unknown' id='116'>Lv</td>
+          <td class='unknown' id='117'>Ts</td>
+          <td class='unknown' id='118'>Og</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </body>
+</html>
