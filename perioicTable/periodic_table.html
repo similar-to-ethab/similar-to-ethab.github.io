@@ -254,7 +254,47 @@
 
       </tbody>
     </table>
+
+    <table>
+      <tr>
+        <td id='57' class='lanthanide'>La</td>
+        <td id='58'class='lanthanide'>Ce</td>
+        <td id='59'class='lanthanide'>Pr</td>
+        <td id='60'class='lanthanide'>Nd</td>
+        <td id='61' class='lanthanide'>Pm</td>
+        <td id='62' class='lanthanide'>Sm</td>
+        <td id='63' class='lanthanide'>Eu</td>
+        <td id='64' class='lanthanide'>Gd</td>
+        <td id='65' class='lanthanide'>Tb</td>
+        <td id='66' class='lanthanide'>Dy</td>
+        <td id='67' class='lanthanide'>Ho</td>
+        <td id='68' class='lanthanide'>Er</td>
+        <td id='69' class='lanthanide'>Tm</td>
+        <td id='70' class='lanthanide'>Yb</td>
+        <td id='71' class='lanthanide'>Lu</td>
+
+      </tr>
+      <tr>
+        <td id='89' class='actinide'>Ac</td>
+        <td id='90' class='actinide'>Th</td>
+        <td id='91' class='actinide'>Pa</td>
+        <td id='92' class='actinide'>U</td>
+        <td id='93' class='actinide'>Np</td>
+        <td id='94' class='actinide'>Pu</td>
+        <td id='95' class='actinide'>Am</td>
+        <td id='96' class='actinide'>Cm</td>
+        <td id='97' class='actinide'>Bk</td>
+        <td id='98' class='actinide'>Cf</td>
+        <td id='99' class='actinide'>Es</td>
+        <td id='100' class='actinide'>Fm</td>
+        <td id='101' class='actinide'>Md</td>
+        <td id='102' class='actinide'>No</td>
+        <td id='103' class='actinide'>Lr</td>
+      </tr>
+    </table>
+    <input type="button" value='click' onclick='if(state) state=false; else state=true; switchColorScheme();'>click Me</>
     <h1 id='periodicTable'></h1>
+
 
     <script type="text/javascript">
 
@@ -263,29 +303,42 @@
       function displayData(el){
         document.getElementById('periodicTable').innerHTML = '';
         Object.entries(el).forEach(([key, value], i) => {
-          /*var newtext = document.createTextNode(key + " \n"),
-          p1 = document.getElementById("periodicTable");
-          console.log(key,value, el);
-          p1.appendChild(newtext);*/
           document.getElementById('periodicTable').innerHTML = document.getElementById('periodicTable').innerHTML + key + ": " + value + '<br>';
         });
-
       }
 
-      pt.forEach((item) => {
-        var atomicNumber = item.atomicNumber;
-        try {
+      var state=false;
 
+      function switchColorScheme(){ //true = specific, false = grouping
+        if (state){
+          pt.forEach((item, i) => {
+            try {
+              document.getElementById(i + 1).style.backgroundColor = '#' + item.cpkHexColor;
+            } catch (e) {
 
-          document.getElementById(atomicNumber).addEventListener('click', function(item){
-            displayData(pt[item.target.id - 1]);
-            console.log(pt[item.target.id - 1]);
+            }
+          });
+        }
+        else{
+          pt.forEach((item, i) => {
+            try {
+              document.getElementById(i + 1).style.backgroundColor = '';
+            } catch (e){
+
+            }
           });
         }
 
-      catch (e) {
-        console.log('not supported yet');
-      }});
+
+      }
+
+      pt.forEach((item, i) => {
+        var atomicNumber = item.atomicNumber;
+
+        document.getElementById(atomicNumber).addEventListener('click', function(item) {
+          displayData(pt[item.target.id - 1]);
+        });
+      });
 
 
 
