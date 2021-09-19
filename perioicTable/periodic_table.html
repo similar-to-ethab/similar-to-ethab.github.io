@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Periodic Table</title>
 
+    <script src="./../js/periodic_tableValues.js" charset="utf-8"></script>
+
     <style media="screen">
 /* TODO: make it so parent border doesn't surround empty cells */
       table {
@@ -14,12 +16,13 @@
         border: 1px solid black;
         border-collapse: collapse;
         text-align: center;
-
       }
       table {
         width: 90vw;
+        margin-top:5vh;
         margin-left: auto;
         margin-right: auto;
+        border-top: 0px;
       }
       td{
         width:5vw;
@@ -30,6 +33,9 @@
       }
 
 /*color coding groups of elements by group - noble gasses, alkaline metals, transition metals, metaloids, etc. */
+.range {
+  /*font-size:10px;*/
+}
 
 /* TODO: better colors */
 .unknown {
@@ -206,7 +212,7 @@
         <tr id='row6'>
           <td class='alkaliMetals' id='55'>Cs</td>
           <td class='alkaliEarth' id='56'>Ba</td>
-          <td class='lanthanide' id=''>57-71</td>
+          <td class='lanthanide range' id=''>57-71</td>
           <td class='transition' id='72'>Hf</td>
           <td class='transition' id='73'>Ta</td>
           <td class='transition' id='74'>W</td>
@@ -226,7 +232,7 @@
         <tr id='row7'>
           <td class='alkaliMetals' id='87'>Fr</td>
           <td class='alkaliEarth' id='88'>Ra</td>
-          <td class='actinide' id=''>89-103</td>
+          <td class='actinide range' id=''>89-103</td>
           <td class='transition' id='104'>Rf</td>
           <td class='transition' id='105'>Db</td>
           <td class='transition' id='106'>Sg</td>
@@ -245,7 +251,44 @@
         </tr>
 
 
+
       </tbody>
     </table>
+    <h1 id='periodicTable'></h1>
+
+    <script type="text/javascript">
+
+
+
+      function displayData(el){
+        document.getElementById('periodicTable').innerHTML = '';
+        Object.entries(el).forEach(([key, value], i) => {
+          /*var newtext = document.createTextNode(key + " \n"),
+          p1 = document.getElementById("periodicTable");
+          console.log(key,value, el);
+          p1.appendChild(newtext);*/
+          document.getElementById('periodicTable').innerHTML = document.getElementById('periodicTable').innerHTML + key + ": " + value + '<br>';
+        });
+
+      }
+
+      pt.forEach((item) => {
+        var atomicNumber = item.atomicNumber;
+        try {
+
+
+          document.getElementById(atomicNumber).addEventListener('click', function(item){
+            displayData(pt[item.target.id - 1]);
+            console.log(pt[item.target.id - 1]);
+          });
+        }
+
+      catch (e) {
+        console.log('not supported yet');
+      }});
+
+
+
+    </script>
   </body>
 </html>
