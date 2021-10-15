@@ -68,7 +68,7 @@
         background-color:aqua;
       }
       .postTransition {
-        background-color: purple;
+        background-color: #a95aec/*#842bd7*/;
       }
 
       .reactiveNon {
@@ -128,8 +128,8 @@
 						<div class="atomicNumber"></div>
           </td>
           <td class='empty'></td>
-          <td class='filler' id='emptySpace' colspan="10" rowspan="3"></td>
-          <td class='' colspan="5">hi</td>
+          <td class='filler empty' id='emptySpace' colspan="10" rowspan="3"></td>
+          <td class='empty' colspan="5">hi</td>
           <td class='noble element' id='2'>
             <div class="atomicMass"></div>
 						<div class='symbol'></div>
@@ -769,6 +769,22 @@
       }
 
       var state=false;
+      // TODO: make something that changes text color to not destroy contrast
+
+      var elTypesList = { // TODO: use best contrast for color
+        'alkaliMetals':1,
+        'alkaliEarth':1,
+        'transition':1,
+        'postTransition':1,
+        'metaloid':1,
+        'reactiveNon':1,
+        'noble':1
+      };
+      function setTextColor(){
+
+      }
+
+
 
       function switchColorScheme(){ //true = specific, false = grouping
         if (state){
