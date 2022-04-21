@@ -764,8 +764,9 @@
       function displayData(obj,id){
         document.getElementById(id).innerHTML = '';
         Object.entries(obj).forEach(([key, value], i) => {
-		console.log(key, value);
-          document.getElementById(id).innerHTML = document.getElementById(id).innerHTML + key + ": " + value + '<br>';
+	  console.log(key, value);
+	  if(key != "cpkHexColor")
+            document.getElementById(id).innerHTML = document.getElementById(id).innerHTML + key + ": " + value + '<br>';
         });
       }
 
